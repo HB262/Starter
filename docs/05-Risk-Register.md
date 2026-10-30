@@ -20,3 +20,7 @@
 | 14 | Pilot shortage / wage inflation | 3 | 3 | 9 | Hiring takes more than 60 days | Market pay; equity for key pilots; contract pilot bench | CP |
 | 15 | Regulatory change (FET, Part 135 rules, airport restrictions) | 2 | 3 | 6 | NBAA alerts | Industry membership (NBAA); counsel | A |
 | 16 | Partner dispute | 2 | 4 | 8 | Disagreement on growth/exit | Clear operating agreement, reserved decisions, buy-sell | H, A |
+| 17 | Equity raise falls short or is late | 3 | 5 | **15** | Fewer than 2 anchors by Jan 2027 | Start early; anchors first; smaller launch at lower price; delay purchase, not quality | H |
+| 18 | Lender requires a guarantor Henry can't provide | 4 | 4 | **16** | Term sheets at 60-70% LTV | Anchor-investor guarantee for a fee or extra units; accept lower LTV with more equity | H |
+| 19 | Securities law misstep (advertising, unregistered finders) | 2 | 5 | 10 | Informal pitching | Securities counsel before any investor conversation; Reg D compliance | SC |
+| 20 | Ownership growth destroys value if jets don't clear debt | 3 | 5 | **15** | Jet #1 cash after debt negative | Management-led path by default; add jets only after Jet #1 clears its debt | H |

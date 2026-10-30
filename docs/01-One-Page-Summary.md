@@ -1,50 +1,54 @@
 # One-page summary: Front Range Jet Partners (working name)
 
-*Draft 1, October 30, 2026. All figures come from `financials/Jet_Business_Financial_Model.xlsx` (Base scenario unless noted) and are estimates to be replaced with real quotes.*
+*Draft 2, October 30, 2026. Figures come from `financials/Jet_Business_Financial_Model.xlsx` (base scenario unless noted). They are estimates to be replaced with real quotes.*
 
 ## The idea
-Buy a used **Cessna Citation Latitude** (2016-2019), base it at **Rocky Mountain Metropolitan Airport (KBJC), Broomfield, CO**, and put it on an established **Part 135 management company's certificate**. That operator flies the jet as **overflow / subcontract lift for NetJets and other fractional and jet-card programs**, filling the gaps with broker charter. There is no personal use. Henry owns the company. A Latitude-rated chief pilot partner (paid, plus equity) runs it day to day.
+Buy a used **Cessna Citation Latitude** (2016-2019), base it at **Rocky Mountain Metropolitan Airport (KBJC), Broomfield, CO**, and put it on an established **Part 135 management company's certificate**. That operator flies it as **overflow / subcontract lift for NetJets and other fractional and jet-card programs**, plus broker charter. There is no personal use.
+
+**Henry** is the founder and sponsor. A Latitude-rated **Chief Pilot partner** runs day-to-day operations. **Outside investors fund the equity** through a GP/LP-style LLC; Henry and the Chief Pilot earn a promote.
 
 ## Why it can work
-- **NetJets runs one of the world's largest Latitude fleets.** When demand spikes, it needs the same aircraft type, at the same cabin standard, from vetted operators.
-- **Denver is a strong charter market**, with ski season, mountain resorts, and coast-to-coast reach in a midsize jet.
-- **Starting on a manager's certificate gives day-one access** to safety ratings (ARGUS / Wyvern) and to fractional supplier relationships. It takes years to earn those on your own.
-- **The exit value is the platform, not just the jets.** Once you hold your own certificate and manage other owners' aircraft, buyers pay a multiple of earnings.
+- NetJets runs one of the largest Latitude fleets. On peak days it needs the same type and cabin from vetted operators.
+- Denver brings ski and resort demand, central repositioning, and high-altitude missions that suit the Latitude.
+- Starting on a top-rated manager's certificate means day-one access to safety ratings and fractional supplier relationships.
+- 100% first-year bonus depreciation gives investors about **$3.20 of deductions per $1 invested** in year one.
 
-## The numbers (one jet, mature year)
+## One jet, mature year
 | | Downside | **Base** | Upside |
 |---|---|---|---|
 | Purchase price | $15.0M | **$13.5M** | $12.5M |
-| Equity to launch (80% loan) | $4.6M | **$4.0M** | $3.4M |
+| Equity to raise (80% loan) | $4.9M | **$4.2M** | $3.6M |
 | Billable hours / year | 500 | **600** | 700 |
-| EBITDA (before debt) | ($0.55M) | **$0.51M** | $1.56M |
-| Debt service | $1.40M | **$1.20M** | $0.93M |
-| Cash flow after debt | ($1.95M) | **($0.70M)** | $0.64M |
-| Breakeven hours incl. debt | 1,565 | **839** | 530 |
+| EBITDA (before debt) | ($0.56M) | **$0.50M** | $1.55M |
+| Cash flow after debt | ($1.96M) | **($0.71M)** | $0.63M |
+| Breakeven hours incl. debt | 1,571 | **842** | 533 |
 
-## 10-year plan (2027-2036)
-| | Downside (stay at one jet) | **Base** | Upside |
+**The honest headline:** at 80% debt, one jet needs about **840 billable hours a year** to cover its loan. Typical charter jets fly 300-450. **Do not buy until a manager commits in writing to 750+ hours of fractional overflow.**
+
+## Three growth paths compared (2027-2036, investors' view)
+| Base scenario | Ownership (5 jets) | **Management-led** (1 jet + 18 managed) | Hybrid (3 jets + 12 managed) |
 |---|---|---|---|
-| Owned / managed jets at exit | 1 / 0 | **3 / 12** | 4 / 14 |
-| Revenue in 2036 | $4.5M | **$21.2M** | $34.0M |
-| Peak owner equity required | $29.6M* | **$17.7M** | $5.9M |
-| Net exit proceeds (2036) | $2.5M | **$31.7M** | $77.4M |
-| Equity multiple / IRR (pre-tax) | 0.1x / n.m. | **1.8x / 9%** | 13x / 36% |
+| Peak equity to raise | $30.7M | **$8.6M** | $18.2M |
+| Investor multiple (pre-tax) | 0.5x | **3.6x** | 1.7x |
+| Investor IRR (pre-tax / after tax if losses usable) | (14%) / n.m. | **17% / 30%** | 9% / 23% |
+| Sponsor promote to Henry + Chief Pilot | $0 | **$3.8M** | $0.3M |
+| Downside (stop-loss sells Jet #1 in 2029) | 0.5x | 2.2x | 1.5x |
+| Upside | 5.9x | 11x | 9.2x |
 
-*\*Downside assumes you hold a losing jet for 10 years. In practice, the stop-loss rule below means you sell in 2029.*
+**Recommendation:** lead with the **management-led path**, and keep the option to add owned jets only if Jet #1 beats its breakeven (that is the hybrid). Buying more jets only pays in the upside case, where each jet earns more than its debt.
 
-## The honest headline
-**A single jet financed at 80% does not cover its loan payments at typical charter utilization.** In the base case it needs about **840 billable hours a year** to cover debt service. A retail-charter jet usually flies 300-450. The business works only if you lock in **committed fractional overflow hours** before you buy, or if you buy cheaper, borrow less, or both. The first 100% bonus depreciation deduction (about $13.5M in 2027) could be worth roughly $5M to Henry personally if the losses are usable, which is a CPA question. That deduction materially changes the return.
+## Investor structure
+- Fund I LLC: investors hold Class A units; the sponsor (Henry + Chief Pilot) holds Class B units.
+- Distributions: return of capital, then an **8% preferred return**, then **80/20** split.
+- 1% acquisition fee per jet; Reg D private placement to accredited investors.
+- Lenders may cap an investor-owned jet at 60-70% LTV unless an anchor investor guarantees the loan.
 
-## Five decisions and gates
-1. **Gate 1 (Dec 2026 - Feb 2027):** Get written proposals from 3+ management companies. Each must show its NetJets/fractional supplier status, its ARGUS/Wyvern ratings, and **a committed hours plan of at least 750 billable hours/year**. No commitment means no purchase.
-2. **Gate 2 (Feb - Mar 2027):** Get a lender term sheet (80-85% LTV) and a CPA opinion on using the tax losses.
-3. **Gate 3 (Mar - May 2027):** Sign the LOI, do the pre-buy inspection, close, then onboard the jet to the manager's certificate.
-4. **Revenue flying by July 2027.** Track hours monthly against the 840-hour breakeven.
-5. **Stop-loss:** If trailing-12-month cash flow after debt is worse than **($750K)** by mid-2029, sell the jet. Do not add aircraft.
-
-## Growth to exit
-2027-29: one jet, prove the hours → 2029-30: apply for **your own Part 135 certificate** → 2030-33: add owned jets #2 and #3 and **sign other owners' jets for management** → 2034-36: sell the company to a consolidator or management company. Exit value comes from the fleet (sold at market) plus 6x the management platform's earnings.
+## Gates and stop-loss
+1. **Gate 1 (Feb 2027):** a management company commits to 750+ hrs, with NetJets/fractional supplier status shown in writing.
+2. **Gate 2 (Mar 2027):** lender term sheet, plus anchor investors soft-circled for about $4.2M.
+3. **Gate 3 (May 2027):** close and onboard. **Revenue flying July 2027.**
+4. **Stop-loss:** if trailing-12 cash after debt is worse than **($750K)** by mid-2029, sell Jet #1 and buy no more jets.
+5. **2029-30:** apply for the company's own Part 135 certificate. **2030-36:** grow managed fleet. **2034-36:** sell to a consolidator.
 
 ## What we need now
-Lender pre-qualification, CPA tax review, management company proposals, an aviation attorney, an insurance broker quote, and an aircraft broker to scan the Latitude market. See `docs/03-Roadmap-Startup-to-Exit.md` and `docs/04-Launch-Checklist.md`.
+Securities counsel, a CPA, an aviation attorney, management company proposals (including the Chief Pilot's current employer), lender conversations about guarantees, an insurance quote, and a broker scan of the Latitude market.

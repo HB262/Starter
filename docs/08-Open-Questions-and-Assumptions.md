@@ -1,6 +1,6 @@
 # Open questions and key assumptions
 
-*Draft 1, October 30, 2026. These are the next interview questions for Henry, and the assumptions to replace with real data.*
+*Draft 2, October 30, 2026. These are the next interview questions for Henry, and the assumptions to replace with real data.*
 
 ## What Henry has told us
 - Financing: mainly debt, assume at least 80% LTV; scenarios wanted
@@ -11,14 +11,18 @@
 - No personal use; pure revenue business
 - Target: revenue flying mid-2027
 - Exit: grow a fleet over 5-10 years, then sell
+- No personal capital: equity from outside investors plus debt; open to a GP/LP structure
+- No significant other income, so the depreciation benefit should be pitched to investors
+- Chief Pilot has no non-compete and wants to return to Colorado; his current employer could be a manager option
+- Stop-loss: use the ($750K)/yr by mid-2029 rule for now
+- Leans toward the ownership growth path; wants ownership, management-led and hybrid compared
 
-## Questions for Henry (round 3)
-1. **Liquidity:** how much cash could you commit over the first 3 years, beyond the launch equity? The base case needs about $7.2M by 2029 and $17.7M by 2033.
-2. **Tax:** do you have significant other income to offset with depreciation, and could you materially participate in the business?
-3. **Partners:** are you open to a minority equity investor to lower debt or fund aircraft #2?
-4. **Partner's employer:** which company does your Chief Pilot fly for now? Could it be a management company candidate, and does he have a non-compete?
-5. **Risk appetite:** is the stop-loss rule (sell if cash after debt is worse than ($750K) a year by mid-2029) the right line for you?
-6. **Growth preference:** grow mainly by **managing other owners' jets** (less capital, most of the exit value) or by **buying more jets**?
+## Questions for Henry (round 4)
+1. **Growth path:** having seen the comparison, do you want to lead with management-led (recommended), hybrid, or ownership? This sets the size of the raise ($8.6M vs $18.2M vs $30.7M peak, base).
+2. **Investors:** do you already know 2-3 people who could anchor $1-2M each? Would any of them guarantee the loan?
+3. **Sponsor split:** how do you and the Chief Pilot want to split the sponsor promote, and what should his salary be?
+4. **Chief Pilot's employer:** may we name them in the RFP now, or should he talk to them first?
+5. **Name:** keep "Front Range Jet Partners" as the working name, or do you have one in mind?
 
 ## Assumptions to verify (most important first)
 | Assumption | Base value | How to verify |
@@ -31,7 +35,10 @@
 | Management fee / commission | $10K/month / 10% | RFP responses |
 | Crew pay | $175K captain / $115K FO | Chief Pilot's market knowledge |
 | Hangar at KBJC | $66K/yr | Sheltair quote; Jet Aviation pre-lease |
-| Tax benefit usable | memo only | CPA memo |
+| Tax benefit usable by investors | memo only | Each investor's CPA; fund CPA memo |
+| Lender LTV without a personal guarantor | 80% | Lender conversations; may be 60-70% |
+| Third-party jets the platform can sign | 18 by 2036 (management-led) | Market survey of Front Range owners; Chief Pilot's network |
+| Net margin per managed jet | $200K/yr | Management company benchmarks |
 
 ## Sources used
 - Latitude operating costs (fuel, maintenance, engine program, crew, hangar, insurance): Flycraft, *Cessna Citation Latitude ownership and operating costs*, flycraft.com

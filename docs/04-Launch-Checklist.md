@@ -1,14 +1,22 @@
 # Launch checklist: filings, contracts, insurance
 
-*Draft 1, October 30, 2026. Tick these off in order. Items marked ⚖️ need the aviation attorney, 💲 the CPA.*
+*Draft 2, October 30, 2026. Tick these off in order. Items marked ⚖️ need the aviation attorney, 💲 the CPA.*
 
 ## A. Company and ownership
 - [ ] Partner term sheet with Chief Pilot: role, salary, profits interest, vesting, non-compete, buy-sell ⚖️
-- [ ] HoldCo LLC and AircraftCo #1 LLC formed (Colorado, or Delaware registered in Colorado) ⚖️
+- [ ] AircraftCo #1 LLC formed under Fund I (Colorado, or Delaware registered in Colorado) ⚖️
 - [ ] Operating agreements: reserved decisions, capital calls, transfer restrictions ⚖️
 - [ ] EINs, bank accounts, accounting system (QuickBooks or similar), bookkeeping by aircraft
 - [ ] Key-person life and disability insurance on Chief Pilot
 - [ ] Trademark / name search for the brand
+
+## A2. Investor raise (securities counsel)
+- [ ] Securities counsel engaged; Reg D 506(b) or 506(c) chosen
+- [ ] Sponsor LLC and Fund I LLC formed; Class A / Class B unit terms (`09-Investor-Structure-GP-LP.md`)
+- [ ] Private Placement Memorandum, operating agreement, subscription agreement, accredited-investor questionnaire
+- [ ] Anchor investors soft-circled; guarantor decision made with the lender
+- [ ] Escrow for subscriptions; Form D filed within 15 days of first sale; Colorado and other state notice filings
+- [ ] Investor reporting set up: quarterly reports, annual K-1s
 
 ## B. Tax 💲
 - [ ] Written CPA memo: bonus depreciation, material participation, passive and at-risk limits

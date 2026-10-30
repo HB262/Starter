@@ -10,19 +10,20 @@ A business plan for buying a used Cessna Citation Latitude, basing it at Rocky M
 | 4 | [Launch checklist](docs/04-Launch-Checklist.md) | Filings, contracts, insurance, FAA/DOT/TSA/IRS items |
 | 5 | [Risk register](docs/05-Risk-Register.md) | Risks, early warnings, mitigations |
 | 6 | [Management company RFP](docs/06-Management-Company-RFP.md) | Questions to send operators, plus a scorecard |
-| 7 | [Investor and lender pitch](docs/07-Investor-and-Lender-Pitch.md) | 10-slide outline and lender package |
+| 7 | [Investor and lender pitch](docs/07-Investor-and-Lender-Pitch.md) | 12-slide outline and lender package |
 | 8 | [Open questions and assumptions](docs/08-Open-Questions-and-Assumptions.md) | What to verify next, and sources |
-| — | [Financial model (Excel)](financials/Jet_Business_Financial_Model.xlsx) | Startup budget, unit economics, financing scenarios, 10-year forecast, exit |
+| 9 | [Investor structure (GP/LP)](docs/09-Investor-Structure-GP-LP.md) | Fund terms, waterfall, depreciation for investors, securities law |
+| — | [Financial model (Excel)](financials/Jet_Business_Financial_Model.xlsx) | Startup budget, unit economics, financing scenarios, three growth paths, investor returns |
 
 ## Using the model
-- **Dashboard:** headline numbers.
+- **Dashboard:** one-jet economics and the three growth paths side by side (investor multiple, IRR, peak raise, sponsor promote).
 - **Assumptions:** every input, with Downside / Base / Upside columns. Switch scenarios in cell **C3**.
-- **Fleet Plan:** owned and managed aircraft by year for each scenario.
+- **Fleet Plan:** owned and managed aircraft by year for each growth path (Ownership, Management-led, Hybrid), with the stop-loss applied.
 - **Startup Budget:** sources and uses of cash for Jet #1, plus the 2028 operating budget.
 - **Unit Economics:** one jet, mature year, plus an hours sensitivity table.
 - **Financing Scenarios:** 60-90% LTV compared, plus an hours × LTV grid.
-- **Forecast:** 10-year P&L, cash flow, owner equity, balance sheet and tax memo.
-- **Debt Schedule** and **Exit:** loan amortization, fleet value, exit proceeds, multiple on equity and IRR.
+- **Forecast Own / Mgmt / Hybrid:** for each path, a 10-year P&L, cash flow, investor equity, balance sheet, investor tax memo, exit and GP/LP waterfall.
+- **Debt Own / Mgmt / Hybrid:** loan amortization, fleet value and any stop-loss sale for each path.
 
 Blue cells are inputs, black cells are formulas, green cells link to other sheets. To rebuild the workbook from code, run `python3 financials/build_model.py`, then recalculate in Excel or LibreOffice.
 

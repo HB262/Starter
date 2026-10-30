@@ -1,17 +1,19 @@
 # Roadmap: startup to exit
 
-*Draft 1, October 30, 2026. Target: revenue flying July 2027. Owners: **H** = Henry, **CP** = Chief Pilot partner, **A** = aviation attorney, **CPA**, **MC** = management company, **L** = lender, **B** = aircraft broker.*
+*Draft 2, October 30, 2026. Target: revenue flying July 2027. Owners: **H** = Henry, **CP** = Chief Pilot partner, **A** = aviation attorney, **SC** = securities counsel, **CPA**, **MC** = management company, **L** = lender, **B** = aircraft broker.*
 
 ## Phase 0: Set up and decide (Nov 2026 - Feb 2027)
 
 | # | Action | Owner | By |
 |---|---|---|---|
-| 0.1 | Agree on partner terms with CP: role, salary, profits interest and vesting, non-compete, buy-sell | H, CP, A | Nov 30 |
+| 0.1 | Agree on sponsor terms with CP: role, salary, split of the Class B promote, vesting, buy-sell | H, CP, A | Nov 30 |
+| 0.1b | Hire securities counsel; choose Reg D 506(b) or 506(c); draft PPM, Fund I operating agreement, subscription documents | H, SC | Jan 15 |
+| 0.1c | Build an investor list (15-25 accredited names); soft-circle 2-3 anchors; ask whether any will guarantee the loan | H | Jan 31 |
 | 0.2 | Hire an aviation attorney and an aviation-savvy CPA | H | Nov 30 |
 | 0.3 | CPA memo: bonus depreciation usability, material participation, entity structure, state sales/use tax | CPA | Dec 31 |
-| 0.4 | Form HoldCo LLC and AircraftCo #1 LLC; get EINs; open bank accounts | A | Dec 15 |
-| 0.5 | Send management company RFP to 4-5 operators, including NetJets' affiliated manager | CP | Dec 1 |
-| 0.6 | Lender pre-qualification: personal financial statement, tax returns, liquidity proof | H, L | Dec 31 |
+| 0.4 | Form Sponsor LLC, Fund I LLC and AircraftCo #1 LLC; get EINs; open bank accounts | A, SC | Dec 15 |
+| 0.5 | Send management company RFP to 4-5 operators, including NetJets' affiliated manager and CP's current employer | CP | Dec 1 |
+| 0.6 | Lender conversations: LTV with and without an anchor-investor guarantee | H, L | Dec 31 |
 | 0.7 | Hire an aircraft broker (buy-side); market scan of 2015-2019 Latitudes with engine program status | H, B | Dec 15 |
 | 0.8 | Insurance broker indication: charter-use hull + $100M+ liability | H | Jan 15 |
 | 0.9 | Score RFP responses; site visits; reference calls with current owners | H, CP | Jan 31 |
@@ -22,7 +24,8 @@
 | # | Action | Owner | By |
 |---|---|---|---|
 | 1.1 | Lender term sheet and credit approval | L | Mar 1 |
-| 1.2 | **Gate 2:** financing plus CPA sign-off | H | Mar 1 |
+| 1.2 | **Gate 2:** lender term sheet plus investor commitments of at least the launch equity (about $4.2M base) | H | Mar 1 |
+| 1.2b | Investor closing: subscriptions signed, funds into escrow, Form D filed within 15 days | SC | Apr 30 |
 | 1.3 | LOI on the selected aircraft, with a refundable deposit into escrow | B, A | Mar 15 |
 | 1.4 | Pre-buy inspection at a Textron service center; records review; engine borescope | CP, B | Apr 15 |
 | 1.5 | Aircraft purchase agreement; resolve squawks; technical acceptance | A, B | Apr 30 |
@@ -46,6 +49,7 @@
 
 | # | Action | Owner |
 |---|---|---|
+| 2.0 | If stop-loss triggered: list Jet #1 for sale; decide with investors whether to continue the management platform | H |
 | 2.1 | Form OpCo LLC; hire Director of Operations, Director of Maintenance (CP can hold Chief Pilot); budget about $350K before revenue | H, CP |
 | 2.2 | FAA Part 119/135 certification: pre-application, formal application, document review (manuals, training program, SMS, drug and alcohol program), demonstration and inspection, issuance. Typically 12-24 months. | OpCo |
 | 2.3 | DOT air taxi registration (14 CFR Part 298), TSA security program, IRS excise tax registration | OpCo, A |
@@ -54,8 +58,8 @@
 
 ## Phase 3: Scale (2030 - 2034)
 
-- Add owned Jet #2 (base 2030) and Jet #3 (base 2033), each in its own AircraftCo, only if Jet #1 meets the advance rule.
-- Grow third-party management to 10+ aircraft. This is the capital-light engine of exit value.
+- Recommended: grow the third-party managed fleet first (management-led path). Add owned jets (hybrid) only if Jet #1 clears its debt service, each in its own AircraftCo, funded by a follow-on raise.
+- Grow third-party management to 10-18 aircraft. This is the capital-light engine of exit value.
 - Build a sales function, a 24/7 operations center, and maintenance partnerships.
 - Get annual audited financials from 2031 to prepare for diligence.
 

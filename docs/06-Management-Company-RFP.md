@@ -1,6 +1,6 @@
 # Management company RFP and scorecard
 
-*Draft 1, October 30, 2026. Send to 4-5 operators. Candidates to research: NetJets' affiliated management company (Executive Jet Management, verify current name and status), Solairus Aviation, Clay Lacy Aviation, Jet Linx (Denver), and any Denver/KBJC-based Part 135 operator. Confirm each one's Denver presence first.*
+*Draft 1, October 30, 2026. Send to 4-5 operators. Candidates to research: NetJets' affiliated management company (Executive Jet Management, verify current name and status), Solairus Aviation, Clay Lacy Aviation, Jet Linx (Denver), the Chief Pilot's current employer (he has no non-compete), and any Denver/KBJC-based Part 135 operator. Confirm each one's Denver presence first.*
 
 ---
 

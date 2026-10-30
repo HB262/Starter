@@ -1,6 +1,6 @@
 # Business plan: Citation Latitude overflow charter company
 
-*Draft 1, October 30, 2026. Prepared for Henry. Figures come from `financials/Jet_Business_Financial_Model.xlsx`. "Base" means the base scenario unless stated otherwise. Every estimate must be replaced with a quote before money is committed.*
+*Draft 2, October 30, 2026. Prepared for Henry. Figures come from `financials/Jet_Business_Financial_Model.xlsx`. "Base" means the base scenario unless stated otherwise. Every estimate must be replaced with a quote before money is committed.*
 
 ---
 
@@ -8,7 +8,7 @@
 
 The company will buy a used Cessna Citation Latitude and base it at Rocky Mountain Metropolitan Airport (KBJC) in Broomfield, Colorado. The jet will fly paid trips under an established Part 135 operator's certificate, mainly as subcontract and overflow lift for NetJets and other fractional and jet-card programs, plus broker charter. There is no owner personal use. The aircraft exists only to earn revenue.
 
-Henry is the founder and majority owner. A Latitude type-rated captain, currently flying a Latitude for a similar company, joins as **Chief Pilot and operating partner** (salary plus equity) and runs the business day to day.
+Henry is the founder and sponsor. Henry contributes no personal capital, so **outside investors fund all the equity** through a GP/LP-style LLC (see `09-Investor-Structure-GP-LP.md`). A Latitude type-rated captain, currently flying a Latitude for a similar company, joins as **Chief Pilot and operating partner** (salary plus equity) and runs the business day to day.
 
 The plan has four phases:
 
@@ -17,17 +17,18 @@ The plan has four phases:
 3. **Scale (2030-2034):** grow to about 3 owned and 10+ managed aircraft.
 4. **Exit (2034-2036):** sell to a strategic buyer.
 
-**Key finding.** At 80% debt, one jet needs about **840 billable hours a year** just to cover its loan (base case). That is well above what most retail charter jets fly. The plan is therefore built around one non-negotiable gate: **do not buy until a management company commits in writing to a fractional overflow hours plan of at least 750 hours a year**, and until a CPA confirms how the bonus depreciation can be used.
+**Key findings.** At 80% debt, one jet needs about **840 billable hours a year** just to cover its loan (base case). That is well above what most retail charter jets fly. The plan is therefore built around one non-negotiable gate: **do not buy until a management company commits in writing to a fractional overflow hours plan of at least 750 hours a year**, and until anchor investors are lined up. **Of the three growth paths modeled, management-led growth (one owned jet plus managing other owners' jets) needs the least capital and returns the most:** base 3.6x investor multiple and 17% pre-tax IRR, on $8.6M of peak equity. Buying more jets loses investor money in the base case.
 
 ## 2. Company and ownership
 
 | Item | Recommendation |
 |---|---|
-| Structure | **HoldCo LLC** (Henry + partner) owns **AircraftCo LLC #1**, a single-purpose entity that holds the jet and the loan. Each later jet gets its own AircraftCo. **OpCo LLC** is formed in Phase 2 to hold the Part 135 certificate. |
-| Why separate entities | Limits liability, keeps each loan ring-fenced, makes each jet easy to sell, and lets OpCo (the platform) be sold separately or with the fleet. |
-| Registration | The FAA requires a "U.S. citizen" owner. A U.S. LLC with U.S. managers qualifies. Register in the AircraftCo's name and use an FAA aircraft title/escrow agent. |
-| Partner equity | Grant the Chief Pilot a **profits interest of 5-15% vesting over 4 years**, with a cliff, good-leaver/bad-leaver terms and a buy-sell. Add key-person life/disability insurance on the Chief Pilot. |
-| Governance | Write down Henry's reserved decisions: buying or selling aircraft, debt, adding partners, changing manager, and annual budget. Hold a monthly operating review. |
+| Structure | **Front Range Jet Partners Fund I, LLC** (investors hold Class A units; Henry and the Chief Pilot hold Class B sponsor units through a sponsor LLC that manages the fund). It owns **AircraftCo LLC #1**, a single-purpose entity that holds the jet and the loan. Each later jet gets its own AircraftCo. **OpCo LLC** is formed in Phase 2 to hold the Part 135 certificate. Full terms are in `09-Investor-Structure-GP-LP.md`. |
+| Why separate entities | Limits liability, keeps each loan ring-fenced, makes each jet easy to sell, and lets OpCo (the platform) be sold with or without the fleet. |
+| Investor economics | Return of capital, then an 8% compounding preferred return, then an 80/20 split of profit; 1% acquisition fee per jet; depreciation allocated to investors. |
+| Registration | The FAA requires a "U.S. citizen" owner. A U.S. LLC with U.S. managers and at least 75% U.S. voting interest qualifies. Check this if any investor is foreign. |
+| Sponsor equity split | Henry and the Chief Pilot agree on their split of the Class B promote, with vesting for the Chief Pilot, good-leaver/bad-leaver terms and a buy-sell. Add key-person insurance on the Chief Pilot. |
+| Governance | Investor consent for buying or selling aircraft, new debt, new capital, and changing the manager. Quarterly reports; audit from year 3. |
 | Name | Working name "Front Range Jet Partners" (placeholder; check trademark and Colorado SOS availability). |
 
 ## 3. The market and the overflow opportunity
@@ -83,87 +84,111 @@ Rates grow 3% a year and costs 3% a year in the base case.
 
 ## 6. Cost structure (one jet, base, today's dollars)
 
-| Cost | Per year | Note |
+| Line | Per year | Note |
 |---|---|---|
+| Charter revenue (600 hrs x $7,750 blended) | $4.65M | |
 | Variable, about $3,700 per flight hour | $2.44M | Fuel 270 gal/hr at $6.50, airframe maintenance $750, engines $660, APU $80, trip costs $450 |
 | Crew (2 captains, 1 FO, contract) | $0.64M | Includes a 25% benefits load |
 | Training | $0.11M | Simulator recurrent training plus Part 135 checks |
 | Hangar, insurance, other fixed, contingency | $0.28M | |
 | Management fee | $0.12M | $10K/month |
 | Manager's commission | $0.47M | 10% of charter revenue |
-| Company G&A | $0.09M | |
-| **EBITDA** | **$0.51M** | 11% margin |
+| Company G&A incl. investor reporting | $0.10M | |
+| **EBITDA** | **$0.50M** | 11% margin |
 | Debt service (80% LTV, 7.25%, 15-yr amortization) | $1.20M | |
-| **Cash flow after debt** | **($0.70M)** | |
+| **Cash flow after debt** | **($0.71M)** | Funded by investor equity in the early years |
 
 The Flycraft benchmark puts Latitude operating cost at about $6,500/hr all-in at 400 hours. Our cost per hour is lower because charter flies more hours over the same fixed base.
 
-## 7. Financing
+## 7. Financing and investors
 
-**Henry's direction:** at least 80% debt. The model's "Financing Scenarios" sheet compares six leverage levels.
+**Equity comes from investors; debt from an aviation lender.** Henry asked for at least 80% debt. The "Financing Scenarios" sheet compares six leverage levels (base scenario):
 
-| LTV | Equity to launch | Annual debt service | Cash after debt (600 hrs) | Breakeven hours incl. debt |
-|---|---|---|---|---|
-| 60% | $6.67M | $0.90M | ($0.39M) | 736 |
-| 70% | $5.32M | $1.05M | ($0.54M) | 787 |
-| 75% | $4.64M | $1.13M | ($0.62M) | 813 |
-| **80%** | **$3.97M** | **$1.20M** | **($0.70M)** | **839** |
-| 85% | $3.29M | $1.28M | ($0.77M) | 865 |
-| 90% | $2.62M | $1.36M | ($0.85M) | 891 |
+| LTV | Equity to raise | Annual debt service | Cash after debt (600 hrs) | Breakeven hours incl. debt | Year-1 depreciation per $1 equity |
+|---|---|---|---|---|---|
+| 60% | $6.88M | $0.90M | ($0.40M) | 739 | 2.0x |
+| 70% | $5.53M | $1.05M | ($0.55M) | 791 | 2.4x |
+| 75% | $4.86M | $1.13M | ($0.63M) | 817 | 2.8x |
+| **80%** | **$4.18M** | **$1.20M** | **($0.71M)** | **842** | **3.2x** |
+| 85% | $3.51M | $1.28M | ($0.78M) | 868 | 3.8x |
+| 90% | $2.83M | $1.36M | ($0.86M) | 894 | 4.8x |
 
-**What this tells you.** Leverage mostly moves *how much cash goes in up front*, not whether the jet carries itself. The real levers are **hours** and **purchase price**. At 80% LTV the jet breaks even after debt at about 840 hours. At 900 hours it makes about +$180K a year.
+**What this tells you.** Leverage changes how much equity investors put in up front, and how much depreciation they get per dollar. It does not change whether the jet carries itself. The real levers are **hours** and **purchase price**.
 
 **Lender expectations.**
 - Credit-based jet loans run 15-20% down. Asset-based loans run 30-40% down.
-- 85-90% leverage usually requires a personal guarantee, strong outside liquidity, or a second-lien/seller note.
-- Advertised rates were about 5.6-9% in Sep/Oct 2026, with prime at 7.00%.
-- Expect a 5-7 year balloon on a 15-20 year amortization.
-- Lenders will underwrite Henry personally, not the charter projections.
+- **Henry won't be the guarantor, so lenders will likely treat this as asset-based (60-70% LTV)** unless an anchor investor guarantees the loan. The guarantor would be compensated with extra units or a fee.
+- Advertised rates were about 5.6-9% in Sep/Oct 2026, with prime at 7.00%. Expect a 5-7 year balloon on a 15-20 year amortization.
 
 **Ways to improve the structure.**
-1. A **20-year amortization**, or 12-24 months interest-only during ramp-up.
-2. Buy an **older, cheaper Latitude (2015-2016)** with engines on program.
-3. Bring in a **minority equity partner** to lower LTV.
-4. Ask the management company for a **minimum-hours or revenue guarantee** in year 1.
+1. A 20-year amortization, or 12-24 months interest-only during ramp-up.
+2. An older, cheaper Latitude (2015-2016) with engines on program.
+3. A minimum-hours or revenue guarantee from the management company in year 1.
+4. Lower leverage with more equity (less cash burn, less depreciation per dollar).
 
-**Tax (memo; get a CPA opinion before LOI).**
-- The 2025 tax law permanently restored **100% bonus depreciation**, and used aircraft qualify. Part 135 charter counts as business use.
-- In base, the model shows a roughly $14.4M tax loss in 2027, worth about $5.3M at a 37% rate, **if** Henry can use it. That depends on passive-activity rules (material participation), at-risk rules, and Henry's other income.
-- The deduction is recaptured as ordinary income when the jet is sold.
-- Also plan state sales/use tax on the purchase with counsel. This depends on where the jet is delivered and on Colorado exemptions.
+**Tax: the investor angle.**
+- The 2025 tax law permanently restored 100% bonus depreciation, and used aircraft qualify. Charter counts as business use.
+- Jet #1 creates about a $13.5M deduction in its first year in service, about **3.2x the investor equity at 80% LTV**. At 37%, that is worth about $5M **if investors can use it**.
+- Most investors are passive, so losses offset only passive income. Unused losses carry forward to the sale.
+- The deduction is recaptured as ordinary income when jets are sold. Each investor's own CPA must confirm.
+- Henry has no income to offset, so the benefit belongs to investors and is a key selling point of the raise.
+- Plan state sales/use tax on the purchase with counsel.
 
-## 8. Financial projections (base)
+## 8. Financial projections: three growth paths
 
-| $M | 2027 | 2028 | 2029 | 2030 | 2031 | 2033 | 2036 |
+All three paths share Jet #1 and the same economics. They differ only in what happens after 2029. Fleet counts are inputs on the "Fleet Plan" sheet.
+
+| Base scenario, 2027-2036 | Ownership | Management-led | Hybrid |
+|---|---|---|---|
+| Owned / third-party managed jets at exit | 5 / 0 | 1 / 18 | 3 / 12 |
+| Revenue in 2036 | $30.3M | $10.4M | $21.2M |
+| EBITDA in 2036 | $6.3M | $3.6M | $5.6M |
+| Debt at exit | $38.0M | $4.9M | $21.0M |
+| **Peak equity to raise** | **$30.7M** | **$8.6M** | **$18.2M** |
+| Net exit proceeds | $15.4M | $35.2M | $31.7M |
+| **Investor multiple (pre-tax)** | **0.5x** | **3.6x** | **1.7x** |
+| Investor IRR pre-tax / after tax if losses usable | (14%) / n.m. | 17% / 30% | 9% / 23% |
+| Sponsor promote + fees (Henry + Chief Pilot) | $0.7M | $3.9M | $0.8M |
+
+| Investor multiple by scenario | Ownership | Management-led | Hybrid |
+|---|---|---|---|
+| Downside (stop-loss sells Jet #1 in 2029) | 0.5x | 2.2x | 1.5x |
+| Base | 0.5x | 3.6x | 1.7x |
+| Upside | 5.9x | 11x | 9.2x |
+
+**How to read this.**
+1. **In base, every owned jet burns about $0.7M a year after debt.** Buying more of them adds revenue but destroys investor value. The ownership path only wins in the upside, where each jet clears its debt.
+2. **Managing other owners' jets is capital-light.** About $200K of margin per jet, no loan, and buyers pay a multiple for it at exit. That is why the management-led path needs the least money and returns the most.
+3. **The stop-loss works.** In the downside, Jet #1 is sold in 2029, which caps losses. The management platform can still be built if the certificate path continues.
+
+**Management-led path, base ($M):**
+
+| | 2027 | 2028 | 2029 | 2030 | 2031 | 2033 | 2036 |
 |---|---|---|---|---|---|---|---|
-| Owned / managed jets (year end) | 1 / 0 | 1 / 0 | 1 / 0 | 2 / 1 | 2 / 3 | 3 / 7 | 3 / 12 |
-| Revenue | 1.4 | 4.3 | 4.9 | 7.7 | 10.9 | 15.3 | 21.2 |
-| EBITDA | (0.1) | 0.3 | 0.5 | 1.0 | 1.9 | 3.4 | 5.6 |
-| Cash after debt service | (1.3) | (0.9) | (1.0) | (1.4) | (0.5) | (0.2) | 2.0 |
-| Owner equity in (cumulative) | 5.3 | 6.2 | 7.2 | 12.7 | 13.2 | 17.7 | 17.7 |
-
-**Exit in 2036 (base):**
-- Fleet sold at $28.5M less 2% costs, plus the management platform at 6x its $3.0M margin ($18.0M), less $21.0M debt, plus $6.7M cash.
-- That gives **$31.7M to owners** on $17.7M invested: **1.8x, 9% IRR before tax effects**.
-
-**Upside:** 13x, 36% IRR. **Downside:** if held, the jet loses about $2M a year after debt, which is why the stop-loss exists.
-
-**How to read this.** The base case is a modest return that depends on heavy equity injections in years 1-6. Most of the value comes from the **management platform**, not from owning jets. That points to a smarter growth path: **grow by managing other people's aircraft (capital-light) faster than by buying more of your own.** Change the Fleet Plan sheet to test this.
+| Owned / managed jets (year end) | 1 / 0 | 1 / 0 | 1 / 0 | 1 / 2 | 1 / 4 | 1 / 9 | 1 / 18 |
+| Revenue | 1.4 | 4.3 | 4.9 | 5.3 | 5.9 | 7.3 | 10.4 |
+| EBITDA | (0.1) | 0.3 | 0.5 | 0.5 | 0.8 | 1.7 | 3.6 |
+| Cash after debt service | (1.4) | (0.9) | (1.0) | (0.7) | (0.4) | 0.5 | 2.4 |
+| Investor equity in (cumulative) | 5.5 | 6.4 | 7.5 | 8.2 | 8.6 | 8.6 | 8.6 |
 
 ## 9. Growth and exit strategy
+
+**Recommended path: management-led, with a hybrid option.** Henry's instinct is to own more jets, and that remains available. The model says to earn it, though: add owned jets only once Jet #1 is beating its breakeven after debt (the hybrid path). Otherwise grow by managing other owners' jets.
 
 | Phase | Timing | Milestones | Triggers to advance |
 |---|---|---|---|
 | 1. Prove | Jul 2027 - 2029 | Jet #1 flying; at least 750 billable hrs/yr run-rate by month 12; 98%+ dispatch reliability | Trailing-12 cash after debt better than ($250K); NetJets/fractional share of 40% or more |
-| 2. Build | 2029 - 2030 | Form OpCo; hire Director of Operations and Director of Maintenance; FAA Part 135 certification (12-24 months); SMS; drug/alcohol program; DOT/TSA registrations | Certificate issued; first third-party owner signed |
-| 3. Scale | 2030 - 2034 | Move jets to own certificate only after ARGUS/Wyvern ratings are earned (keep jets on manager's certificate until then); add owned Jet #2 (2030) and #3 (2033); grow managed fleet to 10+ | Platform margin of $1M+; ratings in place; fractional supplier approval in OpCo's own name |
-| 4. Exit | 2034 - 2036 | Clean audited financials; transferable contracts; recurring management revenue | Strategic buyer (a large management/charter consolidator, a fractional or a private-equity-backed roll-up) |
+| 2. Build | 2029 - 2030 | Form OpCo; hire Director of Operations and Director of Maintenance; FAA Part 135 certification (12-24 months); SMS; drug/alcohol program; DOT/TSA registrations; sign first third-party owners | Certificate issued; 2+ owners signed |
+| 3. Scale | 2030 - 2034 | Keep owned jets on the manager's certificate until ARGUS/Wyvern ratings are earned; grow the managed fleet to 10-18; add owned jets only if Jet #1 clears debt service (raise follow-on equity per jet) | Platform margin of $1M+; ratings in place; fractional supplier approval in OpCo's own name |
+| 4. Exit | 2034 - 2036 | Audited financials; assignable management contracts; recurring management revenue | Strategic buyer (a large management/charter consolidator, a fractional or a PE-backed roll-up) |
+
+**Where to find managed aircraft.** Owners who fly 100-300 hours a year and want charter revenue to offset costs. Denver/Boulder business owners, and the Chief Pilot's network. The Chief Pilot's current employer could be either a management partner for Jet #1 or a future competitor. Decide which before approaching them.
 
 **Exit options.**
-1. Sell OpCo plus fleet to a consolidator (the base case).
-2. Sell OpCo only and sell the jets separately on the market.
+1. Sell Fund I's interests in OpCo plus the fleet to a consolidator (base).
+2. Sell OpCo only and sell the jets on the market.
 3. Merge into a larger operator for equity.
-4. Wind down: sell the jets and keep the cash.
+4. Wind down: sell the jets and return capital.
 
 ## 10. Top risks (full register in `05-Risk-Register.md`)
 
@@ -173,14 +198,17 @@ The Flycraft benchmark puts Latitude operating cost at about $6,500/hr all-in at
 4. **Losing safety ratings or supplier approval** on the move to own certificate. Mitigation: dual path, so jets stay with the manager until ratings are earned.
 5. **Key person** (Chief Pilot). Mitigation: vesting equity, key-person insurance, deputy captain.
 6. **Interest rate and refinancing risk** at the balloon. Mitigation: fixed rate, 7-year term, lower LTV as cash builds.
-7. **Tax losses not usable.** Mitigation: CPA opinion before LOI.
+7. **Raise falls short or investors can't use the tax losses.** Mitigation: anchor investors first; target investors with passive income; each investor's CPA confirms.
+8. **Lender won't go to 80% without a guarantor.** Mitigation: anchor-investor guarantee, or accept 65-70% LTV with more equity.
 
 ## 11. Immediate next steps (next 60 days)
 
-1. Henry and the Chief Pilot agree on the term sheet (equity, salary, role).
-2. Hire an aviation attorney and a CPA, and talk through the tax plan.
-3. Send the management company RFP (`06-Management-Company-RFP.md`) to 4-5 operators, including NetJets' affiliate.
-4. Lender pre-qualification with 2-3 aviation lenders (80-85% LTV term sheets).
-5. Hire an aircraft broker to scan the 2015-2019 Latitude market (JETNET data, off-market units).
-6. Get an insurance broker indication for charter-use hull and liability.
-7. Re-run the model with real quotes. Go or no-go at Gate 1.
+1. Henry and the Chief Pilot agree on the sponsor split (promote, salary, role, vesting).
+2. Hire securities counsel (PPM, operating agreement, Form D), an aviation attorney and a CPA.
+3. Send the management company RFP (`06-Management-Company-RFP.md`) to 4-5 operators, including NetJets' affiliate and the Chief Pilot's current employer.
+4. Talk to 2-3 aviation lenders about LTV with and without an anchor-investor guarantee.
+5. Soft-circle 2-3 anchor investors for about $4-5M; share the one-page summary and depreciation story.
+6. Hire an aircraft broker to scan the 2015-2019 Latitude market.
+7. Get an insurance broker indication for charter-use hull and liability.
+8. Re-run the model with real quotes. Go or no-go at Gate 1.
+
