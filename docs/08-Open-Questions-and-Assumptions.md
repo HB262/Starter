@@ -20,11 +20,11 @@
 - Henry is the general partner and takes no pay at the start; the Chief Pilot is paid
 - The Chief Pilot will talk to his current employer before it is named in any RFP; keep it as a management company option
 - Working name "Front Range Jet Partners" is fine
+- Promote split: **60% Henry / 40% Chief Pilot**, Chief Pilot's share vesting over 4 years
 - Growth path chosen: **management-led** (one owned jet, grow by managing other owners' jets)
 
 ## Still open
-1. **Sponsor split:** how Henry and the Chief Pilot divide the Class B promote. A common starting point is 50-70% to the GP who raises the money and 30-50% to the operating partner, with the operator's share vesting over 4 years.
-2. **Loan guarantor:** whether any anchor investor would guarantee the loan in exchange for a fee or extra units.
+1. **Loan guarantor:** whether any anchor investor would guarantee the loan in exchange for a fee or extra units.
 
 ## Assumptions to verify (most important first)
 | Assumption | Base value | How to verify |

@@ -16,7 +16,7 @@
                           └──► OpCo LLC ────────── own Part 135 certificate, management platform (Phase 2)
 ```
 
-- **Use an LLC, not a limited partnership.** It works like a GP/LP but is simpler. Investors hold **Class A units**, with limited liability and no management rights. Henry and the Chief Pilot hold **Class B (sponsor) units** through a sponsor LLC that is the manager. **Henry is the general partner (managing member).** The split of Class B units between Henry and the Chief Pilot is still to be agreed.
+- **Use an LLC, not a limited partnership.** It works like a GP/LP but is simpler. Investors hold **Class A units**, with limited liability and no management rights. Henry and the Chief Pilot hold **Class B (sponsor) units** through a sponsor LLC that is the manager. **Henry is the general partner (managing member).** **Class B units are split 60% Henry / 40% Chief Pilot** (agreed Oct 30, 2026). The Chief Pilot's 40% vests over 4 years with a 1-year cliff. Acquisition fees go to the sponsor LLC on the same 60/40 basis unless agreed otherwise.
 - **Use one fund, not one SPV per jet.** A single vehicle lets investors share in the management platform, which is where most of the exit value sits in two of the three strategies. If later jets need new money, raise it as a follow-on round in Fund I or as a side-car SPV.
 - Each jet sits in its **own AircraftCo**, which ring-fences the loan and keeps liability separate.
 
@@ -46,6 +46,7 @@
 | Investor IRR, pre-tax | (14%) | **17%** | 9% |
 | Investor IRR after tax, if losses usable | n/a | **30%** | 23% |
 | Sponsor promote (Henry + Chief Pilot) | $0 | **$3.8M** | $0.3M |
+| of which Henry (60%) / Chief Pilot (40%) | $0 / $0 | **$2.3M / $1.5M** | $0.2M / $0.1M |
 | Sponsor acquisition fees | $0.68M | $0.14M | $0.41M |
 
 Upside scenario: 5.9x / 11x / 9.2x investor multiples.

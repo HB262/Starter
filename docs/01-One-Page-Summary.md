@@ -38,7 +38,7 @@ Buy a used **Cessna Citation Latitude** (2016-2019), base it at **Rocky Mountain
 **Chosen path (Henry, Oct 30, 2026): management-led.** One owned Latitude anchors the business; growth comes from managing other owners' jets on our own certificate. Adding owned jets (the hybrid) stays an option, but only once Jet #1 clears its debt and only with a follow-on raise. Buying more jets pays only in the upside case.
 
 ## Investor structure
-- Fund I LLC: investors hold Class A units; the sponsor (Henry + Chief Pilot) holds Class B units.
+- Fund I LLC: investors hold Class A units; the sponsor holds Class B units, split **60% Henry / 40% Chief Pilot** (his share vests over 4 years). Henry is the general partner and takes no salary at the start.
 - Distributions: return of capital, then an **8% preferred return**, then **80/20** split.
 - 1% acquisition fee per jet; Reg D private placement to accredited investors.
 - Lenders may cap an investor-owned jet at 60-70% LTV unless an anchor investor guarantees the loan.

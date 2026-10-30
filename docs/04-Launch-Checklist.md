@@ -3,7 +3,7 @@
 *Draft 2, October 30, 2026. Tick these off in order. Items marked ⚖️ need the aviation attorney, 💲 the CPA.*
 
 ## A. Company and ownership
-- [ ] Partner term sheet with Chief Pilot: role, salary, profits interest, vesting, non-compete, buy-sell ⚖️
+- [ ] Partner term sheet with Chief Pilot: role, salary, 40% of Class B promote vesting over 4 years (1-year cliff), buy-sell ⚖️
 - [ ] AircraftCo #1 LLC formed under Fund I (Colorado, or Delaware registered in Colorado) ⚖️
 - [ ] Operating agreements: reserved decisions, capital calls, transfer restrictions ⚖️
 - [ ] EINs, bank accounts, accounting system (QuickBooks or similar), bookkeeping by aircraft
