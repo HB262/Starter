@@ -1,214 +1,221 @@
-# Business plan: Citation Latitude overflow charter company
+# Business plan: Citation Sovereign+ NetJets overflow company
 
-*Draft 3, October 30, 2026. Prepared for Henry. Figures come from `financials/Jet_Business_Financial_Model.xlsx`. "Base" means the base scenario unless stated otherwise. Every estimate must be replaced with a quote before money is committed.*
+*Draft 4, October 30, 2026. Prepared for Henry, updated with comments from Derek, the intended Chief Pilot. Figures come from `financials/Jet_Business_Financial_Model.xlsx`. "Base" means the base scenario unless stated otherwise. Every estimate must be replaced with a quote before money is committed.*
 
 ---
 
 ## 1. Executive summary
 
-The company will buy a used Cessna Citation Latitude and base it at Rocky Mountain Metropolitan Airport (KBJC) in Broomfield, Colorado. The jet will fly paid trips under an established Part 135 operator's certificate, mainly as subcontract and overflow lift for NetJets and other fractional and jet-card programs, plus broker charter. There is no owner personal use. The aircraft exists only to earn revenue.
+The company will buy a lightly used Cessna Citation Sovereign+ (about 2015) and base it at Rocky Mountain Metropolitan Airport (KBJC) in Broomfield, Colorado. The jet will fly on **Executive Jet Management's (EJM) Part 135 certificate**. EJM is NetJets' affiliated management company, and its managed fleet flies about 95% NetJets customers. The jet earns its hours as NetJets overflow, with a little retail charter. There is no owner personal use.
 
-Henry is the founder and sponsor. Henry contributes no personal capital, so **outside investors fund all the equity** through a GP/LP-style LLC (see `09-Investor-Structure-GP-LP.md`). A Latitude type-rated captain, currently flying a Latitude for a similar company, joins as **Chief Pilot and operating partner** (salary plus equity) and runs the business day to day.
+Henry is the founder and general partner. Henry contributes no personal capital, so **outside investors fund all the equity** through a GP/LP-style LLC (see `09-Investor-Structure-GP-LP.md`). **Derek**, a type-rated pilot who flies today for an operation on EJM's certificate, joins as **Chief Pilot and operating partner** (salary plus equity) and runs the business day to day.
 
 The plan has four phases:
 
-1. **Prove (2027-2029):** one jet on a management company's certificate.
-2. **Build (2029-2030):** apply for and win the company's own Part 135 certificate.
-3. **Scale (2030-2034):** keep one owned jet and grow to 10-18 managed aircraft (the chosen management-led path).
+1. **Prove (2027-2029):** one jet on EJM's certificate flying NetJets trips.
+2. **Decide (2029):** stay on EJM, or build our own Part 135 certificate, but only if NetJets access survives the move.
+3. **Scale (2030-2034):** grow by managing other owners' jets (the chosen management-led path).
 4. **Exit (2034-2036):** sell to a strategic buyer.
 
-**Key findings.** At 80% debt, one jet needs about **840 billable hours a year** just to cover its loan (base case). That is well above what most retail charter jets fly. The plan is therefore built around one non-negotiable gate: **do not buy until a management company commits in writing to a fractional overflow hours plan of at least 750 hours a year**, and until anchor investors are lined up. **Of the three growth paths modeled, management-led growth (one owned jet plus managing other owners' jets) needs the least capital and returns the most:** base 3.6x investor multiple and 17% pre-tax IRR, on $8.6M of peak equity. Buying more jets loses investor money in the base case.
+**Key findings.**
+- Derek asked for very conservative maintenance and contingency budgets, and the model now carries them (section 6). With those budgets and a placeholder NetJets rate of $6,750 an hour, **one jet loses about $1.05M a year before debt and $2.08M after**.
+- **The number that decides the deal is EJM's NetJets rate for a Sovereign+.** At 600 hours, the jet needs about **$8,800 per hour to break even before the loan and about $10,800 to cover the loan**. If NetJets pays fuel separately, the rate needed falls by roughly $2,000 an hour.
+- So the plan's main gate is now: **do not buy until EJM shows, in writing, a rate and hours projection that clear debt service.**
+- At the placeholder rate the stop-loss sells Jet #1 in mid-2029 in every scenario. The management-led path still returns 3.7x (16% IRR) on $8.0M, but all of that comes from the management platform, which depends on the own-certificate decision in section 9.
 
 ## 2. Company and ownership
 
 | Item | Recommendation |
 |---|---|
-| Structure | **Front Range Jet Partners Fund I, LLC** (investors hold Class A units; Henry and the Chief Pilot hold Class B sponsor units through a sponsor LLC that manages the fund). It owns **AircraftCo LLC #1**, a single-purpose entity that holds the jet and the loan. Each later jet gets its own AircraftCo. **OpCo LLC** is formed in Phase 2 to hold the Part 135 certificate. Full terms are in `09-Investor-Structure-GP-LP.md`. |
+| Structure | **Front Range Jet Partners Fund I, LLC** (investors hold Class A units; Henry and Derek hold Class B sponsor units through a sponsor LLC that manages the fund). It owns **AircraftCo LLC #1**, a single-purpose entity that holds the jet and the loan. Each later jet gets its own AircraftCo. **OpCo LLC** is formed only if the company builds its own certificate. Full terms are in `09-Investor-Structure-GP-LP.md`. |
 | Why separate entities | Limits liability, keeps each loan ring-fenced, makes each jet easy to sell, and lets OpCo (the platform) be sold with or without the fleet. |
 | Investor economics | Return of capital, then an 8% compounding preferred return, then an 80/20 split of profit; 1% acquisition fee per jet; depreciation allocated to investors. |
 | Registration | The FAA requires a "U.S. citizen" owner. A U.S. LLC with U.S. managers and at least 75% U.S. voting interest qualifies. Check this if any investor is foreign. |
-| Sponsor equity split | Henry and the Chief Pilot agree on their split of the Class B promote, with vesting for the Chief Pilot, good-leaver/bad-leaver terms and a buy-sell. Add key-person insurance on the Chief Pilot. |
+| Sponsor equity split | 60% Henry / 40% Derek of the Class B promote. Derek's share vests over 4 years, with good-leaver/bad-leaver terms and a buy-sell. Add key-person insurance on Derek. |
 | Governance | Investor consent for buying or selling aircraft, new debt, new capital, and changing the manager. Quarterly reports; audit from year 3. |
 | Name | Working name "Front Range Jet Partners" (placeholder; check trademark and Colorado SOS availability). |
 
-## 3. The market and the overflow opportunity
+## 3. The market and the NetJets opportunity
 
-**How fractional overflow works.** Fractional and jet-card providers (NetJets, Flexjet, and jet-card and membership programs) guarantee owners an aircraft on short notice. On peak days (holidays, ski season, major events) demand exceeds their own fleet. They then subcontract trips to vetted Part 135 operators, usually paying a wholesale rate per hour, and expect the aircraft and crew to meet their standards.
+**How the overflow works.** NetJets guarantees its owners an aircraft on short notice. When demand exceeds its own fleet, it sends trips to vetted operators. EJM is NetJets' affiliated management company, and the jets on EJM's certificate fly about 95% NetJets customers (Derek). EJM makes sure the aircraft and pilots meet NetJets' standards.
 
-**What NetJets requires of a supplier (to be verified).** NetJets does not publish its subcontractor program. Public sources confirm that brokers and fractional programs generally require:
-- an operator holding **ARGUS Gold/Gold+/Platinum** and/or **Wyvern Wingman (Standard or PRO)** ratings, which require operating history, an on-site audit and a working Safety Management System (SMS)
-- the provider's own audit of the operator
-- high liability limits
-- crews meeting experience minimums
-- an aircraft that matches its cabin and equipment standard
+**A current demand driver.** After Phenom runway excursions in the rain, NetJets now requires a minimum of **5,500 ft of runway in the rain for its Phenoms**. Trips to shorter wet runways move to larger aircraft, and Derek's crews have been covering many NetJets Phenom owners. The Sovereign+ needs only about 3,530 ft to take off, so it fits those airports well. *Verify how long the restriction is expected to last; a policy change could reduce this demand.*
 
-*Action:* each management company bidding must show, in writing, whether it is currently an **approved NetJets supplier**, how many hours it flew for NetJets and other fractionals in the last 12 months, and the wholesale rates it was paid. **NetJets' own affiliated management company (Executive Jet Management)** should be one of the bidders. Verify its current name and whether it takes on managed charter aircraft.
+**What NetJets requires (through EJM).** NetJets does not publish its supplier rules. Through EJM we get its certificate, OpSpecs, safety ratings and NetJets compliance for aircraft and crews. Both pilots must hold full PIC type ratings and return to FlightSafety every 6 months.
 
-**Why the Latitude.** NetJets operates a large Latitude fleet, so a Latitude can replace a NetJets aircraft of the same type and cabin seamlessly. The Latitude has a stand-up flat-floor cabin and seats 8-9. Its range is about 2,700 nm, which covers Denver to either coast nonstop. It is the most popular midsize charter jet, which supports both demand and resale.
+**Why the Sovereign+ (Derek's preferred aircraft).**
+- Midsize-plus cabin for 9-12 passengers, about 3,200 nm range, and Garmin G5000 avionics.
+- Short-field performance (about 3,530 ft takeoff) suits mountain and wet-runway airports.
+- About $10.3-15.0M asking for 2015-2018 models (Guardian Jet), well below a comparable Latitude.
+- Trade-offs: production ended, so values may soften faster (base: 6% a year), and the cabin is 5 ft 8 in tall versus the Latitude's 6 ft flat floor. Confirm with EJM that NetJets assigns Sovereign+ jets to its midsize and Phenom-overflow trips.
+- Example of the target: a 2015 Sovereign+ listed on Controller.com with about 2,000 hours, engines on PowerAdvantage+ at $453 per engine per hour.
 
 **Why Denver / KBJC.**
 - Year-round demand: ski resorts (Aspen, Vail/Eagle, Telluride, Jackson), business travel, and a central location for repositioning.
-- KBJC has a Sheltair FBO today, and **Jet Aviation has signed a 30-year lease for a new FBO with about 70,000 sq ft of hangars (operations planned for 2028)**. That should improve hangar supply. Compare with Centennial (KAPA), which has more charter traffic and more competition for hangars.
-- High-altitude, hot-day performance at mountain airports favors the Latitude over light jets.
+- KBJC has a Sheltair FBO today, and **Jet Aviation has signed a 30-year lease for a new FBO with about 70,000 sq ft of hangars (operations planned for 2028)**. EJM also has hangars; confirm where.
 
-**Competition.** Large management/charter operators (Executive Jet Management, Solairus, Clay Lacy, Jet Linx and others; verify Denver presence) and the fractionals' own growing fleets. The fractionals add their own aircraft over time, so overflow demand is cyclical. This is a key risk (section 10).
+**The big dependency.** NetJets can turn off the tap at any time (Derek). If it does, the jet can't live on retail charter alone, and a jet chasing charter won't be available when NetJets needs it again. This is the top risk (section 10).
 
 ## 4. Operations
 
-| Area | Phase 1 (on manager's certificate) | Phase 2+ (own certificate) |
+| Area | On EJM's certificate (plan) | Own certificate (2029 decision) |
 |---|---|---|
-| Operational control, dispatch, flight following | Management company | OpCo (Director of Operations) |
-| Maintenance tracking (CAMP), inspections | Management company with Textron service centers | OpCo Director of Maintenance |
-| Crew employment | Usually the management company employs the crew, with costs passed through. The Chief Pilot may be hired through the manager. | OpCo |
-| Safety ratings (ARGUS/Wyvern) and SMS | Manager's existing ratings | Must be earned: plan 12-24 months after the certificate |
-| Sales | Manager's charter desk plus fractional relationships | OpCo sales lead |
-| Chief Pilot's role | Owner's representative: watches utilization, cost, crew and maintenance; flies the line | Becomes Chief Pilot or Director of Operations of OpCo |
+| Operational control, dispatch, OpSpecs | EJM | OpCo (Director of Operations) |
+| Maintenance | EJM's A&P mechanics, with Textron service centers | OpCo Director of Maintenance |
+| Hangar, fuel and services | EJM hangars and EJM's negotiated fuel and services prices | Own contracts |
+| Pilots | Two PIC type-rated pilots, FlightSafety recurrent every 6 months at EJM's training rates | OpCo |
+| Admin | EJM | OpCo |
+| NetJets compliance and trip flow | EJM | Must be re-earned; may not be possible |
+| Derek's role | Owner's representative: watches hours, cost, crew and maintenance; flies the line | Chief Pilot or Director of Operations of OpCo |
 
-**Crewing.** 2 captains + 1 first officer per aircraft, plus contract pilots for peaks (base budget). Fractional overflow is often short notice, so the crew must be reachable on call. Aircraft rest and crew duty limits under Part 135 cap the hours a single crew can fly.
+**Crewing.** 2 captains plus a second PIC-qualified pilot per aircraft, and contract pilots for peaks. Both seats hold full PIC type ratings.
 
-**Engines on program.** Keep both Pratt & Whitney PW306D1 engines on the **ESP hourly program** and the APU on a program. This protects resale value and avoids surprise overhaul bills. Confirm program status during the pre-buy inspection.
+**Engines on program.** Keep both Pratt & Whitney PW306D engines on the hourly program (PowerAdvantage+/ESP) and the APU on a program. This protects resale value. Confirm program status during the pre-buy inspection.
 
-**Safety Management System.** The FAA now requires Part 135 operators to have an SMS, with compliance due in 2027. When OpCo applies for its own certificate, the SMS must be built from day one.
+**Safety Management System.** EJM's SMS covers the jet while it is on EJM's certificate. Part 135 operators must have an SMS by 2027.
 
 ## 5. Revenue model
 
 | Source | Base assumption | Comment |
 |---|---|---|
-| Fractional / program overflow | 50% of hours at $7,000/hr wholesale | Short-notice and peak-day heavy. Get real rates from bidders. |
-| Broker / retail charter | 50% of hours at $8,500/hr | Excludes 7.5% federal excise tax, which the operator collects and remits |
-| Billable hours, mature year | 600 per jet | Ramp: 60% of mature hours in the first year of service, 90% in the second |
+| NetJets trips via EJM | 95% of hours at $6,750/hr (placeholder) | **Most important number in the plan.** Get EJM's actual rate card, and whether fuel and positioning are paid. |
+| Retail charter | 5% of hours at $8,000/hr | Excludes 7.5% federal excise tax |
+| Billable hours, mature year | 600 per jet | Ramp: 60% of mature hours in the first year of service, 90% in the second. Ask EJM for actual hours on its NetJets-flying midsize jets. |
 | Unpaid positioning | 10% of billable hours | |
-| Management platform (Phase 2+) | $200K net margin per third-party jet managed | Management fee plus charter commission, less staff cost |
+| Management platform (2030+) | $200K net margin per third-party jet managed | Only if the own-certificate decision goes ahead |
 
 Rates grow 3% a year and costs 3% a year in the base case.
 
 ## 6. Cost structure (one jet, base, today's dollars)
 
+Derek asked for very conservative maintenance and contingency budgets. Every maintenance line is set at or above published benchmarks, and contingencies sit on top.
+
 | Line | Per year | Note |
 |---|---|---|
-| Charter revenue (600 hrs x $7,750 blended) | $4.65M | |
-| Variable, about $3,700 per flight hour | $2.44M | Fuel 270 gal/hr at $6.50, airframe maintenance $750, engines $660, APU $80, trip costs $450 |
-| Crew (2 captains, 1 FO, contract) | $0.64M | Includes a 25% benefits load |
-| Training | $0.11M | Simulator recurrent training plus Part 135 checks |
-| Hangar, insurance, other fixed, contingency | $0.28M | |
-| Management fee | $0.12M | $10K/month |
-| Manager's commission | $0.47M | 10% of charter revenue |
-| Company G&A incl. investor reporting | $0.10M | |
-| **EBITDA** | **$0.50M** | 11% margin |
-| Debt service (80% LTV, 7.25%, 15-yr amortization) | $1.20M | |
-| **Cash flow after debt** | **($0.71M)** | Funded by investor equity in the early years |
+| Revenue (600 hrs x $6,813 blended) | $4.09M | |
+| EJM commission (10%) | ($0.41M) | Confirm whether EJM takes a cut of NetJets trips |
+| Fuel, 285 gal/hr at $6.75 | ($1.27M) | Guardian Jet: 274 gal/hr. EJM's negotiated price not yet credited. |
+| Airframe maintenance, $1,250/hr | ($0.83M) | Guardian Jet benchmark $1,220/hr |
+| Engine program, $950/hr | ($0.63M) | Listing shows $906/hr on PowerAdvantage+ |
+| APU program, $95/hr | ($0.06M) | |
+| **Maintenance contingency, 15% on top** | **($0.23M)** | Downside 20% |
+| Crew travel, landing, handling, $450/hr | ($0.30M) | |
+| Crew (2 captains, 1 PIC-rated second pilot, contract pilots) | ($0.69M) | 25% benefits load |
+| Training (FlightSafety every 6 months, 3 pilots) | ($0.14M) | At EJM rates |
+| Hangar, insurance, other fixed | ($0.23M) | |
+| **Operating contingency** | **($0.15M)** | AOG downtime, inspection overruns. Downside $200K. |
+| EJM management fee | ($0.12M) | $10K/month placeholder |
+| Company G&A incl. investor reporting | ($0.10M) | |
+| **EBITDA** | **($1.05M)** | |
+| Debt service (80% LTV, 7.25%, 15-yr amortization) | ($1.03M) | |
+| **Cash flow after debt** | **($2.08M)** | |
 
-The Flycraft benchmark puts Latitude operating cost at about $6,500/hr all-in at 400 hours. Our cost per hour is lower because charter flies more hours over the same fixed base.
+Plus a **$350K one-time squawk reserve** at closing ($500K downside) for pre-buy findings and first-year surprises. Unspent cash stays in the company.
+
+**Rate needed to make one jet work (base, 600 hrs):**
+
+| Target | NetJets rate per billable hour |
+|---|---|
+| EBITDA breakeven | about $8,800 |
+| Covers debt service at 80% LTV | about $10,800 |
+
+Hours alone can't close this gap: at $6,750 each extra hour adds only about $620 of margin. If NetJets reimburses fuel, the rate needed falls by about $2,000 an hour.
 
 ## 7. Financing and investors
 
-**Equity comes from investors; debt from an aviation lender.** Henry asked for at least 80% debt. The "Financing Scenarios" sheet compares six leverage levels (base scenario):
+**Equity comes from investors; debt from an aviation lender.** The "Financing Scenarios" sheet compares six leverage levels (base):
 
-| LTV | Equity to raise | Annual debt service | Cash after debt (600 hrs) | Breakeven hours incl. debt | Year-1 depreciation per $1 equity |
-|---|---|---|---|---|---|
-| 60% | $6.88M | $0.90M | ($0.40M) | 739 | 2.0x |
-| 70% | $5.53M | $1.05M | ($0.55M) | 791 | 2.4x |
-| 75% | $4.86M | $1.13M | ($0.63M) | 817 | 2.8x |
-| **80%** | **$4.18M** | **$1.20M** | **($0.71M)** | **842** | **3.2x** |
-| 85% | $3.51M | $1.28M | ($0.78M) | 868 | 3.8x |
-| 90% | $2.83M | $1.36M | ($0.86M) | 894 | 4.8x |
+| LTV | Equity to raise | Annual debt service | Cash after debt (600 hrs) | Year-1 depreciation per $1 equity |
+|---|---|---|---|---|
+| 60% | $6.50M | $0.77M | ($1.82M) | 1.8x |
+| 70% | $5.35M | $0.90M | ($1.95M) | 2.1x |
+| 75% | $4.78M | $0.96M | ($2.01M) | 2.4x |
+| **80%** | **$4.20M** | **$1.03M** | **($2.08M)** | **2.7x** |
+| 85% | $3.63M | $1.09M | ($2.14M) | 3.2x |
+| 90% | $3.05M | $1.15M | ($2.21M) | 3.8x |
 
-**What this tells you.** Leverage changes how much equity investors put in up front, and how much depreciation they get per dollar. It does not change whether the jet carries itself. The real levers are **hours** and **purchase price**.
+**What this tells you.** Leverage changes how much equity investors put in and how much depreciation they get per dollar. It doesn't make the jet carry itself. The real levers are **the NetJets rate, hours and purchase price**.
 
 **Lender expectations.**
 - Credit-based jet loans run 15-20% down. Asset-based loans run 30-40% down.
-- **Henry won't be the guarantor, so lenders will likely treat this as asset-based (60-70% LTV)** unless an anchor investor guarantees the loan. The guarantor would be compensated with extra units or a fee.
-- Advertised rates were about 5.6-9% in Sep/Oct 2026, with prime at 7.00%. Expect a 5-7 year balloon on a 15-20 year amortization.
-
-**Ways to improve the structure.**
-1. A 20-year amortization, or 12-24 months interest-only during ramp-up.
-2. An older, cheaper Latitude (2015-2016) with engines on program.
-3. A minimum-hours or revenue guarantee from the management company in year 1.
-4. Lower leverage with more equity (less cash burn, less depreciation per dollar).
+- **Henry won't be the guarantor, so lenders will likely treat this as asset-based (60-70% LTV)** unless an anchor investor guarantees the loan.
+- Lenders may want shorter terms on an out-of-production type. Advertised rates were about 5.6-9% in Sep/Oct 2026.
 
 **Tax: the investor angle.**
 - The 2025 tax law permanently restored 100% bonus depreciation, and used aircraft qualify. Charter counts as business use.
-- Jet #1 creates about a $13.5M deduction in its first year in service, about **3.2x the investor equity at 80% LTV**. At 37%, that is worth about $5M **if investors can use it**.
-- Most investors are passive, so losses offset only passive income. Unused losses carry forward to the sale.
-- The deduction is recaptured as ordinary income when jets are sold. Each investor's own CPA must confirm.
-- Henry has no income to offset, so the benefit belongs to investors and is a key selling point of the raise.
-- Plan state sales/use tax on the purchase with counsel.
+- Jet #1 creates about an $11.5M deduction in its first year in service, about **2.7x the investor equity at 80% LTV**.
+- Most investors are passive, so losses offset only passive income. The deduction is recaptured when the jet is sold. Each investor's own CPA must confirm.
 
 ## 8. Financial projections: three growth paths
 
-All three paths share Jet #1 and the same economics. They differ only in what happens after 2029. Fleet counts are inputs on the "Fleet Plan" sheet.
+All three paths share Jet #1. At the placeholder NetJets rate, the stop-loss fails and Jet #1 is sold in mid-2029 in every path, so no path buys more jets. The paths then differ only in how many other owners' jets they manage.
 
 | Base scenario, 2027-2036 | Ownership | Management-led | Hybrid |
 |---|---|---|---|
-| Owned / third-party managed jets at exit | 5 / 0 | 1 / 18 | 3 / 12 |
-| Revenue in 2036 | $30.3M | $10.4M | $21.2M |
-| EBITDA in 2036 | $6.3M | $3.6M | $5.6M |
-| Debt at exit | $38.0M | $4.9M | $21.0M |
-| **Peak equity to raise** | **$30.7M** | **$8.6M** | **$18.2M** |
-| Net exit proceeds | $15.4M | $35.2M | $31.7M |
-| **Investor multiple (pre-tax)** | **0.5x** | **3.6x** | **1.7x** |
-| Investor IRR pre-tax / after tax if losses usable | (14%) / n.m. | 17% / 30% | 9% / 23% |
-| Sponsor promote + fees (Henry + Chief Pilot) | $0.7M | $3.9M | $0.8M |
+| Owned / third-party managed jets at exit | 0 / 0 | 0 / 18 | 0 / 12 |
+| EBITDA in 2036 | $0 | $2.1M | $1.1M |
+| **Peak equity to raise** | **$8.0M** | **$8.0M** | **$8.0M** |
+| Net exit proceeds | $4.1M | $33.1M | $22.5M |
+| **Investor multiple (pre-tax)** | **0.5x** | **3.7x** | **2.6x** |
+| Investor IRR, pre-tax | (7%) | 16% | 12% |
+| Sponsor promote (Henry + Derek) | $0 | $3.5M | $1.3M |
 
 | Investor multiple by scenario | Ownership | Management-led | Hybrid |
 |---|---|---|---|
-| Downside (stop-loss sells Jet #1 in 2029) | 0.5x | 2.2x | 1.5x |
-| Base | 0.5x | 3.6x | 1.7x |
-| Upside | 5.9x | 11x | 9.2x |
-
-**How to read this.**
-1. **In base, every owned jet burns about $0.7M a year after debt.** Buying more of them adds revenue but destroys investor value. The ownership path only wins in the upside, where each jet clears its debt.
-2. **Managing other owners' jets is capital-light.** About $200K of margin per jet, no loan, and buyers pay a multiple for it at exit. That is why the management-led path needs the least money and returns the most.
-3. **The stop-loss works.** In the downside, Jet #1 is sold in 2029, which caps losses. The management platform can still be built if the certificate path continues.
+| Downside | 0.3x | 1.9x | 1.2x |
+| Base | 0.5x | 3.7x | 2.6x |
+| Upside | 0.8x | 6.3x | 4.5x |
 
 **Management-led path, base ($M):**
 
 | | 2027 | 2028 | 2029 | 2030 | 2031 | 2033 | 2036 |
 |---|---|---|---|---|---|---|---|
-| Owned / managed jets (year end) | 1 / 0 | 1 / 0 | 1 / 0 | 1 / 2 | 1 / 4 | 1 / 9 | 1 / 18 |
-| Revenue | 1.4 | 4.3 | 4.9 | 5.3 | 5.9 | 7.3 | 10.4 |
-| EBITDA | (0.1) | 0.3 | 0.5 | 0.5 | 0.8 | 1.7 | 3.6 |
-| Cash after debt service | (1.4) | (0.9) | (1.0) | (0.7) | (0.4) | 0.5 | 2.4 |
-| Investor equity in (cumulative) | 5.5 | 6.4 | 7.5 | 8.2 | 8.6 | 8.6 | 8.6 |
+| Owned / managed jets (year end) | 1 / 0 | 1 / 0 | 0 / 0 | 0 / 2 | 0 / 4 | 0 / 9 | 0 / 18 |
+| Revenue | 1.2 | 3.8 | 2.2 | 0.2 | 0.7 | 1.8 | 4.3 |
+| EBITDA | (0.6) | (1.1) | (0.6) | (0.8) | (0.5) | 0.3 | 2.1 |
+| Investor equity in (cumulative) | 5.9 | 8.0 | 8.0 | 8.0 | 8.0 | 8.0 | 8.0 |
+
+**How to read this.**
+1. **At the placeholder rate, the jet itself loses money**, and investors fund about $2M a year until the 2029 sale.
+2. **All the return comes from managing other owners' jets**, which in the model needs our own certificate. Derek's warning that NetJets work flows through EJM puts that step in question (section 9).
+3. **Rerun the model as soon as EJM's rate card arrives.** If the rate clears debt service, the stop-loss passes, Jet #1 is kept, and the economics change completely.
 
 ## 9. Growth and exit strategy
 
-**Chosen path: management-led (Henry, Oct 30, 2026).** One owned jet anchors the business, and growth comes from managing other owners' jets. Adding owned jets (the hybrid) remains an option, earned only once Jet #1 beats its breakeven after debt and funded by a follow-on raise.
+**Chosen path: management-led (Henry, Oct 30, 2026), now with a 2029 decision point.**
+
+Derek's point changes how growth works. NetJets work reaches us because the jet is on EJM's certificate. A move to our own certificate could cut that work off, and we would be left selling retail charter, which doesn't cover costs. So:
 
 | Phase | Timing | Milestones | Triggers to advance |
 |---|---|---|---|
-| 1. Prove | Jul 2027 - 2029 | Jet #1 flying; at least 750 billable hrs/yr run-rate by month 12; 98%+ dispatch reliability | Trailing-12 cash after debt better than ($250K); NetJets/fractional share of 40% or more |
-| 2. Build | 2029 - 2030 | Form OpCo; hire Director of Operations and Director of Maintenance; FAA Part 135 certification (12-24 months); SMS; drug/alcohol program; DOT/TSA registrations; sign first third-party owners | Certificate issued; 2+ owners signed |
-| 3. Scale | 2030 - 2034 | Keep owned jets on the manager's certificate until ARGUS/Wyvern ratings are earned; grow the managed fleet to 10-18; add owned jets only if Jet #1 clears debt service (raise follow-on equity per jet) | Platform margin of $1M+; ratings in place; fractional supplier approval in OpCo's own name |
-| 4. Exit | 2034 - 2036 | Audited financials; assignable management contracts; recurring management revenue | Strategic buyer (a large management/charter consolidator, a fractional or a PE-backed roll-up) |
-
-**Where to find managed aircraft.** Owners who fly 100-300 hours a year and want charter revenue to offset costs. Denver/Boulder business owners, and the Chief Pilot's network. The Chief Pilot's current employer could be either a management partner for Jet #1 or a future competitor. Decide which before approaching them.
+| 1. Prove | Jul 2027 - 2029 | Jet #1 flying for NetJets through EJM; hours and rate at or above the Gate 1 letter; 98%+ dispatch reliability | Trailing-12 cash after debt better than ($250K) |
+| 2. Decide | 2029 | Ask EJM and NetJets directly whether jets managed on our certificate could keep NetJets work | **Only build our own certificate if NetJets access survives.** Otherwise stay on EJM. |
+| 3a. Scale on own certificate | 2030 - 2034 | Form OpCo; FAA Part 135 certification (12-24 months); manage 10-18 owners' jets | Certificate issued; NetJets supplier approval in OpCo's name |
+| 3b. Scale on EJM (fallback) | 2030 - 2034 | Add owned Sovereign+ jets on EJM's certificate, each in its own AircraftCo and only when Jet #1 clears its debt; or bring other owners' jets to EJM for a finder or oversight fee | Jet #1 cash after debt positive |
+| 4. Exit | 2034 - 2036 | Audited financials; assignable contracts | Strategic buyer, or sell the jets |
 
 **Exit options.**
-1. Sell Fund I's interests in OpCo plus the fleet to a consolidator (base).
-2. Sell OpCo only and sell the jets on the market.
+1. Sell OpCo plus any fleet to a consolidator (if 3a).
+2. Sell the jets on the market and return capital (if 3b).
 3. Merge into a larger operator for equity.
-4. Wind down: sell the jets and return capital.
 
 ## 10. Top risks (full register in `05-Risk-Register.md`)
 
-1. **Utilization below breakeven.** This is the biggest risk. Mitigation: committed-hours letter before purchase; stop-loss rule.
-2. **Overflow demand is cyclical.** Fractionals add their own fleet, and a recession cuts charter. Mitigation: mix of overflow and broker work; variable cost structure; reserve.
-3. **Aircraft value falls** or a big unscheduled maintenance event hits. Mitigation: engines on program, thorough pre-buy inspection, 6-month cash reserve.
-4. **Losing safety ratings or supplier approval** on the move to own certificate. Mitigation: dual path, so jets stay with the manager until ratings are earned.
-5. **Key person** (Chief Pilot). Mitigation: vesting equity, key-person insurance, deputy captain.
-6. **Interest rate and refinancing risk** at the balloon. Mitigation: fixed rate, 7-year term, lower LTV as cash builds.
-7. **Raise falls short or investors can't use the tax losses.** Mitigation: anchor investors first; target investors with passive income; each investor's CPA confirms.
-8. **Lender won't go to 80% without a guarantor.** Mitigation: anchor-investor guarantee, or accept 65-70% LTV with more equity.
+1. **NetJets turns off the tap.** NetJets can stop sending trips at any time. Retail charter alone won't cover costs, and chasing charter makes the jet unavailable when NetJets returns. Mitigation: confirm NetJets' recent volume through EJM; fund a 6-month reserve; stop-loss; keep the jet on EJM so it stays first in line.
+2. **NetJets rate too low to cover costs.** Mitigation: Gate 1 needs EJM's written rate card to clear debt service.
+3. **Maintenance on an out-of-production airframe.** Mitigation: engines on program, thorough pre-buy, 15% maintenance contingency, $150K operating contingency, $350K squawk reserve, 6-month reserve.
+4. **Phenom wet-runway demand fades** if NetJets changes its policy or fleet. Mitigation: don't count on it in the hours letter.
+5. **Aircraft value falls faster** because production has ended. Mitigation: buy below market; keep maintenance current.
+6. **Key person** (Derek). Mitigation: vesting equity, key-person insurance.
+7. **Raise falls short or investors can't use the tax losses.** Mitigation: anchor investors first; each investor's CPA confirms.
+8. **Lender won't go to 80% without a guarantor.** Mitigation: anchor-investor guarantee, or a lower LTV with more equity.
 
 ## 11. Immediate next steps (next 60 days)
 
-1. Henry (general partner, unpaid at the start) and the Chief Pilot (salaried) agree on the split of the sponsor promote and vesting.
-2. Hire securities counsel (PPM, operating agreement, Form D), an aviation attorney and a CPA.
-3. Send the management company RFP (`06-Management-Company-RFP.md`) to 4-5 operators, including NetJets' affiliate and the Chief Pilot's current employer.
-4. Talk to 2-3 aviation lenders about LTV with and without an anchor-investor guarantee.
-5. Soft-circle 2-3 anchor investors for about $4-5M; share the one-page summary and depreciation story.
-6. Hire an aircraft broker to scan the 2015-2019 Latitude market.
-7. Get an insurance broker indication for charter-use hull and liability.
-8. Re-run the model with real quotes. Go or no-go at Gate 1.
-
+1. **Derek gets from EJM:** the NetJets hourly rate for a Sovereign+ (and whether fuel and positioning are included), actual annual hours on comparable EJM jets, EJM's management fee and commission, and EJM's hangar location for a Broomfield-based jet.
+2. Re-run the model with those numbers. If the rate clears debt service, proceed; if not, stop or rethink the aircraft.
+3. Hire securities counsel, an aviation attorney and a CPA.
+4. Talk to 2-3 aviation lenders about a Sovereign+ loan, with and without an anchor-investor guarantee.
+5. Hire an aircraft broker to scan lightly used 2014-2016 Sovereign+ aircraft, starting with the Controller.com example.
+6. Get an insurance broker indication for charter-use hull and liability.
+7. Soft-circle 2-3 anchor investors, but only after the EJM numbers are in.

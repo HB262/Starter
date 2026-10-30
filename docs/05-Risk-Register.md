@@ -1,15 +1,16 @@
 # Risk register
 
-*Draft 1, October 30, 2026. Likelihood (L) and impact (I) are rated 1-5. Score = L x I. Review every quarter.*
+*Draft 2, October 30, 2026, updated with Derek's comments. Likelihood (L) and impact (I) are rated 1-5. Score = L x I. Review every quarter.*
 
 | # | Risk | L | I | Score | Early warning | Mitigation | Owner |
 |---|---|---|---|---|---|---|---|
-| 1 | Utilization below breakeven (about 840 billable hrs incl. debt, base) | 4 | 5 | **20** | Trailing-3-month hours below 60/month | Committed-hours letter before purchase; stop-loss rule; broker sales in addition to overflow | H, CP |
-| 2 | Fractional overflow demand falls (fractionals add their own fleet; recession) | 3 | 5 | **15** | Fewer overflow requests; falling wholesale rates | Keep 50% or more broker/retail charter capacity; variable cost structure; reserve | CP |
-| 3 | NetJets supplier approval not obtained, or lost | 3 | 4 | **12** | Audit findings; no NetJets trips in the first 90 days | Pick an operator already approved; meet cabin and crew standards; diversify to other fractionals | MC, CP |
-| 4 | Big unscheduled maintenance or long downtime | 3 | 4 | **12** | Pre-buy findings; repeat defects | Engines and APU on program; thorough pre-buy; $50K contingency; 6-month reserve | CP |
-| 5 | Aircraft value falls faster than the loan balance (negative equity) | 3 | 4 | **12** | Latitude asking prices down 10%+ year over year | Buy below market; keep maintenance current; pay down debt from cash once positive | H |
-| 6 | Tax losses not usable by Henry | 3 | 4 | **12** | CPA memo | Get the CPA opinion before LOI; structure for material participation if feasible | CPA |
+| 1 | NetJets rate or hours too low to cover costs (base needs about $10,800/hr at 600 hrs incl. debt) | 4 | 5 | **20** | EJM rate card below the Gate 1 threshold; trailing-3-month hours below 50/month | Gate 1: written rate card and hours letter before purchase; stop-loss rule | H, CP |
+| 1b | **NetJets turns off the tap** (Derek: it can at any time) | 3 | 5 | **15** | NetJets trips fall below 70% of hours; EJM owner notices | Keep the jet on EJM so it stays in the rotation; 6-month reserve; stop-loss; don't pivot to retail charter, which can't cover costs | CP |
+| 2 | Overflow demand falls (NetJets adds its own fleet; Phenom wet-runway rule relaxed; recession) | 3 | 4 | **12** | Fewer Phenom-cover trips; falling rates | Don't count Phenom demand in the hours letter; variable cost structure; reserve | CP |
+| 3 | NetJets won't use a Sovereign+ for our trips, or access is lost in a move off EJM's certificate | 2 | 5 | 10 | No NetJets trips in the first 90 days; EJM unsure about own-certificate access | Confirm with EJM before LOI; stay on EJM unless access survives a move | MC, CP |
+| 4 | Big unscheduled maintenance or long downtime on an out-of-production airframe | 3 | 4 | **12** | Pre-buy findings; repeat defects; parts lead times | Engines and APU on program; thorough pre-buy; 15% maintenance contingency; $150K/yr operating contingency; $350K squawk reserve; 6-month reserve; EJM's A&Ps | CP |
+| 5 | Aircraft value falls faster than the loan balance (negative equity) | 3 | 4 | **12** | Sovereign+ asking prices down 10%+ year over year (production has ended) | Buy below market; keep maintenance current; pay down debt from cash once positive | H |
+| 6 | Tax losses not usable by investors | 3 | 4 | **12** | CPA memo | Get the CPA opinion before LOI; structure for material participation if feasible | CPA |
 | 7 | Key-person loss (Chief Pilot) | 2 | 4 | 8 | Burnout, outside offers | Vesting equity; key-person insurance; second captain as backup | H |
 | 8 | Interest rate / balloon refinancing | 3 | 3 | 9 | Rates rising ahead of the balloon year | Fixed rate; longest term available; build cash; lower LTV over time | H |
 | 9 | Management company underperforms or bills poorly | 3 | 3 | 9 | Late or opaque monthly reports; cost per hour above budget | Audit rights; KPIs and termination clause in contract; Chief Pilot as owner's rep | CP |

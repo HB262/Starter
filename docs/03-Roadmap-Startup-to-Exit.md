@@ -1,6 +1,6 @@
 # Roadmap: startup to exit
 
-*Draft 2, October 30, 2026. Target: revenue flying July 2027. Owners: **H** = Henry, **CP** = Chief Pilot partner, **A** = aviation attorney, **SC** = securities counsel, **CPA**, **MC** = management company, **L** = lender, **B** = aircraft broker.*
+*Draft 3, October 30, 2026, updated with Derek's comments. Target: revenue flying July 2027. Owners: **H** = Henry, **CP** = Chief Pilot partner (Derek), **A** = aviation attorney, **SC** = securities counsel, **CPA**, **MC** = management company (EJM), **L** = lender, **B** = aircraft broker.*
 
 ## Phase 0: Set up and decide (Nov 2026 - Feb 2027)
 
@@ -12,13 +12,14 @@
 | 0.2 | Hire an aviation attorney and an aviation-savvy CPA | H | Nov 30 |
 | 0.3 | CPA memo: bonus depreciation usability, material participation, entity structure, state sales/use tax | CPA | Dec 31 |
 | 0.4 | Form Sponsor LLC, Fund I LLC and AircraftCo #1 LLC; get EINs; open bank accounts | A, SC | Dec 15 |
-| 0.5a | CP talks privately with his current employer about managing Jet #1 before it is named anywhere | CP | Nov 20 |
-| 0.5 | Send management company RFP to 4-5 operators, including NetJets' affiliated manager (and CP's current employer if 0.5a goes well) | CP | Dec 1 |
+| 0.5a | CP asks EJM for: NetJets hourly rate card for a Sovereign+ (fuel and positioning included or not), actual annual hours on comparable EJM jets, management fee and commission, hangar location for a KBJC-based jet | CP | Nov 20 |
+| 0.5 | Send the EJM term-sheet questions (`06-Management-Company-RFP.md`); get 1-2 backup quotes for comparison | CP | Dec 1 |
+| 0.5b | Re-run the model with EJM's numbers; stop here if the NetJets rate can't clear debt service | H | Dec 15 |
 | 0.6 | Lender conversations: LTV with and without an anchor-investor guarantee | H, L | Dec 31 |
-| 0.7 | Hire an aircraft broker (buy-side); market scan of 2015-2019 Latitudes with engine program status | H, B | Dec 15 |
+| 0.7 | Hire an aircraft broker (buy-side); market scan of lightly used 2014-2016 Sovereign+ aircraft with engine program status (start with the Controller.com 2015 example) | H, B | Dec 15 |
 | 0.8 | Insurance broker indication: charter-use hull + $100M+ liability | H | Jan 15 |
-| 0.9 | Score RFP responses; site visits; reference calls with current owners | H, CP | Jan 31 |
-| **G1** | **Gate 1 go/no-go:** a management company with fractional supplier status commits to 750+ billable hrs/yr; model re-run on real quotes shows an acceptable outcome | H | **Feb 15** |
+| 0.9 | Reference calls with current EJM owners flying NetJets trips | H, CP | Jan 31 |
+| **G1** | **Gate 1 go/no-go:** EJM's written NetJets rate card and projected-hours letter clear debt service in the model (base: about $10,800/hr at 600 hrs with conservative costs) | H | **Feb 15** |
 
 ## Phase 1: Acquire and launch (Feb - Jul 2027)
 
@@ -29,24 +30,27 @@
 | 1.2b | Investor closing: subscriptions signed, funds into escrow, Form D filed within 15 days | SC | Apr 30 |
 | 1.3 | LOI on the selected aircraft, with a refundable deposit into escrow | B, A | Mar 15 |
 | 1.4 | Pre-buy inspection at a Textron service center; records review; engine borescope | CP, B | Apr 15 |
-| 1.5 | Aircraft purchase agreement; resolve squawks; technical acceptance | A, B | Apr 30 |
-| 1.6 | Sign the management agreement and charter/lease terms with MC (attorney review) | A, H | Apr 30 |
+| 1.5 | Aircraft purchase agreement; resolve squawks (funded from the $350K squawk reserve); technical acceptance | A, B | Apr 30 |
+| 1.6 | Sign EJM's management agreement (attorney review): fee, commission on NetJets trips, termination, audit rights | A, H | Apr 30 |
 | 1.7 | **Gate 3:** close; FAA registration (AC 8050-1) and International Registry; loan funding; insurance bound | A, L | May 15 |
 | 1.8 | MC adds the aircraft to its certificate: conformity inspection, OpSpecs, manuals | MC | Jun 15 |
 | 1.9 | Interior/paint refresh and Wi-Fi to fractional standard (in parallel with 1.8) | CP, MC | Jun 15 |
-| 1.10 | Hire and train crew (2 captains incl. CP, 1 FO); Part 135 initial checks | CP, MC | Jun 30 |
-| 1.11 | Lease the hangar at KBJC (Sheltair now; Jet Aviation from 2028); fuel contract | CP | May 31 |
-| 1.12 | MC submits the aircraft to NetJets/fractional supplier audit; listed with brokers | MC | Jun 30 |
+| 1.10 | Hire and train crew (2 captains incl. CP, 1 PIC-rated second pilot, all with full PIC type ratings); FlightSafety initial at EJM's rates; Part 135 checks | CP, MC | Jun 30 |
+| 1.11 | Hangar through EJM, or at KBJC (Sheltair now; Jet Aviation from 2028); EJM's negotiated fuel pricing | CP | May 31 |
+| 1.12 | EJM confirms the aircraft meets NetJets' standards and adds it to the NetJets rotation | MC | Jun 30 |
 | 1.13 | **First revenue trip** | All | **Jul 1** |
 
 ## Phase 1b: Prove it (Jul 2027 - mid 2029)
 
 - **Monthly owner report** from MC: billable vs. unpaid hours, rate by source, cost per hour, dispatch reliability, maintenance downtime, cash vs. budget.
-- **Quarterly review** against the breakeven (base: about 840 billable hours a year incl. debt) and the hours commitment.
+- **Quarterly review** of the NetJets rate and hours against the Gate 1 letter, and maintenance spend against the conservative budget.
+- **NetJets volume watch:** if NetJets trips fall below 70% of hours for a quarter, review with EJM; do not pivot the jet to retail charter, which doesn't cover costs.
 - **Stop-loss rule:** if trailing-12-month cash flow after debt is worse than ($750K) by June 2029, list the jet for sale and stop expansion.
-- **Advance rule:** if trailing-12-month billable hours are 750 or more and cash after debt is better than ($250K), start Phase 2.
+- **Advance rule:** if cash after debt is better than ($250K) on a trailing-12 basis, consider growth.
 
-## Phase 2: Own certificate (mid 2029 - 2030)
+## Phase 2: Own certificate, only if NetJets access survives (mid 2029 - 2030)
+
+**First step (2029):** ask EJM and NetJets directly whether jets on our own certificate could keep NetJets work. If not, stay on EJM and grow by adding jets to EJM's certificate when Jet #1 clears its debt (see the business plan, section 9). Steps 2.1-2.5 apply only if the answer is yes.
 
 | # | Action | Owner |
 |---|---|---|

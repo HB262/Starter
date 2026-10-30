@@ -1,13 +1,13 @@
 # Open questions and key assumptions
 
-*Draft 3, October 30, 2026. These are the next interview questions for Henry, and the assumptions to replace with real data.*
+*Draft 4, October 30, 2026, updated with Derek's comments. These are the next interview questions for Henry, and the assumptions to replace with real data.*
 
 ## What Henry has told us
 - Financing: mainly debt, assume at least 80% LTV; scenarios wanted
-- Aircraft: used Citation Latitude
+- Aircraft: ~~used Citation Latitude~~ now a **lightly used Citation Sovereign+** (Derek's preference; example: a 2015 on Controller.com)
 - Base: Broomfield (KBJC)
-- Partner: Latitude type-rated captain at a similar company; paid plus equity; Chief Pilot running day-to-day operations
-- Structure: start on a management company's Part 135 certificate
+- Partner: **Derek**, type-rated captain flying today for an operation on EJM's certificate; paid plus equity; Chief Pilot running day-to-day operations
+- Structure: start on **EJM's Part 135 certificate** (certificate, OpSpecs, negotiated fuel and services, hangars, A&Ps, pilots, admin, NetJets compliance)
 - No personal use; pure revenue business
 - Target: revenue flying mid-2027
 - Exit: grow a fleet over 5-10 years, then sell
@@ -23,19 +23,33 @@
 - Promote split: **60% Henry / 40% Chief Pilot**, Chief Pilot's share vesting over 4 years
 - Growth path chosen: **management-led** (one owned jet, grow by managing other owners' jets)
 
+## What Derek added (Oct 30, 2026)
+- EJM-managed jets fly about **95% NetJets customers**; little charter selling needed.
+- **NetJets can turn off the tap at any time.** Living on retail charter alone would put the business under, and a jet chasing charter isn't available when NetJets needs it.
+- NetJets now requires **5,500 ft of runway in the rain for Phenoms**, so Derek's crews cover many Phenom owners.
+- Both pilots hold full PIC type ratings and attend FlightSafety every 6 months at EJM's rates.
+- **Keep maintenance and contingency budgets very conservative.**
+
 ## Still open
-1. **Loan guarantor:** whether any anchor investor would guarantee the loan in exchange for a fee or extra units.
+1. **EJM's NetJets rate for a Sovereign+** (and whether fuel and positioning are included). This decides the deal: base needs about $10,800/hr at 600 hrs to cover debt.
+2. **Actual annual hours** on EJM's NetJets-flying midsize jets.
+3. **EJM's management fee and commission**, and whether the commission applies to NetJets trips.
+4. **Can a jet keep NetJets work if it moves to our own certificate?** If not, the own-certificate step is off, and growth happens on EJM's certificate.
+5. **Loan guarantor:** whether any anchor investor would guarantee the loan in exchange for a fee or extra units.
 
 ## Assumptions to verify (most important first)
 | Assumption | Base value | How to verify |
 |---|---|---|
 | Billable hours a manager can deliver | 600/yr | RFP responses: committed hours |
-| NetJets uses outside Latitude operators, and at what rate | $7,000/hr wholesale | RFP responses; ask NetJets' affiliated manager directly |
-| Purchase price, 2016-2019 Latitude | $13.5M | Broker and JETNET market scan |
+| NetJets rate paid via EJM for a Sovereign+ | $6,750/hr (placeholder) | EJM rate card via Derek |
+| Share of hours flown for NetJets | 95% | Derek; EJM history |
+| Purchase price, lightly used 2014-2016 Sovereign+ | $11.5M | Broker and JETNET market scan; Controller.com example |
+| Airframe maintenance / engine program | $1,250/hr / $950/hr, plus 15% contingency | EJM owner statements; PowerAdvantage+ quote |
+| Squawk reserve / operating contingency | $350K once / $150K a year | Pre-buy findings; EJM history |
 | Interest rate / LTV | 7.25% / 80% | Lender term sheets |
 | Insurance | $85K/yr | Insurance broker quote |
-| Management fee / commission | $10K/month / 10% | RFP responses |
-| Crew pay | $175K captain / $115K FO | Chief Pilot's market knowledge |
+| Management fee / commission | $10K/month / 10% | EJM term sheet |
+| Crew pay | $175K captain / $150K PIC-rated second pilot | Chief Pilot's market knowledge |
 | Hangar at KBJC | $66K/yr | Sheltair quote; Jet Aviation pre-lease |
 | Tax benefit usable by investors | memo only | Each investor's CPA; fund CPA memo |
 | Lender LTV without a personal guarantor | 80% | Lender conversations; may be 60-70% |
@@ -43,7 +57,9 @@
 | Net margin per managed jet | $200K/yr | Management company benchmarks |
 
 ## Sources used
-- Latitude operating costs (fuel, maintenance, engine program, crew, hangar, insurance): Flycraft, *Cessna Citation Latitude ownership and operating costs*, flycraft.com
+- Sovereign+ operating costs (fuel 274 gal/hr, maintenance $1,220/hr, engine reserves $1,017/hr) and 2015-2018 asking prices ($10.3-15.0M): Guardian Jet, *Compare jet aircraft*, guardianjet.com
+- 2015 Sovereign+ listing (about 2,000 hrs, PowerAdvantage+ at $453/engine/hr): aircraft.com and controller.com
+- Earlier Latitude operating costs (fuel, maintenance, engine program, crew, hangar, insurance): Flycraft, *Cessna Citation Latitude ownership and operating costs*, flycraft.com
 - Latitude price guide (2020-2024 production years): AvBuyer price guide (Aircraft Bluebook), updated May 2025, avbuyer.com
 - NetJets Supplemental Lift Assurance program rates: SherpaReport, sherpareport.com
 - ARGUS / Wyvern rating tiers: Chronicle Jets, *How charter brokers vet operators*, chroniclejets.com

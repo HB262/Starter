@@ -104,7 +104,7 @@ def q(sheet):
 # ---------------------------------------------------------------- Assumptions
 A = wb.active
 A.title = "Assumptions"
-setup(A, "Assumptions: Citation Latitude overflow charter business",
+setup(A, "Assumptions: Citation Sovereign+ NetJets overflow business (EJM certificate)",
       "Blue = input you can change. Yellow = key lever. Column F (Live) feeds every forecast "
       "based on the scenario selected in C3.",
       {"A": 52, "B": 12, "C": 14, "D": 14, "E": 14, "F": 14, "G": 90})
@@ -117,9 +117,10 @@ header(A, 5, ["Assumption", "Unit", "Downside", "Base", "Upside", "Live", "Sourc
 # (key, label, unit, down, base, up, fmt, note, key_lever)
 ASSUMPTIONS = [
     ("SEC", "Aircraft acquisition (per aircraft)"),
-    ("price", "Purchase price, used Citation Latitude (2016-2019)", "$", 15_000_000, 13_500_000, 12_500_000, USD,
-     "AvBuyer/Aircraft Bluebook guide: 2020 Latitude ~$17.5M (May 2025), asking range $18.75-22.5M for newer units. "
-     "Older 2016-2019 units assumed lower. VERIFY with a broker/JETNET before LOI.", True),
+    ("price", "Purchase price, lightly used Citation Sovereign+ (2014-2016)", "$", 12_500_000, 11_500_000, 10_500_000, USD,
+     "Chief Pilot (Derek) prefers a lightly used Sovereign+, e.g. a 2015 on Controller.com. Guardian Jet shows 2015-2018 "
+     "Sovereign+ asking $10.3-15.0M (avg $12.6M); a 2015 with ~2,000 hrs is listed 'make offer'. Asking > sale price. "
+     "VERIFY with a broker/JETNET before LOI.", True),
     ("price_chg", "Annual change in price paid for later aircraft", "%", 0.0, 0.0, 0.0, PCT,
      "Assumes later purchases are similar-vintage aircraft at today's price. Adjust if the market moves.", False),
     ("prebuy", "Pre-buy inspection (Textron service center)", "$", 85_000, 75_000, 60_000, USD,
@@ -131,7 +132,10 @@ ASSUMPTIONS = [
     ("refurb", "Cosmetic interior / paint refresh", "$", 350_000, 250_000, 150_000, USD,
      "Fractional customers expect fleet-standard cabins. Estimate.", False),
     ("init_train", "Initial crew training and hiring (per aircraft)", "$", 100_000, 75_000, 50_000, USD,
-     "Type rating for new hires (CE-680A) and Part 135 initial. Estimate.", False),
+     "Type rating for new hires (CE-680) and Part 135 initial at EJM's FlightSafety rates. Estimate.", False),
+    ("squawk", "Post-purchase squawk and unscheduled maintenance reserve (one-time)", "$", 500_000, 350_000, 250_000, USD,
+     "Deliberately conservative (Derek): covers pre-buy findings not credited by the seller, deferred items, and "
+     "first-year surprises on a 10-year-old airframe. Funded at closing; unspent cash stays in the company.", False),
     ("entity", "Company formation, legal, accounting, insurance setup (once)", "$", 75_000, 50_000, 35_000, USD,
      "LLC formation, operating agreement, aviation counsel, CPA, insurance broker. Estimate.", False),
     ("offering", "Investor offering costs (securities counsel, PPM, Form D) (once)", "$", 100_000, 75_000, 50_000, USD,
@@ -152,48 +156,58 @@ ASSUMPTIONS = [
     ("ramp1", "Utilization in first year of service (% of mature)", "%", 0.50, 0.60, 0.70, PCT,
      "Ramp while operator builds the aircraft into its overflow rotation.", False),
     ("ramp2", "Utilization in second year (% of mature)", "%", 0.80, 0.90, 1.00, PCT, "", False),
-    ("mix", "Share of hours flown as fractional / program overflow", "%", 0.40, 0.50, 0.60, PCT,
-     "NetJets, Flexjet, jet card and membership programs. The rest is broker/retail charter.", True),
-    ("rate_ovf", "Wholesale rate, overflow / subcontract trips", "$/hr", 6_750, 7_000, 7_250, USD,
+    ("mix", "Share of hours flown for NetJets (via EJM)", "%", 0.95, 0.95, 0.95, PCT,
+     "Derek: EJM's managed fleet flies ~95% NetJets customers, so little charter selling is needed. The rest is retail charter. "
+     "Model the NetJets cut-off risk with the hours sensitivity on Unit Economics.", True),
+    ("rate_ovf", "Rate paid for NetJets trips (via EJM)", "$/hr", 6_250, 6_750, 7_000, USD,
      "Wholesale is below retail. NetJets' own midsize lift program retails $8,000-10,900/hr (SherpaReport). Estimate; "
-     "get actual subcontract rates from the management company.", True),
-    ("rate_ret", "Retail / broker charter rate", "$/hr", 8_000, 8_500, 9_000, USD,
+     "get EJM's actual NetJets rate card for a Sovereign+.", True),
+    ("rate_ret", "Retail / broker charter rate", "$/hr", 7_500, 8_000, 8_500, USD,
      "Excludes 7.5% federal excise tax (collected from the customer and remitted). Estimate.", True),
     ("rate_g", "Annual charter rate growth", "%", 0.020, 0.030, 0.035, PCT, "", False),
     ("ferry", "Unpaid positioning hours (% of billable)", "%", 0.15, 0.10, 0.08, PCT,
      "Denver base means some empty legs to the coasts. Estimate.", False),
     ("SEC", "Variable operating costs (per flight hour)"),
-    ("gph", "Fuel burn", "gal/hr", 285, 270, 260, NUM,
-     "Flycraft cites 315 gal/hr block (conservative); typical mission average lower.", False),
-    ("fuel", "Jet-A price (contract/volume pricing)", "$/gal", 7.00, 6.50, 6.00, '$#,##0.00',
-     "Flycraft used $7.66/gal retail (Oct 2026). Contract fuel cards typically discount.", False),
-    ("maint", "Airframe maintenance and parts", "$/hr", 850, 750, 650, USD,
-     "Flycraft range $800-1,300/hr incl. unscheduled. Estimate.", False),
-    ("engine", "Engine program (2 x PW306D1, ESP)", "$/hr", 700, 660, 620, USD,
-     "Flycraft range $275-425 per engine per hour. Engines must be on program for resale value.", False),
-    ("apu", "APU program", "$/hr", 100, 80, 70, USD, "Estimate.", False),
+    ("gph", "Fuel burn", "gal/hr", 295, 285, 275, NUM,
+     "Guardian Jet: Sovereign+ 274 gal/hr. Base set above that on purpose.", False),
+    ("fuel", "Jet-A price (EJM negotiated pricing)", "$/gal", 7.25, 6.75, 6.25, '$#,##0.00',
+     "Guardian Jet used $7.54/gal retail. EJM's negotiated fuel should come in lower; not credited until we see the price sheet.", False),
+    ("maint", "Airframe maintenance and parts (scheduled + unscheduled)", "$/hr", 1_450, 1_250, 1_100, USD,
+     "Guardian Jet: Sovereign+ maintenance $1,220/hr. Base set at or above the benchmark (Derek: keep it conservative). "
+     "EJM's in-house A&Ps and labor rates should come in lower.", False),
+    ("engine", "Engine program (2 x PW306D, PowerAdvantage+/ESP)", "$/hr", 1_000, 950, 906, USD,
+     "A 2015 Sovereign+ listing shows PowerAdvantage+ at $453/engine/hr ($906/hr). Guardian Jet engine reserve $1,017/hr. "
+     "Engines must be on program for resale value.", False),
+    ("apu", "APU program", "$/hr", 110, 95, 85, USD, "Estimate.", False),
+    ("maint_cont", "Maintenance contingency added to airframe, engine and APU costs", "%", 0.20, 0.15, 0.10, PCT,
+     "Extra cushion on top of the benchmarks for an out-of-production airframe: AOG parts, corrosion, gear and "
+     "landing-gear overhauls, inspection overruns. Derek asked for very conservative maintenance budgets.", False),
     ("trip", "Crew travel, landing, handling fees (not rebilled)", "$/hr", 500, 450, 400, USD,
      "Flycraft range $400-650/hr.", False),
     ("SEC", "Fixed operating costs (per owned aircraft, per year)"),
     ("captains", "Captains per aircraft", "#", 2, 2, 2, NUM, "Chief pilot (Henry's partner) is one of the captains.", False),
-    ("fos", "First officers per aircraft", "#", 1, 1, 1, NUM, "Plus contract pilots for peaks.", False),
+    ("fos", "Second PIC-rated pilots per aircraft", "#", 1, 1, 1, NUM,
+     "Derek: both seats hold full PIC type ratings (NetJets standard). Plus contract pilots for peaks.", False),
     ("cap_sal", "Captain salary", "$", 190_000, 175_000, 165_000, USD, "Midsize Part 135 market. Estimate.", False),
-    ("fo_sal", "First officer salary", "$", 125_000, 115_000, 105_000, USD, "Estimate.", False),
+    ("fo_sal", "Second pilot salary (PIC type-rated)", "$", 160_000, 150_000, 140_000, USD,
+     "Higher than a typical first officer because both pilots are PIC-qualified. Estimate.", False),
     ("benefits", "Benefits and payroll tax load", "%", 0.28, 0.25, 0.22, PCT, "Flycraft used 43% (corporate); charter typically lower.", False),
     ("contract", "Contract pilot budget", "$", 90_000, 60_000, 40_000, USD, "Estimate.", False),
-    ("train", "Recurrent training per pilot (sim + Part 135)", "$", 40_000, 35_000, 30_000, USD,
-     "Flycraft range $13-20K sim per pilot; Part 135 adds checkrides and travel.", False),
+    ("train", "Recurrent training per pilot per year (FlightSafety every 6 months)", "$", 55_000, 45_000, 40_000, USD,
+     "Derek: pilots return to FlightSafety every 6 months at EJM's training rates. Two sessions plus travel per pilot.", False),
     ("hangar", "Hangar at home base (KBJC)", "$", 84_000, 66_000, 54_000, USD,
-     "Flycraft range $2,305-5,470/month heated. KBJC has Sheltair; Jet Aviation FBO opening 2028.", False),
+     "Flycraft range $2,305-5,470/month heated. EJM has hangars; confirm KBJC space. Sheltair now; Jet Aviation FBO 2028.", False),
     ("ins", "Insurance (hull + $100M+ liability, charter use)", "$", 110_000, 85_000, 70_000, USD,
      "Flycraft: hull 0.15-0.25% of value + liability; charter use adds premium. Get a broker quote.", False),
-    ("mgmt_fee", "Management fee (while on manager's certificate)", "$/month", 11_000, 10_000, 8_500, USD,
-     "Light jet ~$3K/month to heavy $10K+ (Jet Linx). Charter-heavy midsize assumed higher.", True),
-    ("comm", "Manager's commission on charter revenue", "%", 0.12, 0.10, 0.08, PCT,
-     "Commonly 10-15% of charter revenue. Negotiate.", True),
+    ("mgmt_fee", "EJM management fee (while on EJM's certificate)", "$/month", 11_000, 10_000, 8_500, USD,
+     "Covers EJM's Part 135 certificate, OpSpecs, admin and NetJets compliance. Light jet ~$3K/month to heavy $10K+ "
+     "(Jet Linx). Get EJM's actual fee.", True),
+    ("comm", "EJM commission on charter revenue", "%", 0.12, 0.10, 0.08, PCT,
+     "Commonly 10-15% of charter revenue. Confirm whether EJM takes a cut of NetJets trips.", True),
     ("other", "Other fixed: CAMP tracking, nav data, Wi-Fi plan, software", "$", 100_000, 80_000, 65_000, USD,
      "Flycraft range $40-60K corporate; charter adds Wi-Fi and scheduling.", False),
-    ("conting", "Contingency / unscheduled downtime reserve", "$", 75_000, 50_000, 35_000, USD, "", False),
+    ("conting", "Operating contingency (AOG downtime, inspection overruns, surprises)", "$", 200_000, 150_000, 100_000, USD,
+     "Deliberately conservative (Derek). Sits on top of the maintenance contingency.", False),
     ("ga", "Company G&A before own certificate (incl. investor reporting)", "$", 120_000, 100_000, 85_000, USD,
      "Accounting, K-1s and investor reporting, legal, owner-level insurance, chief pilot management stipend.", False),
     ("infl", "Annual cost inflation", "%", 0.040, 0.030, 0.025, PCT, "", False),
@@ -229,7 +243,8 @@ ASSUMPTIONS = [
     ("multiple", "EBITDA multiple on management platform", "x", 5.0, 6.0, 6.5, MULT,
      "Applied to third-party management margin only; owned fleet valued at market. Estimate.", True),
     ("sell_cost", "Fleet selling costs at exit", "%", 0.03, 0.02, 0.02, PCT, "Broker commissions, pre-sale inspections.", False),
-    ("dep", "Annual decline in aircraft market value", "%", 0.07, 0.05, 0.035, PCT, "Estimate; midsize values were firm 2021-2025.", True),
+    ("dep", "Annual decline in aircraft market value", "%", 0.08, 0.06, 0.045, PCT,
+     "Estimate; Sovereign+ production ended, so values may soften faster than in-production types.", True),
     ("tax", "Investor ordinary tax rate (illustrative)", "%", 0.37, 0.37, 0.37, PCT,
      "Memo only. Investors can use losses only against passive income unless they materially participate. Consult a CPA.", False),
     ("cg_tax", "Investor capital gains rate incl. 3.8% NIIT (illustrative)", "%", 0.238, 0.238, 0.238, PCT,
@@ -266,7 +281,7 @@ def a(key, col):
 
 # ------------------------------------------------------------ Unit Economics
 U = wb.create_sheet("Unit Economics")
-setup(U, "Unit economics: one Latitude, mature year, on management company certificate",
+setup(U, "Unit economics: one Sovereign+, mature year, on EJM's Part 135 certificate",
       "Today's dollars, no inflation. Shows whether a single financed jet carries itself.",
       {"A": 50, "B": 14, "C": 15, "D": 15, "E": 15, "F": 15})
 header(U, 4, ["Line item", "", "Downside", "Base", "Upside", "Live"])
@@ -290,7 +305,7 @@ urow(r, "comm", "Less manager's commission", lambda c: f"=-{c}{UR['rev']}*{a('co
 urow(r, "net", "Net charter revenue to owner", lambda c: f"={c}{UR['rev']}+{c}{UR['comm']}", bold=True, border=True); r += 2
 urow(r, "fh", "Flight hours incl. unpaid positioning", lambda c: f"={c}{UR['hours']}*(1+{a('ferry', c)})", NUM); r += 1
 urow(r, "varhr", "Variable cost per flight hour",
-     lambda c: f"={a('gph', c)}*{a('fuel', c)}+{a('maint', c)}+{a('engine', c)}+{a('apu', c)}+{a('trip', c)}"); r += 1
+     lambda c: f"={a('gph', c)}*{a('fuel', c)}+({a('maint', c)}+{a('engine', c)}+{a('apu', c)})*(1+{a('maint_cont', c)})+{a('trip', c)}"); r += 1
 urow(r, "var", "Variable costs", lambda c: f"=-{c}{UR['fh']}*{c}{UR['varhr']}"); r += 2
 urow(r, "crew", "Crew salaries and benefits",
      lambda c: f"=-(({a('captains', c)}*{a('cap_sal', c)}+{a('fos', c)}*{a('fo_sal', c)})*(1+{a('benefits', c)})+{a('contract', c)})"); r += 1
@@ -318,6 +333,11 @@ urow(r, "be", "Breakeven billable hours (EBITDA = 0)",
      lambda c: f"=IF({c}{UR['contrib']}<=0,0,-{c}{UR['fixed']}/{c}{UR['contrib']})", NUM); r += 1
 urow(r, "be_ds", "Breakeven billable hours incl. debt service",
      lambda c: f"=IF({c}{UR['contrib']}<=0,0,-({c}{UR['fixed']}+{c}{UR['ds']})/{c}{UR['contrib']})", NUM, bold=True); r += 1
+urow(r, "req_rate", "NetJets rate needed for EBITDA = 0 at these hours",
+     lambda c: f"=IF({a('mix', c)}=0,0,((-{c}{UR['var']}-{c}{UR['fixed']})/({c}{UR['hours']}*(1-{a('comm', c)}))-(1-{a('mix', c)})*{a('rate_ret', c)})/{a('mix', c)})"); r += 1
+urow(r, "req_rate_ds", "NetJets rate needed to cover debt service too",
+     lambda c: f"=IF({a('mix', c)}=0,0,((-{c}{UR['var']}-{c}{UR['fixed']}-{c}{UR['ds']})/({c}{UR['hours']}*(1-{a('comm', c)}))-(1-{a('mix', c)})*{a('rate_ret', c)})/{a('mix', c)})",
+     bold=True); r += 1
 urow(r, "reserve", "Cash reserve to hold", lambda c: f"=-{c}{UR['fixed']}/12*{a('wc_months', c)}"); r += 1
 urow(r, "growth_ok", "Stop-loss test passed? (1 = may buy more jets)",
      lambda c: f"=IF({c}{UR['cfads']}>={a('stoploss', c)},1,0)", NUM, bold=True); r += 2
@@ -336,7 +356,7 @@ UE = q("Unit Economics")
 
 # ---------------------------------------------------------------- Fleet Plan
 F = wb.create_sheet("Fleet Plan")
-setup(F, "Fleet plan by growth strategy", "Aircraft counts at year end (inputs). Owned = financed Latitudes. "
+setup(F, "Fleet plan by growth strategy", "Aircraft counts at year end (inputs). Owned = financed Sovereign+ jets. "
       "Third-party = other owners' jets managed on your certificate (only counts once you hold one). "
       "Owned growth stops at one jet if the stop-loss test fails.",
       {"A": 46, "B": 12, **{c: 10 for c in YCOLS}})
@@ -436,7 +456,7 @@ def build_strategy(code, name, suffix):
 
     # ---- forecast
     setup(FC, f"10-year forecast: {name} strategy (Live scenario)",
-          "Annual, nominal dollars. Owned jets fly on the management company's certificate until the own-certificate year.",
+          "Annual, nominal dollars. Owned jets fly on EJM's certificate until the own-certificate year.",
           {"A": 56, "B": 4, **{c: 13 for c in YCOLS}})
     put(FC, "A3", "=\"Scenario: \"&Assumptions!$D$3")
     header(FC, 4, ["Line item", ""] + [str(y) for y in YEARS])
@@ -454,7 +474,7 @@ def build_strategy(code, name, suffix):
     r = 5
     frow(r, "year", "Year", lambda c, p, i: YEARS[i], YEAR, bold=True); r += 1
     frow(r, "idx", "Years from 2027", lambda c, p, i: f"={c}{R['year']}-2027", NUM); r += 1
-    frow(r, "cert", "On management company certificate? (1 = yes; stays 1 if stop-loss ends an owned-only plan)",
+    frow(r, "cert", "On EJM's certificate? (1 = yes; stays 1 if stop-loss ends an owned-only plan)",
          lambda c, p, i: f"=IF(OR({c}{R['year']}<'Fleet Plan'!$B${fr['cert']}+{L('cert_delay')},"
                          f"AND({UE}!$F${UR['growth_ok']}=0,SUM('Fleet Plan'!$C${fr['tp']}:${LASTY}${fr['tp']})=0)),1,0)", NUM); r += 1
     frow(r, "cidx", "Cost inflation index", lambda c, p, i: f"=(1+{L('infl')})^{c}{R['idx']}", '0.000'); r += 2
@@ -481,8 +501,8 @@ def build_strategy(code, name, suffix):
     frow(r, "rev", "Total revenue", lambda c, p, i: f"=SUM({c}{R['r_ovf']}:{c}{R['r_tp']})", bold=True, border=True); r += 2
 
     section(FC, r, "Operating costs", 12); r += 1
-    frow(r, "c_var", "Variable flight costs (fuel, maintenance, engines, APU, trip)",
-         lambda c, p, i: f"={c}{R['fh']}*({L('gph')}*{L('fuel')}+{L('maint')}+{L('engine')}+{L('apu')}+{L('trip')})*{c}{R['cidx']}"); r += 1
+    frow(r, "c_var", "Variable flight costs (fuel, maintenance + contingency, engines, APU, trip)",
+         lambda c, p, i: f"={c}{R['fh']}*({L('gph')}*{L('fuel')}+({L('maint')}+{L('engine')}+{L('apu')})*(1+{L('maint_cont')})+{L('trip')})*{c}{R['cidx']}"); r += 1
     frow(r, "c_crew", "Crew salaries, benefits, contract pilots",
          lambda c, p, i: f"={c}{R['acy']}*(({L('captains')}*{L('cap_sal')}+{L('fos')}*{L('fo_sal')})*(1+{L('benefits')})+{L('contract')})*{c}{R['cidx']}"); r += 1
     frow(r, "c_train", "Recurrent training",
@@ -517,8 +537,8 @@ def build_strategy(code, name, suffix):
     frow(r, "price", "Price per aircraft", lambda c, p, i: f"={L('price')}*(1+{L('price_chg')})^{c}{R['idx']}"); r += 1
     frow(r, "capex", "Aircraft purchases (total price)", lambda c, p, i: f"={c}{R['newac']}*{c}{R['price']}"); r += 1
     frow(r, "newdebt", "Less: new loans", lambda c, p, i: f"=-{c}{R['capex']}*{L('ltv')}"); r += 1
-    frow(r, "acqc", "Acquisition, onboarding, refurb, training",
-         lambda c, p, i: f"={c}{R['newac']}*({L('prebuy')}+{L('legal')}+{L('onboard')}+{L('refurb')}+{L('init_train')})*{c}{R['cidx']}"); r += 1
+    frow(r, "acqc", "Acquisition, onboarding, refurb, training, squawk reserve",
+         lambda c, p, i: f"={c}{R['newac']}*({L('prebuy')}+{L('legal')}+{L('onboard')}+{L('refurb')}+{L('init_train')}+{L('squawk')})*{c}{R['cidx']}"); r += 1
     frow(r, "acqfee", "GP acquisition fee", lambda c, p, i: f"={c}{R['capex']}*{L('acq_fee')}"); r += 1
     frow(r, "setup", "Company setup and investor offering costs",
          lambda c, p, i: f"={L('entity')}+{L('offering')}" if i == 0 else "=0"); r += 1
@@ -653,7 +673,7 @@ fsrow(r, "price", "Purchase price", lambda c: f"={L('price')}"); r += 1
 fsrow(r, "loan", "Loan", lambda c: f"={c}{FSR['price']}*{c}{FSR['ltv']}"); r += 1
 fsrow(r, "down", "Down payment", lambda c: f"={c}{FSR['price']}-{c}{FSR['loan']}"); r += 1
 fsrow(r, "acq", "Acquisition, onboarding, setup, offering costs, GP fee",
-      lambda c: f"={L('prebuy')}+{L('legal')}+{L('onboard')}+{L('refurb')}+{L('init_train')}+{L('entity')}+{L('offering')}+{L('price')}*{L('acq_fee')}"); r += 1
+      lambda c: f"={L('prebuy')}+{L('legal')}+{L('onboard')}+{L('refurb')}+{L('init_train')}+{L('squawk')}+{L('entity')}+{L('offering')}+{L('price')}*{L('acq_fee')}"); r += 1
 fsrow(r, "res", "Cash reserve", lambda c: f"={UE}!$F${UR['reserve']}"); r += 1
 fsrow(r, "cash", "Total equity to raise for launch", lambda c: f"=SUM({c}{FSR['down']}:{c}{FSR['res']})", bold=True, border=True); r += 2
 fsrow(r, "ds", "Annual debt service", lambda c: f"=PMT({L('rate')},{L('amort')},-{c}{FSR['loan']})"); r += 1
@@ -704,6 +724,7 @@ SB = [
     ("Part 135 onboarding, conformity, Wi-Fi/avionics", f"={L('onboard')}", ""),
     ("Interior/paint refresh", f"={L('refurb')}", ""),
     ("Initial crew training and hiring", f"={L('init_train')}", ""),
+    ("Post-purchase squawk and maintenance reserve", f"={L('squawk')}", "One-time, conservative; unspent cash stays in the company"),
     ("Company formation, legal, accounting, insurance setup", f"={L('entity')}", ""),
     ("Investor offering costs (securities counsel, PPM, Form D)", f"={L('offering')}", ""),
     ("GP acquisition fee", f"={L('price')}*{L('acq_fee')}", "Paid to Henry's GP entity at closing"),
@@ -771,7 +792,9 @@ DASH = [
     ("Annual debt service, one jet", f"=-{UE}!F{UR['ds']}", USD, ""),
     ("Cash flow after debt, one jet", f"={UE}!F{UR['cfads']}", USD, "Negative = investors fund the gap"),
     ("Breakeven billable hours (EBITDA)", f"={UE}!F{UR['be']}", NUM, ""),
-    ("Breakeven billable hours incl. debt", f"={UE}!F{UR['be_ds']}", NUM, "Key target for the management company"),
+    ("Breakeven billable hours incl. debt", f"={UE}!F{UR['be_ds']}", NUM, "Over ~1,000 hrs means hours alone can't fix it"),
+    ("NetJets rate needed, EBITDA breakeven", f"={UE}!F{UR['req_rate']}", USD, "Per billable hour, at the assumed hours"),
+    ("NetJets rate needed, incl. debt service", f"={UE}!F{UR['req_rate_ds']}", USD, "Key number to get from EJM"),
     ("Stop-loss test passed? (1 = yes)", f"={UE}!F{UR['growth_ok']}", NUM, "0 = owned fleet frozen at one jet"),
 ]
 r = 6
@@ -819,7 +842,7 @@ for txt, font in (("Blue text: input you can change", BLUE), ("Black text: formu
     r += 1
 Z.cell(row=r, column=1, value="Yellow fill: key lever").fill = KEY_FILL
 r += 1
-Z.cell(row=r, column=1, value="All estimates must be verified with quotes from lenders, the management company, insurers and an aircraft broker.").font = SUB
+Z.cell(row=r, column=1, value="All estimates must be verified with quotes from lenders, EJM, insurers and an aircraft broker.").font = SUB
 
 wb.move_sheet("Assumptions", offset=-(len(wb.sheetnames) - 2))
 wb.move_sheet("Fleet Plan", offset=-(wb.sheetnames.index("Fleet Plan") - 2))

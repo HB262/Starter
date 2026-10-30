@@ -41,15 +41,15 @@
 - [ ] CAMP / maintenance tracking transferred
 
 ## E. Management company and operations
-- [ ] RFP issued and scored (`06-Management-Company-RFP.md`)
-- [ ] Written evidence: Part 135 certificate, ARGUS/Wyvern ratings and audit dates, IS-BAO if any, **NetJets/fractional supplier status**
-- [ ] **Committed hours plan (750+ billable/yr)** or minimum revenue guarantee
+- [ ] EJM questions answered (`06-Management-Company-RFP.md`); 1-2 backup quotes for comparison
+- [ ] Written evidence: EJM's Part 135 certificate, ARGUS/Wyvern ratings and audit dates, and confirmation that NetJets will use a Sovereign+ on our trips
+- [ ] **EJM's NetJets rate card and projected-hours letter that clear debt service (Gate 1)**; state whether fuel and positioning are paid
 - [ ] Management agreement reviewed ⚖️: fees, commission, cost pass-through, owner audit rights, crew employment, termination, monthly reporting, approval limits for maintenance spend
 - [ ] Aircraft lease or charter arrangement between AircraftCo and the operator (operational control rests with the certificate holder) ⚖️
 - [ ] Aircraft added to the operator's OpSpecs; conformity inspection complete
-- [ ] Hangar lease at KBJC; fuel contract or card
+- [ ] Hangar through EJM or at KBJC; EJM's negotiated fuel and services pricing
 - [ ] Wi-Fi, cabin standard and catering standard meet fractional requirements
-- [ ] Crew hired; Part 135 initial and recurrent training scheduled; drug and alcohol testing enrollment (operator)
+- [ ] Crew hired, both seats with full PIC type ratings; FlightSafety recurrent every 6 months at EJM's rates; Part 135 checks; drug and alcohol testing enrollment (operator)
 
 ## F. Insurance
 - [ ] Hull all-risk at agreed value (lender as loss payee)
@@ -59,7 +59,7 @@
 - [ ] Non-owned aircraft liability for HoldCo
 - [ ] Directors and officers / general liability for HoldCo
 
-## G. Own Part 135 certificate (Phase 2)
+## G. Own Part 135 certificate (only if NetJets access survives a move off EJM)
 - [ ] OpCo formed; required management (Director of Operations, Chief Pilot, Director of Maintenance) hired with FAA-qualifying experience
 - [ ] FAA pre-application statement of intent; formal application; manuals; training program; SMS
 - [ ] Drug and alcohol testing program

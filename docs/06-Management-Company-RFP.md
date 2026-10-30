@@ -1,57 +1,65 @@
-# Management company RFP and scorecard
+# EJM term-sheet questions (and backup RFP)
 
-*Draft 1, October 30, 2026. Send to 4-5 operators. Candidates to research: NetJets' affiliated management company (Executive Jet Management, verify current name and status), Solairus Aviation, Clay Lacy Aviation, Jet Linx (Denver), the Chief Pilot's current employer (he has no non-compete; he will talk to them first, before they get this RFP), and any Denver/KBJC-based Part 135 operator. Confirm each one's Denver presence first.*
+*Draft 2, October 30, 2026, updated with Derek's comments. The plan now puts Jet #1 on **Executive Jet Management's (EJM) Part 135 certificate**. Derek flies today for an operation on EJM's certificate, so he takes these questions to EJM first. Send the same questions to 1-2 other operators (for example Solairus, Clay Lacy, Jet Linx Denver) only as a price check.*
 
 ---
 
-## Cover letter (to send)
+## What Derek has already told us about EJM
+- EJM provides the Part 135 certificate, OpSpecs, and negotiated fuel and services prices.
+- EJM has hangars, A&P mechanics, pilots and admin.
+- Its managed jets fly about **95% NetJets customers**, so owners don't have to sell charter.
+- EJM makes sure aircraft and pilots meet NetJets' requirements. Both pilots hold full PIC type ratings and attend FlightSafety recurrent every 6 months, at EJM's training rates.
+- NetJets can turn off the flow at any time.
+- Lately the crews have covered many NetJets Phenom owners, since NetJets now requires at least 5,500 ft of runway in the rain for Phenoms.
 
-> We are acquiring a 2015-2019 Cessna Citation Latitude, to be based at Rocky Mountain Metropolitan Airport (KBJC), for **dedicated charter use with no owner flying**. Our goal is to support fractional and jet-card programs, especially NetJets, as subcontract and overflow lift, plus broker charter. We have a Latitude type-rated captain who will join as our Chief Pilot and owner's representative. We plan to place the aircraft on a certificate by June 2027 and would like your proposal by **[date]**.
+## Questions for EJM (in order of importance)
 
-## Questions
+**1. The NetJets rate** *(decides the deal)*
+- What does EJM bill NetJets per hour for a Sovereign+? Is fuel included, or reimbursed separately?
+- Is positioning paid? Are there daily minimums, overnight or crew fees?
+- What share of that rate reaches the owner after EJM's commission?
 
-**1. Certificate and safety**
-- Part 135 certificate number; years operating; fleet size and Latitude count
-- ARGUS rating and tier, Wyvern Wingman status, IS-BAO stage, with dates of the last audits
-- SMS status; accident and incident history for the last 10 years
+**2. Hours**
+- Actual annual billable hours for EJM-managed midsize jets flying NetJets trips over the last 3 years (range and average).
+- How much of recent volume is Phenom wet-runway cover, and how long does EJM expect that to last?
+- Will EJM put a projected-hours letter in writing for our aircraft?
+- How are trips allocated between owners' aircraft of the same type?
 
-**2. Fractional and overflow access** *(most important)*
-- Are you currently an **approved supplier to NetJets**? To Flexjet or other programs? Since when?
-- Hours flown for each fractional or program in the last 12 months, in total and on Latitudes
-- Wholesale rates paid per hour (range) and how positioning is paid
-- Cabin, crew and equipment standards we must meet
+**3. Fit**
+- Will NetJets use a Sovereign+ for our trips (cabin height is 5 ft 8 in versus the Latitude's 6 ft)? Any cabin, Wi-Fi or paint standard we must meet?
+- Can the aircraft be based at KBJC? Where are EJM's nearest hangars?
 
-**3. Commitment**
-- Projected billable hours for our aircraft in year 1 and year 2, broken down by source
-- Will you commit to a **minimum of 750 billable hours** or a minimum revenue guarantee? On what terms?
-- How do you allocate trips between owners' aircraft of the same type (fairness policy)?
+**4. Costs**
+- Monthly management fee and what it covers.
+- Commission on NetJets trips and on retail charter.
+- Negotiated fuel price at KBJC and typical trip stops.
+- Maintenance labor rate for EJM's A&P mechanics; approval limits for owner spend.
+- FlightSafety Sovereign recurrent price at EJM's rates.
+- Insurance: can AircraftCo join EJM's fleet policy?
+- Sample monthly owner statement for a NetJets-flying jet.
 
-**4. Economics**
-- Monthly management fee and what it covers
-- Charter commission (% of revenue) and any other markups (fuel, maintenance, catering, crew travel)
-- Who employs the crew? Can our Chief Pilot be hired onto your roster and fly our aircraft?
-- Pass-through cost policy and approval limits for maintenance spend
-- Sample monthly owner statement
+**5. Pilots**
+- Can Derek be hired onto EJM's roster and fly our aircraft as captain? Who employs the crew?
+- Staffing per aircraft for 600-800 hours a year.
 
-**5. Operations**
-- Maintenance approach for Latitudes; preferred service centers; CAMP or equivalent tracking
-- Hangar arrangements at KBJC; fuel discounts
-- Dispatch reliability for managed aircraft over the last 12 months
+**6. Contract and the future**
+- Term, termination notice, audit rights, data ownership.
+- If NetJets stops sending trips, what happens to the jet and the fee?
+- If we later get our own Part 135 certificate, could aircraft we manage still fly NetJets trips (through EJM or directly)?
+- Would EJM accept more aircraft from us later, owned or brought in from other owners, and on what terms?
 
-**6. Contract**
-- Term, termination rights and notice, audit rights, data ownership
-- Path for transitioning the aircraft to the owner's own certificate in the future
+## Gate 1 pass test
+Put EJM's answers into the model (Assumptions: `rate_ovf`, `hours`, `mix`, `mgmt_fee`, `comm`, `fuel`). Proceed only if **cash flow after debt service on the Unit Economics sheet is better than the ($750K) stop-loss threshold**, and ideally positive. In the base case that needs a NetJets rate of about $10,800 an hour at 600 hours.
 
-## Scorecard
+## Backup operator scorecard (price check only)
 
-| Criterion | Weight | Op. A | Op. B | Op. C | Op. D |
-|---|---|---|---|---|---|
-| Fractional / NetJets supplier status and volume | 30% | | | | |
-| Committed hours / revenue guarantee | 20% | | | | |
-| Safety ratings and record | 15% | | | | |
-| Total cost (fee + commission + markups) | 15% | | | | |
-| Transparency (reporting, audit rights) | 10% | | | | |
-| Denver/KBJC presence, crew and maintenance support | 10% | | | | |
-| **Weighted score** | 100% | | | | |
+| Criterion | Weight | EJM | Op. B | Op. C |
+|---|---|---|---|---|
+| NetJets volume and rate | 40% | | | |
+| Total cost (fee + commission + markups) | 20% | | | |
+| Safety ratings and record | 15% | | | |
+| Transparency (reporting, audit rights) | 10% | | | |
+| Denver/KBJC presence, crew and maintenance support | 15% | | | |
+| **Weighted score** | 100% | | | |
 
-Score each criterion 1-5, multiply by its weight, and add them up. Treat a score below 3 on the first two criteria as disqualifying.
+Score each criterion 1-5, multiply by its weight, and add them up.
