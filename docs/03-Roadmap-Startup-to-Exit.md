@@ -59,7 +59,7 @@
 
 ## Phase 3: Scale (2030 - 2034)
 
-- Recommended: grow the third-party managed fleet first (management-led path). Add owned jets (hybrid) only if Jet #1 clears its debt service, each in its own AircraftCo, funded by a follow-on raise.
+- Chosen path: grow the third-party managed fleet (management-led), targeting 2 managed jets in 2030, 9 by 2033 and about 18 by 2036. Add owned jets (hybrid) only if Jet #1 clears its debt service, each in its own AircraftCo, funded by a follow-on raise.
 - Grow third-party management to 10-18 aircraft. This is the capital-light engine of exit value.
 - Build a sales function, a 24/7 operations center, and maintenance partnerships.
 - Get annual audited financials from 2031 to prepare for diligence.

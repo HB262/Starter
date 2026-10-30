@@ -1,6 +1,6 @@
 # Business plan: Citation Latitude overflow charter company
 
-*Draft 2, October 30, 2026. Prepared for Henry. Figures come from `financials/Jet_Business_Financial_Model.xlsx`. "Base" means the base scenario unless stated otherwise. Every estimate must be replaced with a quote before money is committed.*
+*Draft 3, October 30, 2026. Prepared for Henry. Figures come from `financials/Jet_Business_Financial_Model.xlsx`. "Base" means the base scenario unless stated otherwise. Every estimate must be replaced with a quote before money is committed.*
 
 ---
 
@@ -14,7 +14,7 @@ The plan has four phases:
 
 1. **Prove (2027-2029):** one jet on a management company's certificate.
 2. **Build (2029-2030):** apply for and win the company's own Part 135 certificate.
-3. **Scale (2030-2034):** grow to about 3 owned and 10+ managed aircraft.
+3. **Scale (2030-2034):** keep one owned jet and grow to 10-18 managed aircraft (the chosen management-led path).
 4. **Exit (2034-2036):** sell to a strategic buyer.
 
 **Key findings.** At 80% debt, one jet needs about **840 billable hours a year** just to cover its loan (base case). That is well above what most retail charter jets fly. The plan is therefore built around one non-negotiable gate: **do not buy until a management company commits in writing to a fractional overflow hours plan of at least 750 hours a year**, and until anchor investors are lined up. **Of the three growth paths modeled, management-led growth (one owned jet plus managing other owners' jets) needs the least capital and returns the most:** base 3.6x investor multiple and 17% pre-tax IRR, on $8.6M of peak equity. Buying more jets loses investor money in the base case.
@@ -173,7 +173,7 @@ All three paths share Jet #1 and the same economics. They differ only in what ha
 
 ## 9. Growth and exit strategy
 
-**Recommended path: management-led, with a hybrid option.** Henry's instinct is to own more jets, and that remains available. The model says to earn it, though: add owned jets only once Jet #1 is beating its breakeven after debt (the hybrid path). Otherwise grow by managing other owners' jets.
+**Chosen path: management-led (Henry, Oct 30, 2026).** One owned jet anchors the business, and growth comes from managing other owners' jets. Adding owned jets (the hybrid) remains an option, earned only once Jet #1 beats its breakeven after debt and funded by a follow-on raise.
 
 | Phase | Timing | Milestones | Triggers to advance |
 |---|---|---|---|

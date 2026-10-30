@@ -83,7 +83,7 @@ Lenders will ask who stands behind the loan. With no wealthy guarantor, an inves
 
 ## Next steps
 
-1. Pick a strategy (recommendation: management-led or hybrid; see the business plan).
+1. ~~Pick a strategy.~~ Done: management-led (Oct 30, 2026). Size the raise at about $4.2M at launch with commitments up to about $8.6M (base).
 2. Engage securities counsel to draft the PPM and operating agreement.
 3. Build a target list of 15-25 accredited investors, with $250K minimum tickets.
 4. Talk to lenders about guarantor requirements early. This decides the LTV.

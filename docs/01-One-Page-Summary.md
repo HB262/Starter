@@ -1,6 +1,6 @@
 # One-page summary: Front Range Jet Partners (working name)
 
-*Draft 2, October 30, 2026. Figures come from `financials/Jet_Business_Financial_Model.xlsx` (base scenario unless noted). They are estimates to be replaced with real quotes.*
+*Draft 3, October 30, 2026. Figures come from `financials/Jet_Business_Financial_Model.xlsx` (base scenario unless noted). They are estimates to be replaced with real quotes.*
 
 ## The idea
 Buy a used **Cessna Citation Latitude** (2016-2019), base it at **Rocky Mountain Metropolitan Airport (KBJC), Broomfield, CO**, and put it on an established **Part 135 management company's certificate**. That operator flies it as **overflow / subcontract lift for NetJets and other fractional and jet-card programs**, plus broker charter. There is no personal use.
@@ -35,7 +35,7 @@ Buy a used **Cessna Citation Latitude** (2016-2019), base it at **Rocky Mountain
 | Downside (stop-loss sells Jet #1 in 2029) | 0.5x | 2.2x | 1.5x |
 | Upside | 5.9x | 11x | 9.2x |
 
-**Recommendation:** lead with the **management-led path**, and keep the option to add owned jets only if Jet #1 beats its breakeven (that is the hybrid). Buying more jets only pays in the upside case, where each jet earns more than its debt.
+**Chosen path (Henry, Oct 30, 2026): management-led.** One owned Latitude anchors the business; growth comes from managing other owners' jets on our own certificate. Adding owned jets (the hybrid) stays an option, but only once Jet #1 clears its debt and only with a follow-on raise. Buying more jets pays only in the upside case.
 
 ## Investor structure
 - Fund I LLC: investors hold Class A units; the sponsor (Henry + Chief Pilot) holds Class B units.
@@ -48,7 +48,9 @@ Buy a used **Cessna Citation Latitude** (2016-2019), base it at **Rocky Mountain
 2. **Gate 2 (Mar 2027):** lender term sheet, plus anchor investors soft-circled for about $4.2M.
 3. **Gate 3 (May 2027):** close and onboard. **Revenue flying July 2027.**
 4. **Stop-loss:** if trailing-12 cash after debt is worse than **($750K)** by mid-2029, sell Jet #1 and buy no more jets.
-5. **2029-30:** apply for the company's own Part 135 certificate. **2030-36:** grow managed fleet. **2034-36:** sell to a consolidator.
+5. **2029-30:** apply for the company's own Part 135 certificate. **2030-36:** grow to about 18 managed jets around the one owned jet. **2034-36:** sell to a consolidator.
+
+**The raise:** about $4.2M at launch, with commitments of up to about $8.6M over three years (base).
 
 ## What we need now
 Securities counsel, a CPA, an aviation attorney, management company proposals (including the Chief Pilot's current employer), lender conversations about guarantees, an insurance quote, and a broker scan of the Latitude market.
