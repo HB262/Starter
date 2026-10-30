@@ -13,6 +13,7 @@ A business plan for buying a used Cessna Citation Latitude, basing it at Rocky M
 | 7 | [Investor and lender pitch](docs/07-Investor-and-Lender-Pitch.md) | 12-slide outline and lender package |
 | 8 | [Open questions and assumptions](docs/08-Open-Questions-and-Assumptions.md) | What to verify next, and sources |
 | 9 | [Investor structure (GP/LP)](docs/09-Investor-Structure-GP-LP.md) | Fund terms, waterfall, depreciation for investors, securities law |
+| — | [Investor pitch deck](https://claude.ai/artifact/C83gJ7W13o543KZXGfyYH5) | 14 designed slides on the management-led plan (private link; share from the deck's Share menu) |
 | — | [Financial model (Excel)](financials/Jet_Business_Financial_Model.xlsx) | Startup budget, unit economics, financing scenarios, three growth paths, investor returns |
 
 ## Using the model
