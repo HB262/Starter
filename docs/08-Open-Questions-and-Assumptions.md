@@ -1,6 +1,6 @@
 # Open questions and key assumptions
 
-*Draft 2, October 30, 2026. These are the next interview questions for Henry, and the assumptions to replace with real data.*
+*Draft 3, October 30, 2026. These are the next interview questions for Henry, and the assumptions to replace with real data.*
 
 ## What Henry has told us
 - Financing: mainly debt, assume at least 80% LTV; scenarios wanted
@@ -16,13 +16,15 @@
 - Chief Pilot has no non-compete and wants to return to Colorado; his current employer could be a manager option
 - Stop-loss: use the ($750K)/yr by mid-2029 rule for now
 - Leans toward the ownership growth path; wants ownership, management-led and hybrid compared
+- Confident he can find investors
+- Henry is the general partner and takes no pay at the start; the Chief Pilot is paid
+- The Chief Pilot will talk to his current employer before it is named in any RFP; keep it as a management company option
+- Working name "Front Range Jet Partners" is fine
 
-## Questions for Henry (round 4)
-1. **Growth path:** having seen the comparison, do you want to lead with management-led (recommended), hybrid, or ownership? This sets the size of the raise ($8.6M vs $18.2M vs $30.7M peak, base).
-2. **Investors:** do you already know 2-3 people who could anchor $1-2M each? Would any of them guarantee the loan?
-3. **Sponsor split:** how do you and the Chief Pilot want to split the sponsor promote, and what should his salary be?
-4. **Chief Pilot's employer:** may we name them in the RFP now, or should he talk to them first?
-5. **Name:** keep "Front Range Jet Partners" as the working name, or do you have one in mind?
+## Still open
+1. **Growth path:** management-led (recommended), hybrid, or ownership. This sets the size of the raise ($8.6M vs $18.2M vs $30.7M peak, base).
+2. **Sponsor split:** how Henry and the Chief Pilot divide the Class B promote. A common starting point is 50-70% to the GP who raises the money and 30-50% to the operating partner, with the operator's share vesting over 4 years.
+3. **Loan guarantor:** whether any anchor investor would guarantee the loan in exchange for a fee or extra units.
 
 ## Assumptions to verify (most important first)
 | Assumption | Base value | How to verify |

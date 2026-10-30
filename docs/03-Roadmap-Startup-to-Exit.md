@@ -12,7 +12,8 @@
 | 0.2 | Hire an aviation attorney and an aviation-savvy CPA | H | Nov 30 |
 | 0.3 | CPA memo: bonus depreciation usability, material participation, entity structure, state sales/use tax | CPA | Dec 31 |
 | 0.4 | Form Sponsor LLC, Fund I LLC and AircraftCo #1 LLC; get EINs; open bank accounts | A, SC | Dec 15 |
-| 0.5 | Send management company RFP to 4-5 operators, including NetJets' affiliated manager and CP's current employer | CP | Dec 1 |
+| 0.5a | CP talks privately with his current employer about managing Jet #1 before it is named anywhere | CP | Nov 20 |
+| 0.5 | Send management company RFP to 4-5 operators, including NetJets' affiliated manager (and CP's current employer if 0.5a goes well) | CP | Dec 1 |
 | 0.6 | Lender conversations: LTV with and without an anchor-investor guarantee | H, L | Dec 31 |
 | 0.7 | Hire an aircraft broker (buy-side); market scan of 2015-2019 Latitudes with engine program status | H, B | Dec 15 |
 | 0.8 | Insurance broker indication: charter-use hull + $100M+ liability | H | Jan 15 |

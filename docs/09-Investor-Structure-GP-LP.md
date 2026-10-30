@@ -16,7 +16,7 @@
                           └──► OpCo LLC ────────── own Part 135 certificate, management platform (Phase 2)
 ```
 
-- **Use an LLC, not a limited partnership.** It works like a GP/LP but is simpler. Investors hold **Class A units**, with limited liability and no management rights. Henry and the Chief Pilot hold **Class B (sponsor) units** through a sponsor LLC that is the manager.
+- **Use an LLC, not a limited partnership.** It works like a GP/LP but is simpler. Investors hold **Class A units**, with limited liability and no management rights. Henry and the Chief Pilot hold **Class B (sponsor) units** through a sponsor LLC that is the manager. **Henry is the general partner (managing member).** The split of Class B units between Henry and the Chief Pilot is still to be agreed.
 - **Use one fund, not one SPV per jet.** A single vehicle lets investors share in the management platform, which is where most of the exit value sits in two of the three strategies. If later jets need new money, raise it as a follow-on round in Fund I or as a side-car SPV.
 - Each jet sits in its **own AircraftCo**, which ring-fences the loan and keeps liability separate.
 
@@ -29,7 +29,7 @@
 | Preferred return | 8%, compounding, cumulative | Market-standard for real-asset deals |
 | Distribution order | 1) return of capital, 2) 8% pref, 3) split remaining profit **80% investors / 20% sponsor** | Simple; sponsor earns only if investors do well |
 | Acquisition fee | 1% of each aircraft's price, paid at closing | Pays for sourcing and deal work |
-| Ongoing pay | Chief Pilot salary (in crew costs); Henry's management stipend inside company G&A | No separate asset-management fee, to keep the deal clean |
+| Ongoing pay | Chief Pilot is salaried (in crew costs). **Henry takes no salary at the start**; as general partner he earns through the 1% acquisition fee and the promote. Revisit a modest GP fee once the fleet covers its debt. | No separate asset-management fee, which keeps the deal clean and shows investors the GP is aligned |
 | Tax allocations | Depreciation losses allocated to Class A pro rata to capital | This is the main tax feature for investors |
 | Capital calls | Committed capital drawn as needed, up to a cap; reserve held from day one | The jet needs cash support in early years |
 | Investor protections | Investor consent to buy or sell aircraft, add debt, change manager, or raise more capital; quarterly reports; annual audit from year 3 | Builds trust |

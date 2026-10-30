@@ -203,7 +203,7 @@ All three paths share Jet #1 and the same economics. They differ only in what ha
 
 ## 11. Immediate next steps (next 60 days)
 
-1. Henry and the Chief Pilot agree on the sponsor split (promote, salary, role, vesting).
+1. Henry (general partner, unpaid at the start) and the Chief Pilot (salaried) agree on the split of the sponsor promote and vesting.
 2. Hire securities counsel (PPM, operating agreement, Form D), an aviation attorney and a CPA.
 3. Send the management company RFP (`06-Management-Company-RFP.md`) to 4-5 operators, including NetJets' affiliate and the Chief Pilot's current employer.
 4. Talk to 2-3 aviation lenders about LTV with and without an anchor-investor guarantee.
