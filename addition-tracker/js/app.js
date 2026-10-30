@@ -52,6 +52,27 @@ document.addEventListener("mousemove", (e) => {
 
 // ── Dialog helper ──────────────────────────────────────────────────────────
 
+// In-page confirm and status messages (browser alert/confirm are blocked
+// when the tracker runs as an Artifact).
+function ask(message, okLabel = "Delete") {
+  const d = $("#ask");
+  $("#ask-msg").textContent = message;
+  $("#ask-ok").textContent = okLabel;
+  d.returnValue = "";
+  d.showModal();
+  return new Promise((resolve) => d.addEventListener("close", () => resolve(d.returnValue === "ok"), { once: true }));
+}
+let toastTimer;
+function toast(message, tone = "") {
+  const t = $("#toast");
+  t.textContent = message;
+  t.className = `toast ${tone}`;
+  t.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => (t.hidden = true), 5000);
+}
+store.onError((msg) => toast(msg, "bad"));
+
 const dlg = $("#dlg");
 function openDialog({ title, body, onSave, onDelete, saveLabel = "Save", onOpen }) {
   $("#dlg-title").textContent = title;
@@ -60,7 +81,7 @@ function openDialog({ title, body, onSave, onDelete, saveLabel = "Save", onOpen 
   const del = $("#dlg-delete");
   del.hidden = !onDelete;
   del.onclick = async () => {
-    if (!confirm("Delete this? This can't be undone.")) return;
+    if (!(await ask("Delete this? This can't be undone."))) return;
     await onDelete();
     dlg.close("deleted");
   };
@@ -76,7 +97,7 @@ function openDialog({ title, body, onSave, onDelete, saveLabel = "Save", onOpen 
       const ok = await onSave(new FormData(form), form);
       if (ok !== false) dlg.close("ok");
     } catch (err) {
-      alert(`Couldn't save: ${err.message}`);
+      toast(`Couldn't save: ${err.message}`, "bad");
     } finally {
       btn.disabled = false;
       btn.textContent = saveLabel;
@@ -91,9 +112,13 @@ function openDialog({ title, body, onSave, onDelete, saveLabel = "Save", onOpen 
 function renderBanners() {
   const ph = state.placeholder || {};
   const parts = [];
+  const cs = store.cloud.status;
+  if (cs === "connecting") parts.push(`<div class="banner info">Loading the tracker's saved data…</div>`);
+  if (cs === "unavailable") parts.push(`<div class="banner">Sign in to claude.ai to see and update the tracker's budget, schedule and log. The 3D model works without signing in.</div>`);
+  if (cs === "readonly") parts.push(`<div class="banner info">You can view this tracker. Changes need edit access from its owner.</div>`);
   const which = [ph.budget && "budget", ph.schedule && "schedule", ph.model && "3D model"].filter(Boolean);
   if (which.length) {
-    parts.push(`<div class="banner"><strong>Placeholder data:</strong> the ${which.join(" and ")} ${which.length > 1 ? "are" : "is"} sample numbers until the contractor's bid and schedule are entered. Edit them here, or in <code>data/project-data.js</code>.</div>`);
+    parts.push(`<div class="banner"><strong>Placeholder data:</strong> the ${which.join(" and ")} ${which.length > 1 ? "are" : "is"} sample numbers until the contractor's bid and schedule are entered. Edit them here${store.backend === "local" ? `, or in <code>data/project-data.js</code>` : ""}.</div>`);
   }
   if (store.seedChanged()) {
     parts.push(`<div class="banner">The starting data file has changed since you last saved in this browser. To use it, export a backup first, then <button class="link" data-goto="data">Reset to starting data</button>.</div>`);
@@ -126,7 +151,7 @@ function recompute() {
   try {
     sched = computeSchedule(state.tasks, state.project.startDate);
   } catch (err) {
-    alert(err.message);
+    toast(err.message, "bad");
     sched = new Map();
   }
 }
@@ -157,7 +182,7 @@ function renderOverview() {
         const status = r.start <= today ? `${t.progress || 0}% done` : `starts ${fmtShort(r.start)}`;
         return `<li><span>${esc(t.name)}${r.slip > 0 ? ` <span class="status bad small">+${r.slip}d</span>` : ""}</span><span class="when">${status}</span></li>`;
       }).join("")
-    : `<li class="muted">All tasks complete.</li>`;
+    : `<li class="muted">${state.tasks.length ? "All tasks complete." : "No schedule yet."}</li>`;
 
   const recent = [...state.events].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
   $("#overview-log").innerHTML = recent.length
@@ -493,7 +518,7 @@ function editTask(id) {
       const tid = id || store.uid("t");
       // reject cycles
       const test = state.tasks.filter((x) => x.id !== tid).concat([{ ...t, ...v, id: tid, delays: [] }]);
-      try { computeSchedule(test, state.project.startDate); } catch (err) { alert(`That would make a loop: ${err.message}`); return false; }
+      try { computeSchedule(test, state.project.startDate); } catch (err) { toast(`That would make a loop: ${err.message}`, "bad"); return false; }
       store.update((s) => {
         const newLogs = delays.filter((d) => d.log);
         const cleaned = delays.map(({ log, ...d }) => d);
@@ -558,7 +583,7 @@ function editEvent(id) {
       <label class="f full">Title<input name="title" required value="${esc(ev.title)}" placeholder="e.g. Footings poured"></label>
       <label class="f full">Notes<textarea name="note" placeholder="What happened, who was there, what's next">${esc(ev.note)}</textarea></label>
       <div class="full"><div class="thumbs" id="ev-photos">${keep.map((p) => `<span style="position:relative"><img data-photo="${esc(p)}" alt=""><button type="button" class="link small" data-rm-photo="${esc(p)}" style="position:absolute;top:2px;right:4px;background:var(--surface);border-radius:4px;padding:0 4px">✕</button></span>`).join("")}</div></div>
-      <label class="f full">Add photos<input type="file" name="files" accept="image/*" multiple></label>
+      ${store.canUploadPhotos() ? `<label class="f full">Add photos<input type="file" name="files" accept="image/*" multiple></label>` : `<p class="full muted small">Adding photos needs edit access to this tracker.</p>`}
     </div>`,
     onOpen(form) {
       hydratePhotos(form);
@@ -570,13 +595,9 @@ function editEvent(id) {
     async onSave(fd) {
       const files = fd.getAll("files").filter((f) => f && f.size);
       const added = [];
-      for (const f of files) {
-        const pid = store.uid("ph");
-        await store.photos.put(pid, await store.downscale(f));
-        added.push(pid);
-      }
+      for (const f of files) added.push(await store.savePhoto(f));
       const removed = (ev.photos || []).filter((p) => !keep.includes(p));
-      for (const p of removed) store.photos.delete(p).catch(() => {});
+      for (const p of removed) store.deletePhoto(p);
       store.update((s) => {
         const v = { date: fd.get("date"), type: fd.get("type"), title: fd.get("title").trim(), note: fd.get("note").trim(), photos: [...keep, ...added] };
         if (id) Object.assign(s.events.find((x) => x.id === id), v);
@@ -584,7 +605,7 @@ function editEvent(id) {
       });
     },
     onDelete: id ? () => {
-      for (const p of ev.photos || []) store.photos.delete(p).catch(() => {});
+      for (const p of ev.photos || []) store.deletePhoto(p);
       store.update((s) => { s.events = s.events.filter((x) => x.id !== id); });
     } : null,
   });
@@ -623,32 +644,41 @@ $$("[data-mode]").forEach((b) => b.addEventListener("click", () => {
   renderModelLegend();
 }));
 $$("[data-view]").forEach((b) => b.addEventListener("click", () => modelView?.setView(b.dataset.view)));
+$$("[data-ptz]").forEach((b) => b.addEventListener("click", () => modelView?.nudge(b.dataset.ptz)));
 $("#opt-existing").onchange = (e) => modelView?.set({ showExisting: e.target.checked });
 $("#opt-xray").onchange = (e) => modelView?.set({ xray: e.target.checked });
 
 // ── Data tab ───────────────────────────────────────────────────────────────
 
 $("#export").onclick = async () => {
-  const data = await store.exportAll();
-  const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
-  const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `addition-tracker-${fmtISO(todayUTC())}.json` });
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  try {
+    const data = await store.exportAll();
+    const ok = await store.saveFile(`addition-tracker-${fmtISO(todayUTC())}.json`, JSON.stringify(data));
+    if (!ok) toast("This view can't save files. Open the tracker on claude.ai while signed in.", "bad");
+  } catch (err) {
+    if (err?.code !== "cancelled") toast(`Couldn't export: ${err.message || err.code}`, "bad");
+  }
 };
 $("#import").onchange = async (e) => {
   const file = e.target.files[0];
+  e.target.value = "";
   if (!file) return;
-  if (!confirm("Replace everything in this browser with the backup?")) return;
+  if (!(await ask("Replace all budget, schedule and log data with this backup?", "Replace"))) return;
   try {
     await store.importAll(JSON.parse(await file.text()));
-    alert("Backup loaded.");
+    toast("Backup loaded.");
   } catch (err) {
-    alert(`Couldn't import: ${err.message}`);
+    toast(`Couldn't import: ${err.message}`, "bad");
   }
-  e.target.value = "";
 };
-$("#reset").onclick = () => {
-  if (confirm("Discard all changes in this browser and reload the starting data? Export a backup first if you want to keep them.")) store.resetToSeed();
+$("#reset").hidden = store.backend !== "local";
+if (store.backend === "cloud") {
+  $("#data-where").innerHTML = "Budget, schedule and log entries are saved with this tracker on claude.ai, so they're the same on every device you open it from. Photos are stored with it too. Export makes a backup file you can keep or import later.";
+  $("#seed-h").hidden = true;
+  $("#seed-p").hidden = true;
+}
+$("#reset").onclick = async () => {
+  if (await ask("Discard all changes in this browser and reload the starting data? Export a backup first if you want to keep them.", "Reset")) store.resetToSeed();
 };
 
 const PROJECT_FIELDS = [["name", "Project name"], ["address", "Address"], ["permit", "Permit"], ["contractor", "General contractor"], ["architect", "Architect"], ["structural", "Structural engineer"], ["startDate", "Construction start", "date"]];
@@ -658,13 +688,14 @@ function renderProjectForm() {
 $("#save-project").onclick = () => {
   const fd = new FormData($("#project-form"));
   store.update((s) => { for (const [k] of PROJECT_FIELDS) s.project[k] = fd.get(k); });
+  toast("Project details saved.");
 };
 
 async function renderStorageInfo() {
   let txt = `${state.events.length} log entries, ${state.events.reduce((n, e) => n + (e.photos || []).length, 0)} photos, ${state.expenses.length} expenses.`;
   try {
     const est = await navigator.storage?.estimate?.();
-    if (est) txt += ` Browser storage used: ${(est.usage / 1e6).toFixed(1)} MB.`;
+    if (est && store.backend === "local") txt += ` Browser storage used: ${(est.usage / 1e6).toFixed(1)} MB.`;
   } catch {}
   $("#storage-info").textContent = txt;
 }

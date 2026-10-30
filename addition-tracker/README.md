@@ -11,7 +11,11 @@ A web app for tracking the remodel and addition at 3315 S. Columbine Cir. (permi
 | Log | Dated notes with photos (issues, inspections, deliveries, delays, payments). Delays recorded on the schedule are logged automatically |
 | Data | Export and import a backup, reset to the starting data, and edit project details |
 
-## Run it
+## Hosted version
+
+A private copy runs as a claude.ai Artifact. There, the budget, schedule and log are saved with the artifact (its shared database) and photos in its file store, so they're the same on every device. The page detects this automatically (`window.claude`) and uses the browser-only storage below otherwise.
+
+## Run it locally
 
 Any static file server works. From this folder:
 

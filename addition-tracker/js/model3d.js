@@ -105,6 +105,13 @@ export function createModelView(container, tooltipEl) {
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.maxPolarAngle = Math.PI / 2 - 0.02;
+  controls.minDistance = 8;
+  controls.maxDistance = 600;
+  controls.screenSpacePanning = true;
+  renderer.domElement.tabIndex = 0;
+  renderer.domElement.setAttribute("aria-label", "3D model. Arrow keys pan when focused.");
+  controls.listenToKeyEvents(renderer.domElement);
+  controls.keyPanSpeed = 14;
 
   scene.add(new THREE.HemisphereLight(0xffffff, 0x8d8a7c, 2.2));
   const sun = new THREE.DirectionalLight(0xffffff, 2.6);
@@ -303,6 +310,32 @@ export function createModelView(container, tooltipEl) {
     controls.update();
   }
 
+  // Button controls: pan, tilt, zoom, rotate
+  function nudge(action) {
+    const offset = camera.position.clone().sub(controls.target);
+    const sph = new THREE.Spherical().setFromVector3(offset);
+    const step = sph.radius * 0.12;
+    const right = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0);
+    const up = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 1);
+    let pan = null;
+    switch (action) {
+      case "zoom-in": sph.radius = Math.max(controls.minDistance, sph.radius * 0.8); break;
+      case "zoom-out": sph.radius = Math.min(controls.maxDistance, sph.radius * 1.25); break;
+      case "tilt-up": sph.phi = Math.max(0.05, sph.phi - 0.15); break;
+      case "tilt-down": sph.phi = Math.min(controls.maxPolarAngle, sph.phi + 0.15); break;
+      case "rot-left": sph.theta -= Math.PI / 12; break;
+      case "rot-right": sph.theta += Math.PI / 12; break;
+      case "pan-left": pan = right.multiplyScalar(-step); break;
+      case "pan-right": pan = right.multiplyScalar(step); break;
+      case "pan-up": pan = up.multiplyScalar(step); break;
+      case "pan-down": pan = up.multiplyScalar(-step); break;
+      case "pan-reset": controls.target.copy(center); break;
+    }
+    if (pan) controls.target.add(pan);
+    camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(sph));
+    controls.update();
+  }
+
   // Hover labels
   const ray = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
@@ -356,6 +389,7 @@ export function createModelView(container, tooltipEl) {
       applyMode();
     },
     setView,
+    nudge,
     snapshot() {
       renderer.render(scene, camera);
       return renderer.domElement.toDataURL("image/png");

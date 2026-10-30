@@ -70,9 +70,25 @@
       <div class="model-wrap">
         <div id="model-canvas"></div>
         <div id="model-tip" class="tip" hidden></div>
+        <div class="ptz" role="group" aria-label="Camera controls">
+          <button data-ptz="tilt-up" title="Tilt up" aria-label="Tilt up">▲</button>
+          <button data-ptz="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+          <button data-ptz="rot-left" title="Rotate left" aria-label="Rotate left">⟲</button>
+          <button data-ptz="tilt-down" title="Tilt down" aria-label="Tilt down">▼</button>
+          <button data-ptz="zoom-out" title="Zoom out" aria-label="Zoom out">−</button>
+          <button data-ptz="rot-right" title="Rotate right" aria-label="Rotate right">⟳</button>
+          <span class="ptz-label">Pan</span>
+          <div class="pan">
+            <button data-ptz="pan-up" title="Pan up" aria-label="Pan up">↑</button>
+            <button data-ptz="pan-left" title="Pan left" aria-label="Pan left">←</button>
+            <button data-ptz="pan-reset" title="Re-center" aria-label="Re-center">◎</button>
+            <button data-ptz="pan-right" title="Pan right" aria-label="Pan right">→</button>
+            <button data-ptz="pan-down" title="Pan down" aria-label="Pan down">↓</button>
+          </div>
+        </div>
         <div class="legend-3d" id="model-legend"></div>
       </div>
-      <p class="muted small">Drag to orbit, scroll or pinch to zoom, right-drag to pan. Hover a part to name it. Traced from the Ready for Construction set (sheets A1.3, A1.4 and the addition cross section). Proportions are close but not survey-accurate.</p>
+      <p class="muted small">Drag to rotate and tilt, scroll or pinch to zoom, right-drag or two-finger drag to pan (arrow keys pan too), or use the buttons. Hover a part to name it. Traced from the Ready for Construction set (sheets A1.3, A1.4 and the addition cross section). Proportions are close but not survey-accurate.</p>
     </section>
 
     <!-- BUDGET -->
@@ -130,15 +146,15 @@
     <section id="tab-data" class="tab">
       <div class="card prose">
         <h2>Your data</h2>
-        <p>Everything you enter here (expenses, delays, progress, log entries, photos) is saved in <strong>this browser</strong>. Export a backup regularly, and use Import to move it to another device.</p>
+        <p id="data-where">Everything you enter here (expenses, delays, progress, log entries, photos) is saved in <strong>this browser</strong>. Export a backup regularly, and use Import to move it to another device.</p>
         <div class="row gap wrap">
           <button class="btn primary" id="export">Export backup (.json)</button>
           <label class="btn">Import backup<input type="file" id="import" accept="application/json,.json" hidden /></label>
           <button class="btn danger" id="reset">Reset to starting data</button>
         </div>
         <p class="muted small" id="storage-info"></p>
-        <h3>Starting data</h3>
-        <p>The starting budget, schedule, and model dimensions live in <code>addition-tracker/data/project-data.js</code>. Edit that file to change the defaults, then use Reset here to load it.</p>
+        <h3 id="seed-h">Starting data</h3>
+        <p id="seed-p">The starting budget, schedule, and model dimensions live in <code>addition-tracker/data/project-data.js</code>. Edit that file to change the defaults, then use Reset here to load it.</p>
       </div>
       <div class="card">
         <div class="card-head"><h2>Project details</h2><button class="btn" id="save-project">Save</button></div>
@@ -165,6 +181,13 @@
     <img id="lightbox-img" alt="" />
   </dialog>
 
+  <dialog id="ask" class="ask">
+    <form method="dialog">
+      <p id="ask-msg"></p>
+      <div class="dlg-actions"><span class="spacer"></span><button value="cancel" class="btn">Cancel</button><button value="ok" class="btn danger-fill" id="ask-ok">Delete</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
   <div id="chart-tip" class="tip" hidden></div>
 
   <script type="module" src="js/app.js"></script>
