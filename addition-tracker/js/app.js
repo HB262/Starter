@@ -1,9 +1,9 @@
-import * as store from "./store.js?v=20261031b";
-import DOCS from "../data/documents.js?v=20261031b";
+import * as store from "./store.js?v=20261031c";
+import DOCS from "../data/documents.js?v=20261031c";
 import {
   computeSchedule, summarize, parseDate, fmtISO, fmtShort, fmtLong, todayUTC,
   addWorkdays, calendarDays,
-} from "./schedule.js?v=20261031b";
+} from "./schedule.js?v=20261031c";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -958,7 +958,7 @@ function progressByTask() {
 async function ensureModel() {
   if (modelView) return;
   try {
-    const { createModelView } = await import("./model3d.js?v=20261031b");
+    const { createModelView } = await import("./model3d.js?v=20261031c");
     modelView = createModelView($("#model-canvas"), $("#model-tip"));
     modelView.update(state, progressByTask());
   } catch (err) {
@@ -974,6 +974,7 @@ function renderModelLegend() {
     ? [["#c9a46a", "Framed, siding not done"], ["rgba(90,90,90,.3)", "Not started (ghost)"], [M.roof, "Complete"]]
     : [[M.siding, "Board & batten siding"], [M.brick, "Brick wainscot"], [M.roof, "Standing seam roof"], [M.existingWalls, "Existing house"]];
   $("#model-legend").innerHTML = items.map(([c, l]) => `<div><span class="sw" style="background:${c}"></span>${l}</div>`).join("");
+  if (state.model.revision) $("#model-legend").insertAdjacentHTML("beforeend", `<div class="muted small">Model: ${esc(state.model.revision)}</div>`);
 }
 
 $$("[data-mode]").forEach((b) => b.addEventListener("click", () => {

@@ -10,7 +10,7 @@
 //   the owner across devices. The 3D model geometry still comes from
 //   data/project-data.js.
 
-import seed from "../data/project-data.js?v=20261031b";
+import seed from "../data/project-data.js?v=20261031c";
 
 const STATE_KEY = "addition-tracker:state:v1";
 const SEED_KEY = "addition-tracker:seed-hash:v1";

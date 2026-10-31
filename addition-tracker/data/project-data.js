@@ -82,6 +82,8 @@ export default {
   // roofs: hip roofs over a rectangular eave outline (4 corners, in order).
   //   `eaveZ` is the height of the eave edge; `pitch` is rise per 12" of run.
   model: {
+    // Shown under the 3D legend, so a viewer can tell which model version loaded.
+    revision: "Oct 31, existing roof matched to aerial",
     materials: {
       siding: "#d9d4c7",      // Hardie vertical board & batten, color TBD
       brick: "#8a5a44",       // full brick veneer wainscot
