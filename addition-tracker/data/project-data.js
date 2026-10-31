@@ -103,7 +103,15 @@ export default {
         plate: 13.1,         // 10'-1" plate
         basementDepth: 9.5,  // basement + crawl below; drawn under grade in Progress view
         wainscot: 3.0,       // brick veneer height above floor
-        sharedEdges: [4],    // SE wall abuts the existing house
+        sharedEdges: [4, 5], // SE wall abuts the existing house; NE side is open to the garage
+        // The shop area (NE end of the wing, under the wing roof) is open to the
+        // garage and sits at garage slab level, so the raised floor stops at the
+        // shop/bedroom wall and the shop gets its own slab at grade.
+        foundationFootprint: [[-9.47, -8.89], [-30.46, -24.45], [-19.74, -38.91], [-27.7, -44.81], [-14.93, -62.04], [23.18, -33.79], [18.8, -27.9], [4.6, -27.9]],
+        lowSlabs: [
+          // walls: footprint-line edges of this slab that need siding below the wing floor
+          { label: "Shop area slab (garage level)", poly: [[-0.31, -2.1], [-9.47, -8.89], [4.6, -27.9], [18.8, -27.9]], top: 0, walls: [0] },
+        ],
         openings: [
           { edge: 0, offset: 4.5,  width: 5, height: 6, sill: 2, type: "window", label: "W6 5'×6' fixed" },
           { edge: 0, offset: 15.5, width: 5, height: 6, sill: 2, type: "window", label: "W1 5'×6' casement egress (Bedroom 101)" },
@@ -219,7 +227,7 @@ export default {
         { frame: "wing", a: [24, 35.5], b: [24, 39.2] },
         // laundry 107 south wall (shelf / built-in) and the garage demising wall
         { frame: "wing", a: [3.6, 32], b: [11.4, 32], doors: [[4.6, 7.2]] },
-        { frame: "plan", a: [4.6, -27.9], b: [31.1, -27.9], doors: [[8.9, 11.9]], fire: true },
+        { frame: "plan", a: [4.6, -27.9], b: [31.1, -27.9], doors: [[8.9, 11.9]], fire: true, top: 8.1 },
         // laundry / hallway 108
         { frame: "plan", a: [15.2, -27.9], b: [15.2, -30.0] },
       ],
@@ -231,7 +239,7 @@ export default {
         { name: "Powder room 106", frame: "wing", finish: "tile", at: [18.2, 33.5], poly: [[15.6, 28.5], [20.8, 28.5], [20.8, 36], [15.6, 36]] },
         { name: "Toy closet", frame: "wing", finish: "wood", poly: [[24, 35.5], [29.2, 35.5], [29.2, 39.4], [24, 39.4]] },
         { name: "Play room 104", frame: "wing", finish: "wood", poly: [[31.5, 19], [37.5, 19], [37.5, 18], [47.4, 18], [47.4, 39.4], [29.2, 39.4], [29.2, 23.5], [31.5, 23.5]] },
-        { name: "Shop area (garage level on the plans)", frame: "wing", finish: "rubber", poly: [[0.3, 0], [11.4, 0], [11.4, 23.66], [0.3, 31.9]] },
+        { name: "Shop area (open to the garage)", frame: "wing", finish: "rubber", floor: 0, poly: [[0.3, 0], [11.4, 0], [11.4, 23.66], [0.3, 31.9]] },
         { name: "Laundry 107", frame: "plan", finish: "tile", poly: [[4.6, -27.9], [15.2, -27.9], [15.2, -30.0], [15.5, -30.2], [9.6, -34.6]] },
         { name: "Hallway 108", frame: "wing", finish: "tile", at: [6, 36.5], poly: [[0.3, 31.9], [3.6, 30.3], [3.6, 32], [11.4, 32], [11.4, 39.4], [0.3, 39.4]] },
       ],

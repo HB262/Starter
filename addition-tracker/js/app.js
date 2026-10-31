@@ -131,7 +131,17 @@ function renderBanners() {
 
 function budgetRows() {
   const actualBy = {};
-  for (const e of state.expenses) actualBy[e.budgetId] = (actualBy[e.budgetId] || 0) + Number(e.amount || 0);
+  // An expense can be split across lines: `splits: [{ budgetId, amount }]`.
+  const allocations = (e) => e.splits?.length ? e.splits : [{ budgetId: e.budgetId, amount: e.amount }];
+  let unassigned = 0;
+  for (const e of state.expenses) {
+    let left = Number(e.amount || 0);
+    for (const a of allocations(e)) {
+      const amt = Number(a.amount || 0);
+      if (state.budget.some((b) => b.id === a.budgetId)) { actualBy[a.budgetId] = (actualBy[a.budgetId] || 0) + amt; left -= amt; }
+    }
+    if (Math.abs(left) > 0.005) unassigned += left;
+  }
   const rows = state.budget.map((b) => ({ ...b, actual: actualBy[b.id] || 0 }));
   const cats = [];
   for (const r of rows) {
@@ -141,7 +151,6 @@ function budgetRows() {
     c.actual += r.actual;
     c.items.push(r);
   }
-  const unassigned = state.expenses.filter((e) => !state.budget.some((b) => b.id === e.budgetId)).reduce((s, e) => s + Number(e.amount || 0), 0);
   const totalBudget = rows.reduce((s, r) => s + Number(r.budget || 0), 0);
   const totalActual = rows.reduce((s, r) => s + r.actual, 0) + unassigned;
   // Payments not split by line (e.g. contractor draws) count against unspent budget, not on top of it.
@@ -202,21 +211,29 @@ function renderOverview() {
     ? recent.map((e) => `<li><span><span class="chip ${e.type}">${e.type}</span> ${esc(e.title)}</span><span class="when">${fmtShort(parseDate(e.date))}</span></li>`).join("")
     : `<li class="muted">No entries yet.</li>`;
 
-  $("#overview-budget").innerHTML = budgetChart(b.cats);
+  $("#overview-budget").innerHTML = budgetChart(b);
 }
 
 // ── Budget ─────────────────────────────────────────────────────────────────
 
-function budgetChart(cats) {
+// Categories, plus a Total row (on its own scale) and contract draws that
+// haven't been split across budget lines.
+function budgetChart(b) {
+  const cats = [...b.cats];
+  if (b.unassigned) cats.push({ name: "Contractor draws (not split by line)", budget: 0, actual: b.unassigned, draws: true });
   const max = Math.max(1, ...cats.map((c) => Math.max(c.budget, c.actual)));
-  return `<div class="bchart">${cats.map((c) => {
-    const over = c.actual > c.budget;
-    const tip = `<strong>${esc(c.name)}</strong><br>Budget ${money(c.budget)}<br>Actual ${money(c.actual)}<br>${over ? `Over by ${money(c.actual - c.budget)}` : `Remaining ${money(c.budget - c.actual)}`}`;
-    return `<div class="lbl">${esc(c.name)}</div>
-      <div class="val">${moneyK(c.actual)} of ${moneyK(c.budget)}${over ? ` <span class="status bad">▲</span>` : ""}</div>
+  const total = { name: "Total", budget: b.totalBudget, actual: b.totalActual, total: true };
+  return `<div class="bchart">${[total, ...cats].map((c) => {
+    const over = !c.draws && c.actual > c.budget;
+    const scale = c.total ? Math.max(1, c.budget, c.actual) : max;
+    const tip = c.draws
+      ? `<strong>${esc(c.name)}</strong><br>Paid ${money(c.actual)}<br>Counts toward the total; not yet assigned to a category`
+      : `<strong>${esc(c.name)}</strong><br>Budget ${money(c.budget)}<br>Actual ${money(c.actual)}<br>${over ? `Over by ${money(c.actual - c.budget)}` : `Remaining ${money(c.budget - c.actual)}`}`;
+    return `<div class="lbl"${c.total ? ' style="font-weight:600"' : ""}>${esc(c.name)}</div>
+      <div class="val">${c.draws ? `${moneyK(c.actual)} paid` : `${moneyK(c.actual)} of ${moneyK(c.budget)}`}${over ? ` <span class="status bad">▲</span>` : ""}</div>
       <div class="track" data-tip="${esc(tip)}">
-        <div class="b" style="width:${(c.budget / max) * 100}%"></div>
-        <div class="a ${over ? "over" : ""}" style="width:${(c.actual / max) * 100}%"></div>
+        <div class="b" style="width:${(c.budget / scale) * 100}%"></div>
+        <div class="a ${over ? "over" : ""}" style="width:${(c.actual / scale) * 100}%"></div>
       </div>`;
   }).join("")}</div>`;
 }
@@ -231,7 +248,7 @@ function renderBudget() {
     tile("Remaining", money(remaining), remaining < 0 ? `<span class="status bad">▲ Over budget</span>` : ""),
     tile("Projected cost", money(b.projected), over > 0 ? `<span class="status bad">▲ ${money(over)} over</span>` : `<span class="status good">✓ Within budget</span>`),
   ].join("");
-  $("#budget-chart").innerHTML = budgetChart(b.cats);
+  $("#budget-chart").innerHTML = budgetChart(b);
 
   $("#budget-table").innerHTML = `
     <thead><tr><th>Item</th><th class="num">Budget</th><th class="num">Actual</th><th class="num">Variance</th><th>Used</th></tr></thead>
@@ -245,7 +262,8 @@ function renderBudget() {
     </tbody>
     <tfoot><tr><td>Total</td><td class="num">${money(b.totalBudget)}</td><td class="num">${money(b.totalActual)}</td><td class="num">${variance(b.totalBudget, b.totalActual)}</td><td>${meter(b.totalBudget, b.totalActual)}</td></tr></tfoot>`;
 
-  const lineName = (id, e) => state.budget.find((x) => x.id === id)?.item || (e?.paymentId ? "Contract payment" : "Contractor draw (not split by line)");
+  const lineName = (id, e) => e?.splits?.length ? `Split across ${e.splits.length} lines`
+    : state.budget.find((x) => x.id === id)?.item || (e?.paymentId ? "Contract payment" : "Contractor draw (not split by line)");
   const exp = [...state.expenses].sort((a, c) => c.date.localeCompare(a.date));
   $("#expense-table").innerHTML = exp.length
     ? `<thead><tr><th>Date</th><th>Vendor</th><th>Budget line</th><th>Note</th><th class="num">Amount</th></tr></thead>
@@ -307,13 +325,22 @@ function editExpense(id) {
     body: `<div class="form-grid">
       <label class="f">Date<input name="date" type="date" required value="${esc(ex.date)}"></label>
       <label class="f">Amount ($)<input name="amount" type="number" step="0.01" required value="${esc(ex.amount)}"></label>
-      <label class="f full">Budget line<select name="budgetId">${opts}</select></label>
+      ${ex.splits?.length
+        ? `<div class="f full"><span>Split across budget lines</span><ul class="list small" style="margin:4px 0 0">${ex.splits.map((sp) => `<li>${esc(state.budget.find((b) => b.id === sp.budgetId)?.item || "Not split")}: ${money(sp.amount)}</li>`).join("")}</ul>
+           <label class="check" style="margin-top:6px"><input type="checkbox" name="unsplit"> Remove the split and use one line</label></div>`
+        : ""}
+      <label class="f full">Budget line${ex.splits?.length ? " (only if you remove the split)" : ""}<select name="budgetId">${opts}</select></label>
       <label class="f full">Paid to<input name="vendor" value="${esc(ex.vendor)}"></label>
       <label class="f full">Note<input name="note" value="${esc(ex.note)}"></label>
     </div>`,
     onSave: (fd) => store.update((s) => {
       const v = { date: fd.get("date"), amount: Number(fd.get("amount")), budgetId: fd.get("budgetId"), vendor: fd.get("vendor").trim(), note: fd.get("note").trim() };
-      if (id) Object.assign(s.expenses.find((x) => x.id === id), v);
+      if (id) {
+        const e = s.expenses.find((x) => x.id === id);
+        if (e.splits?.length && fd.get("unsplit") !== "on") v.budgetId = e.budgetId;
+        if (fd.get("unsplit") === "on") delete e.splits;
+        Object.assign(e, v);
+      }
       else s.expenses.push({ id: store.uid("e"), ...v });
     }),
     onDelete: id ? () => store.update((s) => { s.expenses = s.expenses.filter((x) => x.id !== id); }) : null,

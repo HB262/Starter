@@ -199,7 +199,7 @@ export function createModelView(container, tooltipEl) {
       if (!f) return p;
       return [f.origin[0] + p[0] * f.u[0] + p[1] * f.v[0], f.origin[1] + p[0] * f.u[1] + p[1] * f.v[1]];
     };
-    const floor = int.floor ?? 0, ceil = int.ceiling ?? floor + 8, doorH = int.doorHeight ?? 6.67;
+    const floor = int.floor ?? 0, ceilAll = int.ceiling ?? floor + 8, doorH = int.doorHeight ?? 6.67;
     interiorCut = int.cutHeight ?? floor + 5;
     const wallMat = mat("#eee8dd");
     const T = 0.4;
@@ -220,6 +220,7 @@ export function createModelView(container, tooltipEl) {
       const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
       const at = (t) => [a[0] + ((b[0] - a[0]) * t) / len, a[1] + ((b[1] - a[1]) * t) / len];
       const base = w.fire ? 0 : floor;
+      const ceil = w.top ?? ceilAll;
       const info = { kind: "new", phase: "framing", interior: true, label: w.fire ? "1-hour wall between house and garage" : "Interior wall" };
       const doors = [...(w.doors || [])].sort((x, y) => x[0] - y[0]);
       let t = 0;
@@ -235,12 +236,13 @@ export function createModelView(container, tooltipEl) {
       const pts = r.poly.map((p) => toPlan(r.frame, p));
       const geo = new THREE.ShapeGeometry(new THREE.Shape(pts.map(([x, y]) => new THREE.Vector2(x, y))));
       geo.rotateX(-Math.PI / 2);
-      geo.translate(0, floor + 0.04, 0);
+      const rf = r.floor ?? floor;
+      geo.translate(0, rf + 0.04, 0);
       const m = mat(FINISH_COLORS[r.finish] || "#ccc", { polygonOffset: true, polygonOffsetFactor: -1 });
       add(new THREE.Mesh(geo, m), { kind: "new", phase: "flooring", interior: true, label: `${r.name} · ${r.finish}` });
       const [cx, cy] = r.at ? toPlan(r.frame, r.at) : centroid(pts);
       const sp = labelSprite(r.name.replace(/ \(.*\)$/, ""));
-      sp.position.set(cx, floor + 2.2, -cy);
+      sp.position.set(cx, rf + 2.2, -cy);
       sp.visible = false;
       group.add(sp);
       labels.push(sp);
@@ -297,11 +299,25 @@ export function createModelView(container, tooltipEl) {
 
       // Foundation / basement
       const fShape = new THREE.Shape(pts.map(([x, y]) => new THREE.Vector2(x, y)));
+      const fPts = vol.foundationFootprint || pts;
       const fBottom = isNew ? -(vol.basementDepth || 1.5) : -1;
-      const fGeo = new THREE.ExtrudeGeometry(fShape, { depth: vol.floor - fBottom + 0.01, bevelEnabled: false });
+      const fGeo = new THREE.ExtrudeGeometry(new THREE.Shape(fPts.map(([x, y]) => new THREE.Vector2(x, y))), { depth: vol.floor - fBottom + 0.01, bevelEnabled: false });
       fGeo.rotateX(-Math.PI / 2);
       fGeo.translate(0, fBottom, 0);
       add(new THREE.Mesh(fGeo, mat(M.foundation || "#999")), { kind: vol.kind, phase: "foundation", label: `${vol.label}: foundation` });
+
+      // parts of the volume whose floor is lower (e.g. a shop at garage level)
+      for (const ls of vol.lowSlabs || []) {
+        const g = new THREE.ExtrudeGeometry(new THREE.Shape(ls.poly.map(([x, y]) => new THREE.Vector2(x, y))), { depth: ls.top + 1.5 + 0.01, bevelEnabled: false });
+        g.rotateX(-Math.PI / 2);
+        g.translate(0, -1.5, 0);
+        add(new THREE.Mesh(g, mat(M.foundation || "#999")), { kind: vol.kind, phase: "foundation", label: ls.label });
+        const lc = centroid(ls.poly);
+        for (const ei of ls.walls || []) {
+          const w = edgePanel(ls.poly[ei], ls.poly[(ei + 1) % ls.poly.length], lc, ls.top, vol.floor, [], WALL_T);
+          add(new THREE.Mesh(w.geo, mat(M.siding || "#ddd")), { kind: "new", phase: "framing", siding: true, label: vol.label });
+        }
+      }
 
       if (!isNew) {
         const wGeo = new THREE.ExtrudeGeometry(fShape, { depth: vol.plate - vol.floor, bevelEnabled: false });
