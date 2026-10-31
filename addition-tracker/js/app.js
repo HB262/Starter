@@ -1062,6 +1062,107 @@ function renderDocs() {
 }
 $("#doc-search").addEventListener("input", renderDocs);
 
+// ── Site map ───────────────────────────────────────────────────────────────
+// state.site: { photo, w, h, tx, ty, rot, scale, opacity }. The plan (feet,
+// +y north) is drawn at (tx, ty) image pixels, rotated `rot` degrees clockwise,
+// `scale` image pixels per foot.
+
+let siteDraft = null; // unsaved alignment while dragging / sliding
+const siteStage = $("#site-stage");
+
+function siteShapes() {
+  const m = state.model || {};
+  const int = m.interior || {};
+  const f = int.frames?.wing;
+  const toPlan = (frame, p) => (frame === "wing" && f ? [f.origin[0] + p[0] * f.u[0] + p[1] * f.v[0], f.origin[1] + p[0] * f.u[1] + p[1] * f.v[1]] : p);
+  return {
+    newVols: (m.volumes || []).filter((v) => v.kind === "new"),
+    existing: (m.volumes || []).filter((v) => v.kind !== "new"),
+    rooms: (int.rooms || []).map((r) => ({ name: r.name, pts: r.poly.map((p) => toPlan(r.frame, p)) })),
+  };
+}
+
+function renderSite() {
+  const s = siteDraft || state.site;
+  const has = !!s?.photo;
+  $("#site-controls").hidden = !has;
+  $("#site-upload-btn").firstChild.textContent = has ? "Replace image" : "Upload aerial image";
+  if (!has) {
+    siteStage.innerHTML = `<div class="empty">${store.canUploadPhotos() ? "No aerial image yet. Use <strong>Upload aerial image</strong>." : "No aerial image yet."}</div>`;
+    return;
+  }
+  const { newVols, existing, rooms } = siteShapes();
+  const pts = (arr) => arr.map(([x, y]) => `${x},${-y}`).join(" ");
+  const showEx = $("#site-existing").checked, showRooms = $("#site-rooms").checked;
+  const g = `<g transform="translate(${s.tx} ${s.ty}) rotate(${s.rot}) scale(${s.scale})">
+    ${showEx ? existing.map((v) => `<polygon class="site-existing" points="${pts(v.footprint)}"/>`).join("") : ""}
+    <g opacity="${s.opacity ?? 0.7}">${newVols.map((v) => `<polygon class="site-new" points="${pts(v.footprint)}"><title>${esc(v.label)}</title></polygon>`).join("")}</g>
+    ${showRooms ? rooms.map((r) => `<polygon class="site-room" points="${pts(r.pts)}"><title>${esc(r.name)}</title></polygon>`).join("") : ""}
+  </g>`;
+  const img = siteStage.querySelector("img");
+  if (!img || img.dataset.photo !== s.photo) {
+    siteStage.innerHTML = `<img data-photo="${esc(s.photo)}" alt="Aerial image of the lot"><svg viewBox="0 0 ${s.w} ${s.h}" preserveAspectRatio="none">${g}</svg>`;
+    hydratePhotos(siteStage);
+  } else {
+    siteStage.querySelector("svg").innerHTML = g;
+  }
+  $("#site-rot").value = s.rot; $("#site-rot-v").value = `${Number(s.rot).toFixed(1)}°`;
+  $("#site-scale").value = s.scale; $("#site-scale-v").value = `${Number(s.scale).toFixed(2)} px/ft`;
+  $("#site-opacity").value = s.opacity ?? 0.7;
+  $("#site-save").disabled = !siteDraft;
+}
+
+const siteEdit = (patch) => { siteDraft = { ...(siteDraft || state.site), ...patch }; renderSite(); };
+$("#site-rot").oninput = (e) => siteEdit({ rot: Number(e.target.value) });
+$("#site-scale").oninput = (e) => siteEdit({ scale: Number(e.target.value) });
+$("#site-opacity").oninput = (e) => siteEdit({ opacity: Number(e.target.value) });
+$("#site-existing").onchange = $("#site-rooms").onchange = () => renderSite();
+$("#site-reset").onclick = () => { const s = siteDraft || state.site; siteEdit({ tx: s.w / 2, ty: s.h / 2 }); };
+$("#site-save").onclick = () => {
+  if (!siteDraft) return;
+  const next = siteDraft;
+  siteDraft = null;
+  store.update((st) => { st.site = next; });
+  toast("Site map alignment saved");
+};
+
+let siteDrag = null;
+siteStage.addEventListener("pointerdown", (e) => {
+  const svg = e.target.closest("svg");
+  if (!svg) return;
+  const s = siteDraft || state.site;
+  siteDrag = { x: e.clientX, y: e.clientY, tx: s.tx, ty: s.ty, k: s.w / svg.getBoundingClientRect().width };
+  svg.setPointerCapture(e.pointerId);
+  svg.classList.add("dragging");
+});
+siteStage.addEventListener("pointermove", (e) => {
+  if (!siteDrag) return;
+  siteEdit({ tx: siteDrag.tx + (e.clientX - siteDrag.x) * siteDrag.k, ty: siteDrag.ty + (e.clientY - siteDrag.y) * siteDrag.k });
+});
+const endSiteDrag = () => { siteDrag = null; siteStage.querySelector("svg")?.classList.remove("dragging"); };
+siteStage.addEventListener("pointerup", endSiteDrag);
+siteStage.addEventListener("pointercancel", endSiteDrag);
+
+$("#site-upload").onchange = async (e) => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  try {
+    const bmp = await createImageBitmap(file);
+    const k = Math.min(1, 1800 / Math.max(bmp.width, bmp.height));
+    const w = Math.round(bmp.width * k), h = Math.round(bmp.height * k);
+    const photo = await store.savePhoto(file);
+    const old = state.site;
+    const base = old ? { tx: old.tx * (w / old.w), ty: old.ty * (h / old.h), rot: old.rot, scale: old.scale * (w / old.w), opacity: old.opacity } : { tx: w / 2, ty: h / 2, rot: 0, scale: w / 160, opacity: 0.7 };
+    siteDraft = null;
+    store.update((st) => { st.site = { photo, w, h, ...base }; });
+    if (old?.photo) store.deletePhoto(old.photo);
+    toast("Image added. Line up the outline, then Save alignment.");
+  } catch (err) {
+    toast(`Couldn't add that image: ${err.message}`, "bad");
+  }
+};
+
 // ── Render all ─────────────────────────────────────────────────────────────
 
 function renderAll() {
@@ -1076,6 +1177,7 @@ function renderAll() {
   renderScheduleTiles();
   renderGantt();
   renderPermit();
+  renderSite();
   renderLog();
   renderDocs();
   renderProjectForm();

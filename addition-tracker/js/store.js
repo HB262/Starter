@@ -53,6 +53,7 @@ export function load() {
       project: { name: seed.project.name, address: "", startDate: seed.project.startDate },
       model: clone(seed.model),
       permit: null,
+      site: null,
       budget: [], expenses: [], tasks: [], events: [], payments: [],
     };
     connectCloud();
@@ -125,7 +126,7 @@ async function connectCloud() {
     notify();
     return;
   }
-  const pending = new Set([...COLLECTIONS, "meta", "permit"]);
+  const pending = new Set([...COLLECTIONS, "meta", "permit", "site"]);
   const settle = (k) => {
     pending.delete(k);
     if (!pending.size && cloud.status === "connecting") cloud.status = "ready";
@@ -153,6 +154,13 @@ async function connectCloud() {
       settle("meta");
     },
     (e) => errorHandler(`Couldn't load project details (${e.code}).`),
+  );
+  db.doc("meta/site").onSnapshot(
+    (snap) => {
+      state.site = snap.exists ? clone(snap.data()) : null;
+      settle("site");
+    },
+    (e) => errorHandler(`Couldn't load the site map (${e.code}).`),
   );
   db.doc("meta/permit").onSnapshot(
     (snap) => {
@@ -194,6 +202,9 @@ function persistCloud(prev, next) {
   const meta = (s) => JSON.stringify({ project: s.project, placeholder: s.placeholder });
   if (meta(prev) !== meta(next)) {
     queueWrite("project details", () => db.doc("meta/project").set(clone({ project: next.project, placeholder: next.placeholder || {} })));
+  }
+  if (next.site && JSON.stringify(prev.site) !== JSON.stringify(next.site)) {
+    queueWrite("the site map", () => db.doc("meta/site").set(clone(next.site)));
   }
   if (next.permit && JSON.stringify(prev.permit) !== JSON.stringify(next.permit)) {
     queueWrite("the permit", () => db.doc("meta/permit").set(clone(next.permit)));
