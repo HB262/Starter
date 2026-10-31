@@ -149,7 +149,7 @@ export default {
         id: "existing-west",
         label: "Existing house",
         kind: "existing",
-        footprint: [[-16.5, -71.5], [11.7, -71.5], [11.7, -97.1], [-16.5, -97.1]],
+        footprint: [[-18.3, -71.5], [11.7, -71.5], [11.7, -97.1], [-18.3, -97.1]],
         floor: 3.0,
         plate: 11.0,
       },
@@ -157,7 +157,7 @@ export default {
         id: "existing-south",
         label: "Existing house",
         kind: "existing",
-        footprint: [[4.0, -70.5], [36.1, -70.5], [36.1, -118.7], [4.0, -118.7]],
+        footprint: [[1.5, -70.5], [34.7, -70.5], [34.7, -118.7], [1.5, -118.7]],
         floor: 3.0,
         plate: 11.0,
       },
@@ -171,9 +171,9 @@ export default {
       { id: "wing-main",  kind: "new", eave: [[0, 0], [-32.56, -24.13], [-7.28, -58.24], [25.28, -34.1]],      eaveZ: 12.2, pitch: 7 },
       { id: "wing-low",   kind: "new", eave: [[10.72, -14.46], [-29.8, -44.5], [-15.24, -64.14], [25.28, -34.1]], eaveZ: 12.2, pitch: 7 },
       { id: "garage",     kind: "new", eave: [[0.6, -0.8], [32.6, -0.8], [32.6, -28.65], [0.6, -28.65]],      eaveZ: 7.5,  pitch: 5 },
-      { id: "existing-mid",   kind: "existing", eave: [[16.76, -38.56], [-11.36, -59.4], [11.0, -89.57], [39.12, -68.73]], eaveZ: 10.4, pitch: 5 },
-      { id: "existing-west",  kind: "existing", eave: [[-18, -70], [13.2, -70], [13.2, -98.6], [-18, -98.6]],              eaveZ: 10.4, pitch: 5 },
-      { id: "existing-south", kind: "existing", eave: [[2.5, -69], [37.6, -69], [37.6, -120.2], [2.5, -120.2]],          eaveZ: 10.4, pitch: 5 },
+      { id: "existing-mid",   kind: "existing", eave: [[12.41, -34.37], [-14.91, -54.62], [11.0, -89.57], [38.31, -69.32]], eaveZ: 10.4, pitch: 5 },
+      { id: "existing-west",  kind: "existing", eave: [[-19.8, -70], [13.2, -70], [13.2, -98.6], [-19.8, -98.6]],          eaveZ: 10.4, pitch: 5 },
+      { id: "existing-south", kind: "existing", eave: [[0, -69], [36.2, -69], [36.2, -120.2], [0, -120.2]],              eaveZ: 10.4, pitch: 5 },
       // New covered entry over the existing stoop (A3.2 east elevation): 4/12 gable
       // facing east, about 21 ft wide, on posts; the back end dies into the
       // existing roof. Ridge runs along eave[0]→eave[1].
