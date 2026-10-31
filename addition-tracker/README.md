@@ -8,6 +8,7 @@ A web app for tracking the remodel and addition at 3315 S. Columbine Cir. (permi
 | 3D model | The bedroom wing, garage and existing house, traced from the Ready for Construction set. **Finished** shows the completed design; **Current progress** shows each part as a ghost, in progress, or done based on the schedule. Views: 3D, from the street, and plan |
 | Budget | Budget vs. actual by category and line item, variance, projected cost, and an expense ledger |
 | Schedule | Gantt chart. Click a task to set progress or record a delay; delays push that task and everything that depends on it. The gray line under each bar is the original plan, and red hatching is delay |
+| Permit | Permit BLD-2024-01595: status, dates, valuation, fees, and the inspection list linked to schedule tasks. Recording a result can add it to the log |
 | Log | Dated notes with photos (issues, inspections, deliveries, delays, payments). Delays recorded on the schedule are logged automatically |
 | Data | Export and import a backup, reset to the starting data, and edit project details |
 

@@ -169,6 +169,7 @@ function renderOverview() {
     tile("Projected cost", money(b.projected), over > 0 ? `<span class="status bad">▲ ${money(over)} over budget</span>` : `<span class="status good">✓ On budget</span>`),
     tile("Construction progress", pct(s.percent), `weighted by task duration`),
     tile("Projected finish", s.finish ? fmtLong(s.finish) : "–", s.slip > 0 ? `<span class="status bad">▲ ${plural(s.slip, "working day")} late</span>` : `<span class="status good">✓ On original schedule</span>`),
+    ...(state.permit ? [(() => { const c = inspectionCounts(state.permit); return tile("Permit inspections", `${c.passed} of ${c.total}`, `<button class="link" data-goto="permit">${esc(state.permit.number || "Permit")} →</button>`); })()] : []),
   ].join("");
 
   const today = todayUTC();
@@ -536,6 +537,131 @@ function editTask(id) {
   });
 }
 
+// ── Permit ─────────────────────────────────────────────────────────────────
+
+const INSPECTION_STATUSES = ["Not scheduled", "Scheduled", "Passed", "Partial", "Failed", "Not required"];
+const PERMIT_FIELDS = [
+  ["number", "Permit number"], ["status", "Status"], ["type", "Permit type"], ["jurisdiction", "Issued by"],
+  ["address", "Address"], ["applied", "Applied", "date"], ["issued", "Issued", "date"], ["expires", "Expires", "date"],
+  ["valuation", "Valuation ($)", "number"], ["fees", "Fees paid ($)", "number"], ["contractor", "Contractor of record"],
+  ["codes", "Codes"], ["scope", "Scope of work", "textarea"], ["notes", "Notes", "textarea"],
+];
+const pillClass = (st) => (st || "").toLowerCase().replace(/\s+/g, "-");
+
+function inspectionCounts(p) {
+  const list = (p?.inspections || []).filter((i) => i.status !== "Not required");
+  return { passed: list.filter((i) => i.status === "Passed").length, total: list.length, failed: list.filter((i) => i.status === "Failed").length };
+}
+
+function renderPermit() {
+  const p = state.permit;
+  if (!p) {
+    $("#permit-tiles").innerHTML = "";
+    $("#permit-facts").innerHTML = `<div class="empty">${store.cloud.status === "connecting" ? "Loading the permit…" : "No permit details yet. Use Edit details to add them."}</div>`;
+    $("#inspection-table").innerHTML = "";
+    return;
+  }
+  const c = inspectionCounts(p);
+  const today = todayUTC();
+  const exp = p.expires ? parseDate(p.expires) : null;
+  const daysLeft = exp ? calendarDays(today, exp) : null;
+  const fmtD = (d) => (d ? fmtLong(parseDate(d)) : "—");
+  $("#permit-tiles").innerHTML = [
+    tile("Permit", esc(p.number || "—"), esc(p.status || "Status not entered yet")),
+    tile("Issued", fmtD(p.issued), p.applied ? `Applied ${fmtD(p.applied)}` : ""),
+    tile("Expires", fmtD(p.expires), daysLeft == null ? "Enter from the permit card" : daysLeft < 0 ? `<span class="status bad">▲ Expired</span>` : daysLeft <= 60 ? `<span class="status bad">▲ ${daysLeft} days left</span>` : `${daysLeft} days left`),
+    tile("Inspections passed", `${c.passed} of ${c.total}`, c.failed ? `<span class="status bad">▲ ${c.failed} failed</span>` : ""),
+  ].join("");
+  $("#permit-title").textContent = `Building permit ${p.number || ""}`.trim();
+  $("#permit-portal").href = p.portalUrl || "https://aca-prod.accela.com/ARAPAHOE/Default.aspx";
+  const val = (k, type) => {
+    const v = p[k];
+    if (v == null || v === "") return `<span class="missing">Not entered</span>`;
+    if (type === "date") return fmtLong(parseDate(v));
+    if (type === "number") return money(Number(v));
+    return esc(v);
+  };
+  $("#permit-facts").innerHTML = PERMIT_FIELDS.map(([k, l, type]) => `<dt>${l}</dt><dd>${val(k, type)}</dd>`).join("");
+
+  const taskName = (id) => state.tasks.find((t) => t.id === id)?.name;
+  $("#inspection-table").innerHTML = `
+    <thead><tr><th>Inspection</th><th>Status</th><th>Date</th><th>Planned with</th><th>Notes</th></tr></thead>
+    <tbody>${(p.inspections || []).map((i) => {
+      const r = sched.get(i.taskId);
+      const planned = taskName(i.taskId) ? `${esc(taskName(i.taskId))}${r ? ` <span class="muted">(${fmtShort(r.end)})</span>` : ""}` : `<span class="muted">—</span>`;
+      return `<tr class="click" data-inspection="${esc(i.id)}">
+        <td>${esc(i.name)}</td>
+        <td><span class="pill ${pillClass(i.status)}">${i.status === "Passed" ? "✓ " : i.status === "Failed" ? "✕ " : ""}${esc(i.status || "Not scheduled")}</span></td>
+        <td class="num">${i.date ? fmtShort(parseDate(i.date)) : "—"}</td>
+        <td>${planned}</td>
+        <td class="muted">${esc(i.notes || i.inspector || "")}</td></tr>`;
+    }).join("")}</tbody>`;
+}
+
+$("#inspection-table").addEventListener("click", (e) => {
+  const tr = e.target.closest("[data-inspection]");
+  if (tr) editInspection(tr.dataset.inspection);
+});
+$("#add-inspection").onclick = () => editInspection(null);
+$("#edit-permit").onclick = () => editPermit();
+
+function ensurePermit(s) {
+  if (!s.permit) s.permit = { number: "", inspections: [] };
+  s.permit.inspections ||= [];
+  return s.permit;
+}
+
+function editPermit() {
+  const p = state.permit || {};
+  openDialog({
+    title: "Permit details",
+    body: `<div class="form-grid">${PERMIT_FIELDS.map(([k, l, type]) => type === "textarea"
+      ? `<label class="f full">${l}<textarea name="${k}">${esc(p[k] || "")}</textarea></label>`
+      : `<label class="f ${["jurisdiction", "address", "codes", "type"].includes(k) ? "full" : ""}">${l}<input name="${k}" type="${type || "text"}" ${type === "number" ? 'step="0.01" min="0"' : ""} value="${esc(p[k] ?? "")}"></label>`).join("")}
+      <label class="f full">County portal link<input name="portalUrl" type="url" value="${esc(p.portalUrl || "")}"></label>
+    </div>`,
+    onSave: (fd) => {
+      store.update((s) => {
+        const t = ensurePermit(s);
+        for (const [k, , type] of PERMIT_FIELDS) {
+          const v = (fd.get(k) || "").trim();
+          t[k] = type === "number" ? (v === "" ? null : Number(v)) : v;
+        }
+        t.portalUrl = (fd.get("portalUrl") || "").trim();
+      });
+      toast("Permit details saved.");
+    },
+  });
+}
+
+function editInspection(id) {
+  const insp = state.permit?.inspections?.find((i) => i.id === id) || { name: "", status: "Not scheduled", taskId: "", date: "", inspector: "", notes: "" };
+  openDialog({
+    title: id ? insp.name : "Add inspection",
+    body: `<div class="form-grid">
+      <label class="f full">Inspection<input name="name" required value="${esc(insp.name)}"></label>
+      <label class="f">Status<select name="status">${INSPECTION_STATUSES.map((st) => `<option ${st === insp.status ? "selected" : ""}>${st}</option>`).join("")}</select></label>
+      <label class="f">Date<input type="date" name="date" value="${esc(insp.date || "")}"></label>
+      <label class="f">Inspector<input name="inspector" value="${esc(insp.inspector || "")}"></label>
+      <label class="f">Planned with task<select name="taskId"><option value="">None</option>${state.tasks.map((t) => `<option value="${esc(t.id)}" ${t.id === insp.taskId ? "selected" : ""}>${esc(t.name)}</option>`).join("")}</select></label>
+      <label class="f full">Notes or corrections<textarea name="notes">${esc(insp.notes || "")}</textarea></label>
+      <label class="check full"><input type="checkbox" name="log" checked> Add this result to the log</label>
+    </div>`,
+    onSave: (fd) => {
+      const v = { name: fd.get("name").trim(), status: fd.get("status"), date: fd.get("date"), inspector: fd.get("inspector").trim(), taskId: fd.get("taskId"), notes: fd.get("notes").trim() };
+      store.update((s) => {
+        const p = ensurePermit(s);
+        if (id) Object.assign(p.inspections.find((i) => i.id === id), v);
+        else p.inspections.push({ id: store.uid("i"), ...v });
+        if (fd.get("log") === "on") {
+          s.events.push({ id: store.uid("ev"), date: v.date || fmtISO(todayUTC()), type: v.status === "Failed" ? "issue" : "inspection", title: `${v.name} inspection: ${v.status.toLowerCase()}`, note: [v.inspector && `Inspector: ${v.inspector}.`, v.notes].filter(Boolean).join(" "), photos: [] });
+        }
+      });
+    },
+    onDelete: id ? () => store.update((s) => { s.permit.inspections = s.permit.inspections.filter((i) => i.id !== id); }) : null,
+  });
+}
+
 // ── Log ────────────────────────────────────────────────────────────────────
 
 const logFilter = $("#log-filter");
@@ -712,6 +838,7 @@ function renderAll() {
   renderBudget();
   renderScheduleTiles();
   renderGantt();
+  renderPermit();
   renderLog();
   renderProjectForm();
   renderStorageInfo();

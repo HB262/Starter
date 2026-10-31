@@ -25,6 +25,7 @@
       <button role="tab" data-tab="model">3D model</button>
       <button role="tab" data-tab="budget">Budget</button>
       <button role="tab" data-tab="schedule">Schedule</button>
+      <button role="tab" data-tab="permit">Permit</button>
       <button role="tab" data-tab="log">Log</button>
       <button role="tab" data-tab="data">Data</button>
     </nav>
@@ -125,6 +126,29 @@
         </div>
         <p class="muted small">Click a task to update progress or record a delay. Delays push that task and every task that depends on it. Durations are working days (Mon–Fri).</p>
         <div id="gantt" class="gantt"></div>
+      </div>
+    </section>
+
+    <!-- PERMIT -->
+    <section id="tab-permit" class="tab">
+      <div class="tiles" id="permit-tiles"></div>
+      <div class="card">
+        <div class="card-head">
+          <h2 id="permit-title">Building permit</h2>
+          <div class="row gap wrap">
+            <a class="btn" id="permit-portal" href="#" target="_blank" rel="noopener">Open county portal ↗</a>
+            <button class="btn" id="edit-permit">Edit details</button>
+          </div>
+        </div>
+        <dl class="facts" id="permit-facts"></dl>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <h2>Inspections</h2>
+          <button class="btn" id="add-inspection">Add inspection</button>
+        </div>
+        <p class="muted small">The usual Arapahoe County residential inspections. Check them against the permit card and the inspection list in the county portal. Click one to record a date or result; results can be added to the log.</p>
+        <div class="table-wrap"><table class="table" id="inspection-table"></table></div>
       </div>
     </section>
 

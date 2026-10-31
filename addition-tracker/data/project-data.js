@@ -28,6 +28,48 @@ export default {
     startDate: "2026-11-16", // PLACEHOLDER: first working day on site
   },
 
+  // ── Building permit ──────────────────────────────────────────────────────
+  // Number, address and scope are from the permit submittal and the Ready for
+  // Construction set. Status, dates, valuation and fees are blank until they
+  // are copied from the county's Accela Citizen Access record (needs a login).
+  // Inspections are the usual Arapahoe County residential sequence; confirm
+  // against the permit card. `taskId` links an inspection to a schedule task.
+  // `status`: "Not scheduled" | "Scheduled" | "Passed" | "Partial" | "Failed" | "Not required"
+  permit: {
+    number: "BLD-2024-01595",
+    jurisdiction: "Arapahoe County Public Works & Development, Building Division",
+    portalUrl: "https://aca-prod.accela.com/ARAPAHOE/Default.aspx",
+    address: "3315 S Columbine Cir, Englewood, CO 80113-7606",
+    type: "Residential addition & remodel",
+    scope: "Single-story bedroom wing with basement and crawl space, attached 2-car garage, re-roof of the existing house in standing seam metal, new gas service and sanitary lateral to the addition.",
+    codes: "2021 IRC, 2021 IPC, 2021 IFGC, 2020 NEC, 2021 IECC (climate zone 5B)",
+    status: "",
+    applied: "",
+    issued: "",
+    expires: "",
+    valuation: null,
+    fees: null,
+    contractor: "",
+    notes: "",
+    inspections: [
+      { id: "i-footing",     name: "Footing / caisson",            taskId: "foundation", status: "Not scheduled" },
+      { id: "i-foundation",  name: "Foundation walls",             taskId: "insp-fdn",   status: "Not scheduled" },
+      { id: "i-drain",       name: "Perimeter drain & damproofing", taskId: "waterproof", status: "Not scheduled" },
+      { id: "i-underslab",   name: "Underground / under-slab plumbing", taskId: "framing", status: "Not scheduled" },
+      { id: "i-framing",     name: "Rough framing",                taskId: "insp-rough", status: "Not scheduled" },
+      { id: "i-r-elec",      name: "Rough electrical",             taskId: "insp-rough", status: "Not scheduled" },
+      { id: "i-r-plumb",     name: "Rough plumbing",               taskId: "insp-rough", status: "Not scheduled" },
+      { id: "i-r-mech",      name: "Rough mechanical & gas",       taskId: "insp-rough", status: "Not scheduled" },
+      { id: "i-roof",        name: "Roof sheathing / ice & water", taskId: "roofing",    status: "Not scheduled" },
+      { id: "i-insulation",  name: "Insulation",                   taskId: "insulation", status: "Not scheduled" },
+      { id: "i-drywall",     name: "Drywall / fire separation",    taskId: "drywall",    status: "Not scheduled" },
+      { id: "i-f-elec",      name: "Final electrical",             taskId: "final",      status: "Not scheduled" },
+      { id: "i-f-plumb",     name: "Final plumbing",               taskId: "final",      status: "Not scheduled" },
+      { id: "i-f-mech",      name: "Final mechanical",             taskId: "final",      status: "Not scheduled" },
+      { id: "i-f-bldg",      name: "Final building",               taskId: "final",      status: "Not scheduled" },
+    ],
+  },
+
   // ── 3D model ─────────────────────────────────────────────────────────────
   // Plan coordinates in feet: +x = east, +y = north (street side). Origin is
   // the north eave corner of the new bedroom wing. z = 0 is finished grade.

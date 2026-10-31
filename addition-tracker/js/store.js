@@ -52,6 +52,7 @@ export function load() {
       placeholder: {},
       project: { name: seed.project.name, address: "", startDate: seed.project.startDate },
       model: clone(seed.model),
+      permit: null,
       budget: [], expenses: [], tasks: [], events: [],
     };
     connectCloud();
@@ -62,6 +63,7 @@ export function load() {
     try { state = JSON.parse(saved); } catch { state = null; }
   }
   if (!state) state = clone(seed);
+  if (!state.permit) state.permit = clone(seed.permit);
   return state;
 }
 
@@ -122,7 +124,7 @@ async function connectCloud() {
     notify();
     return;
   }
-  const pending = new Set([...COLLECTIONS, "meta"]);
+  const pending = new Set([...COLLECTIONS, "meta", "permit"]);
   const settle = (k) => {
     pending.delete(k);
     if (!pending.size && cloud.status === "connecting") cloud.status = "ready";
@@ -150,6 +152,13 @@ async function connectCloud() {
       settle("meta");
     },
     (e) => errorHandler(`Couldn't load project details (${e.code}).`),
+  );
+  db.doc("meta/permit").onSnapshot(
+    (snap) => {
+      state.permit = snap.exists ? clone(snap.data()) : null;
+      settle("permit");
+    },
+    (e) => errorHandler(`Couldn't load the permit (${e.code}).`),
   );
 }
 
@@ -184,6 +193,9 @@ function persistCloud(prev, next) {
   const meta = (s) => JSON.stringify({ project: s.project, placeholder: s.placeholder });
   if (meta(prev) !== meta(next)) {
     queueWrite("project details", () => db.doc("meta/project").set(clone({ project: next.project, placeholder: next.placeholder || {} })));
+  }
+  if (next.permit && JSON.stringify(prev.permit) !== JSON.stringify(next.permit)) {
+    queueWrite("the permit", () => db.doc("meta/permit").set(clone(next.permit)));
   }
 }
 
