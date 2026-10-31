@@ -80,6 +80,28 @@ function hipRoofGeometry(eave, eaveZ, pitch) {
   return { geo, ridgeZ: eaveZ + rise };
 }
 
+// A room name label: wide canvas, sized to the text.
+function labelSprite(text) {
+  const cv = document.createElement("canvas");
+  const g = cv.getContext("2d");
+  const font = "600 44px system-ui, sans-serif";
+  g.font = font;
+  const w = Math.ceil(g.measureText(text).width) + 36;
+  cv.width = w; cv.height = 72;
+  g.font = font;
+  g.fillStyle = "rgba(255,255,255,0.86)";
+  g.beginPath(); g.roundRect(0, 0, w, 72, 16); g.fill();
+  g.fillStyle = "#2b2a27";
+  g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillText(text, w / 2, 38);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(cv), depthTest: false, transparent: true }));
+  sp.scale.set((w / 72) * 1.5, 1.5, 1);
+  sp.renderOrder = 10;
+  return sp;
+}
+
+const FINISH_COLORS = { carpet: "#b9ab95", wood: "#a8794f", tile: "#d9d4ca", rubber: "#55524d" };
+
 function textSprite(text, color = "#222") {
   const cv = document.createElement("canvas");
   cv.width = 128; cv.height = 128;
@@ -139,7 +161,10 @@ export function createModelView(container, tooltipEl) {
   let group = new THREE.Group();
   scene.add(group);
   let parts = [];
-  let opts = { mode: "finished", showExisting: true, xray: false };
+  let opts = { mode: "finished", showExisting: true, xray: false, interior: false };
+  let labels = [];
+  let interiorCut = 8;
+  let interiorCenter = null;
   let lastState = null, lastProgress = {};
   let center = new THREE.Vector3();
   let radius = 60;
@@ -165,13 +190,104 @@ export function createModelView(container, tooltipEl) {
     return mesh;
   }
 
+  // Interior partitions, floor finishes, fixtures and room labels.
+  function buildInterior(int) {
+    if (!int) return;
+    const frames = int.frames || {};
+    const toPlan = (frame, p) => {
+      const f = frames[frame];
+      if (!f) return p;
+      return [f.origin[0] + p[0] * f.u[0] + p[1] * f.v[0], f.origin[1] + p[0] * f.u[1] + p[1] * f.v[1]];
+    };
+    const floor = int.floor ?? 0, ceil = int.ceiling ?? floor + 8, doorH = int.doorHeight ?? 6.67;
+    interiorCut = int.cutHeight ?? floor + 5;
+    const wallMat = mat("#eee8dd");
+    const T = 0.4;
+
+    const box = (a, b, y0, y1, m, info) => {
+      // a box between plan points a and b (centerline), y0..y1 high
+      const A = toV3(a), B = toV3(b);
+      const len = A.distanceTo(B);
+      if (len < 0.05 || y1 - y0 < 0.05) return;
+      const mesh = new THREE.Mesh(new THREE.BoxGeometry(len, y1 - y0, T), m);
+      mesh.position.copy(A.clone().add(B).multiplyScalar(0.5)).setY((y0 + y1) / 2);
+      mesh.rotation.y = Math.atan2(-(B.z - A.z), B.x - A.x);
+      add(mesh, info);
+    };
+
+    for (const w of int.walls || []) {
+      const a = toPlan(w.frame, w.a), b = toPlan(w.frame, w.b);
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      const at = (t) => [a[0] + ((b[0] - a[0]) * t) / len, a[1] + ((b[1] - a[1]) * t) / len];
+      const base = w.fire ? 0 : floor;
+      const info = { kind: "new", phase: "framing", interior: true, label: w.fire ? "1-hour wall between house and garage" : "Interior wall" };
+      const doors = [...(w.doors || [])].sort((x, y) => x[0] - y[0]);
+      let t = 0;
+      for (const [d0, d1] of doors) {
+        box(at(t), at(d0), base, ceil, wallMat, info);
+        box(at(d0), at(d1), floor + doorH, ceil, wallMat, { ...info, label: "Door opening" });
+        t = d1;
+      }
+      box(at(t), at(len), base, ceil, wallMat, info);
+    }
+
+    for (const r of int.rooms || []) {
+      const pts = r.poly.map((p) => toPlan(r.frame, p));
+      const geo = new THREE.ShapeGeometry(new THREE.Shape(pts.map(([x, y]) => new THREE.Vector2(x, y))));
+      geo.rotateX(-Math.PI / 2);
+      geo.translate(0, floor + 0.04, 0);
+      const m = mat(FINISH_COLORS[r.finish] || "#ccc", { polygonOffset: true, polygonOffsetFactor: -1 });
+      add(new THREE.Mesh(geo, m), { kind: "new", phase: "flooring", interior: true, label: `${r.name} · ${r.finish}` });
+      const [cx, cy] = r.at ? toPlan(r.frame, r.at) : centroid(pts);
+      const sp = labelSprite(r.name.replace(/ \(.*\)$/, ""));
+      sp.position.set(cx, floor + 2.2, -cy);
+      sp.visible = false;
+      group.add(sp);
+      labels.push(sp);
+    }
+
+    for (const f of int.fixtures || []) {
+      const [[u0, v0], [u1, v1]] = f.box;
+      const corners = [[u0, v0], [u1, v0], [u1, v1], [u0, v1]].map((p) => toPlan(f.frame, p));
+      const info = { kind: "new", phase: "fixtures", interior: true, label: f.label };
+      const m = f.glass
+        ? mat("#9fc3d6", { transparent: true, opacity: 0.35, roughness: 0.1 })
+        : mat(f.color || "#ddd");
+      const extrude = (pts, y0, h) => {
+        const g = new THREE.ExtrudeGeometry(new THREE.Shape(pts.map(([x, y]) => new THREE.Vector2(x, y))), { depth: h, bevelEnabled: false });
+        g.rotateX(-Math.PI / 2);
+        g.translate(0, y0, 0);
+        add(new THREE.Mesh(g, m.clone()), info);
+      };
+      if (f.steps) {
+        // risers climb from the garage slab (first edge) up to the house floor (far edge)
+        const n = f.steps;
+        for (let i = 0; i < n; i++) {
+          const k0 = i / n, k1 = 1;
+          const lerp = (p, q, k) => [p[0] + (q[0] - p[0]) * k, p[1] + (q[1] - p[1]) * k];
+          const pts = [lerp(corners[0], corners[3], k0), lerp(corners[1], corners[2], k0), lerp(corners[1], corners[2], k1), lerp(corners[0], corners[3], k1)];
+          extrude(pts, 0, (floor * (i + 1)) / (n + 1));
+        }
+      } else {
+        extrude(corners, floor + 0.05, f.h);
+      }
+    }
+    const all = (int.rooms || []).flatMap((r) => r.poly.map((p) => toPlan(r.frame, p)));
+    if (all.length) {
+      const [cx, cy] = centroid(all);
+      interiorCenter = new THREE.Vector3(cx, floor, -cy);
+    }
+  }
+
   function build(model) {
     scene.remove(group);
     group.traverse((o) => { o.geometry?.dispose(); o.material?.dispose?.(); });
     group = new THREE.Group();
     parts = [];
+    labels = [];
     scene.add(group);
     const M = model.materials || {};
+    buildInterior(model.interior, M);
 
     for (const vol of model.volumes || []) {
       const pts = vol.footprint;
@@ -250,7 +366,7 @@ export function createModelView(container, tooltipEl) {
       const m = isNew
         ? mat(M.roof || "#444", { metalness: 0.45, roughness: 0.45 })
         : mat(M.existingRoof || "#777");
-      add(new THREE.Mesh(geo, m), { kind: r.kind, phase: isNew ? "roof" : "existing", label: isNew ? `New roof (${r.pitch}/12 standing seam)` : "Existing roof" });
+      add(new THREE.Mesh(geo, m), { kind: r.kind, roof: true, phase: isNew ? "roof" : "existing", label: isNew ? `New roof (${r.pitch}/12 standing seam)` : "Existing roof" });
     }
 
     const box = new THREE.Box3();
@@ -286,6 +402,7 @@ export function createModelView(container, tooltipEl) {
         }
       }
       if (u.phase === "foundation" && opts.xray) opacity = Math.min(opacity, 0.85);
+      if (opts.interior && u.roof) visible = false;
       p.visible = visible;
       m.color.setHex(color);
       if (u.edges) u.edges.visible = ghost;
@@ -298,11 +415,22 @@ export function createModelView(container, tooltipEl) {
     }
     groundMat.opacity = opts.xray ? 0.35 : 1;
     groundMat.depthWrite = !opts.xray;
+    // Inside: slice every wall at the cut height so rooms show from above
+    renderer.clippingPlanes = opts.interior ? [new THREE.Plane(new THREE.Vector3(0, -1, 0), interiorCut)] : [];
+    sun.castShadow = !opts.interior;
+    for (const l of labels) l.visible = opts.interior;
   }
 
   function setView(name) {
     const c = center;
     const r = radius * 1.6 * Math.max(1, 1.2 / (camera.aspect || 1));
+    if (name === "inside" && interiorCenter) {
+      const ic = interiorCenter;
+      camera.position.set(ic.x - 26, ic.y + 52, ic.z + 30);
+      controls.target.copy(ic);
+      controls.update();
+      return;
+    }
     if (name === "top") camera.position.set(c.x, c.y + r * 2.6, c.z + 0.001);
     else if (name === "street") camera.position.set(c.x + 8, 5.5, c.z - r * 1.25);
     else camera.position.set(c.x - r * 0.8, c.y + r * 0.42, c.z - r * 0.8);

@@ -171,6 +171,79 @@ export default {
       roof: "roofing",
       openings: "windows",
       siding: "siding",
+      drywall: "drywall",
+      flooring: "flooring",
+      fixtures: "cabinets",
+    },
+
+    // Interior, traced from the 1st floor plan (sheet A1.3). Approximate.
+    // Points are [u, v] in a frame (`wing`: u runs along the NW wall from the
+    // north corner toward the west corner, v runs from that wall toward the
+    // existing house) or [x, y] in plan coordinates when frame is "plan".
+    // walls: centerlines with door gaps `doors: [[from, to], ...]` measured
+    //   along the wall from its first point. Height is floor to ceiling.
+    // rooms: floor areas with finish (carpet | wood | tile | rubber); `at` places the label.
+    // fixtures: simple boxes [[u0, v0], [u1, v1], height].
+    interior: {
+      frames: { wing: { origin: [-0.31, -2.1], u: [-0.8034, -0.5955], v: [0.5955, -0.8034] } },
+      floor: 3.0,
+      ceiling: 13.1,
+      doorHeight: 6.67,
+      cutHeight: 8.0, // the "Inside" view slices walls here
+      walls: [
+        // shop / bedroom wing wall and hall 103 west side
+        { frame: "wing", a: [11.4, 0.3], b: [11.4, 36.6] },
+        // between the bedrooms
+        { frame: "wing", a: [24.6, 0.3], b: [24.6, 19] },
+        // bedrooms / hallway 103 (doors to 101 and 100)
+        { frame: "wing", a: [11.4, 19], b: [37.5, 19], doors: [[9.4, 12.4], [13.9, 16.9]] },
+        // bedroom 101 closet
+        { frame: "wing", a: [14.5, 15.1], b: [20.4, 15.1], doors: [[1, 5]] },
+        { frame: "wing", a: [14.5, 15.1], b: [14.5, 19] },
+        { frame: "wing", a: [20.4, 15.1], b: [20.4, 19] },
+        // bedroom 100 closet
+        { frame: "wing", a: [24.6, 3.8], b: [33.4, 3.8], doors: [[2, 6.5]] },
+        { frame: "wing", a: [33.4, 0.3], b: [33.4, 3.8] },
+        // hallway 103 / bathroom 105 (bath door)
+        { frame: "wing", a: [15.6, 23.5], b: [29.2, 23.5], doors: [[6.6, 9.1]] },
+        // hall side of the WC and powder room
+        { frame: "wing", a: [15.6, 23.5], b: [15.6, 36] },
+        { frame: "wing", a: [15.6, 28.5], b: [20.8, 28.5] },
+        { frame: "wing", a: [20.8, 23.5], b: [20.8, 36], doors: [[0.6, 3.1]] },
+        // powder room 106 door to the south hall
+        { frame: "wing", a: [15.6, 36], b: [24, 36], doors: [[1.2, 3.7]] },
+        // bathroom east wall (play room built-in on the other side)
+        { frame: "wing", a: [29.2, 23.5], b: [29.2, 39.2], doors: [[13, 15]] },
+        // bath / toy closet
+        { frame: "wing", a: [20.8, 35.5], b: [29.2, 35.5] },
+        { frame: "wing", a: [24, 35.5], b: [24, 39.2] },
+        // laundry 107 south wall (shelf / built-in) and the garage demising wall
+        { frame: "wing", a: [3.6, 32], b: [11.4, 32], doors: [[4.6, 7.2]] },
+        { frame: "plan", a: [4.6, -27.9], b: [31.1, -27.9], doors: [[8.9, 11.9]], fire: true },
+        // laundry / hallway 108
+        { frame: "plan", a: [15.2, -27.9], b: [15.2, -30.0] },
+      ],
+      rooms: [
+        { name: "Bedroom 101", frame: "wing", finish: "carpet", poly: [[11.4, 0], [24.6, 0], [24.6, 19], [11.4, 19]] },
+        { name: "Bedroom 100", frame: "wing", finish: "carpet", poly: [[24.6, 0], [37.5, 0], [37.5, 19], [24.6, 19]] },
+        { name: "Hallway 103", frame: "wing", finish: "wood", at: [13.5, 29], poly: [[11.4, 19], [31.5, 19], [31.5, 23.5], [15.6, 23.5], [15.6, 36], [24, 36], [24, 39.4], [11.4, 39.4]] },
+        { name: "Bathroom 105", frame: "wing", finish: "tile", at: [24.5, 27], poly: [[15.6, 23.5], [29.2, 23.5], [29.2, 35.5], [20.8, 35.5], [20.8, 28.5], [15.6, 28.5]] },
+        { name: "Powder room 106", frame: "wing", finish: "tile", at: [18.2, 33.5], poly: [[15.6, 28.5], [20.8, 28.5], [20.8, 36], [15.6, 36]] },
+        { name: "Toy closet", frame: "wing", finish: "wood", poly: [[24, 35.5], [29.2, 35.5], [29.2, 39.4], [24, 39.4]] },
+        { name: "Play room 104", frame: "wing", finish: "wood", poly: [[31.5, 19], [37.5, 19], [37.5, 18], [47.4, 18], [47.4, 39.4], [29.2, 39.4], [29.2, 23.5], [31.5, 23.5]] },
+        { name: "Shop area (garage level on the plans)", frame: "wing", finish: "rubber", poly: [[0.3, 0], [11.4, 0], [11.4, 23.66], [0.3, 31.9]] },
+        { name: "Laundry 107", frame: "plan", finish: "tile", poly: [[4.6, -27.9], [15.2, -27.9], [15.2, -30.0], [15.5, -30.2], [9.6, -34.6]] },
+        { name: "Hallway 108", frame: "wing", finish: "tile", at: [6, 36.5], poly: [[0.3, 31.9], [3.6, 30.3], [3.6, 32], [11.4, 32], [11.4, 39.4], [0.3, 39.4]] },
+      ],
+      fixtures: [
+        { label: "Double vanity", frame: "wing", box: [[27.2, 24.2], [29.0, 28.8]], h: 2.8, color: "#e8e2d6" },
+        { label: "Shower", frame: "wing", box: [[23.5, 31], [28.5, 35.3]], h: 7, glass: true },
+        { label: "Toilet", frame: "wing", box: [[17.7, 25.6], [19.3, 27.9]], h: 1.4, color: "#f4f2ee" },
+        { label: "Toilet", frame: "wing", box: [[17.7, 29.8], [19.3, 32.1]], h: 1.4, color: "#f4f2ee" },
+        { label: "Entertainment center / wet bar (built-in)", frame: "wing", box: [[29.4, 24.2], [31.4, 35]], h: 7, color: "#7b5a3c" },
+        { label: "Washer & dryer", frame: "plan", box: [[8.7, -28.2], [13.6, -30.4]], h: 3.2, color: "#e9e9e6" },
+        { label: "Steps down to the garage (5 risers)", frame: "plan", box: [[13.3, -24.6], [16.7, -27.7]], h: 0, steps: 5, color: "#9c9a94" },
+      ],
     },
   },
 

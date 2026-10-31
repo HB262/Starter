@@ -940,6 +940,10 @@ $$("[data-view]").forEach((b) => b.addEventListener("click", () => modelView?.se
 $$("[data-ptz]").forEach((b) => b.addEventListener("click", () => modelView?.nudge(b.dataset.ptz)));
 $("#opt-existing").onchange = (e) => modelView?.set({ showExisting: e.target.checked });
 $("#opt-xray").onchange = (e) => modelView?.set({ xray: e.target.checked });
+$("#opt-interior").onchange = (e) => {
+  modelView?.set({ interior: e.target.checked });
+  modelView?.setView(e.target.checked ? "inside" : "3d");
+};
 
 // ── Data tab ───────────────────────────────────────────────────────────────
 
