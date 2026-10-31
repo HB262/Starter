@@ -464,10 +464,13 @@ function renderGantt() {
   const rows = [];
   const phases = [...new Set(tasks.map((t) => t.phase || "Other"))];
   for (const ph of phases) {
-    rows.push({ phase: ph });
-    for (const t of tasks) if ((t.phase || "Other") === ph) rows.push({ task: t });
+    const members = tasks.filter((t) => (t.phase || "Other") === ph);
+    rows.push({ phase: ph, members });
+    if (!collapsedPhases.has(ph)) for (const t of members) rows.push({ task: t });
   }
   const H = headH + rows.length * rowH + 8;
+  const allClosed = phases.every((p) => collapsedPhases.has(p));
+  $("#gantt-all").textContent = allClosed ? "Expand all" : "Collapse all";
   const X = (d) => calendarDays(start, d) * dayW;
   const rowY = new Map();
 
@@ -494,12 +497,25 @@ function renderGantt() {
   rows.forEach((row, i) => {
     const y = headH + i * rowH;
     if (row.phase) {
-      labels += `<text class="lbl-phase" x="10" y="${y + rowH - 9}">${esc(row.phase)}</text>`;
+      const closed = collapsedPhases.has(row.phase);
+      const pr = row.members.map((t) => sched.get(t.id)).filter(Boolean);
+      const done = row.members.filter((t) => Number(t.progress) >= 100).length;
+      labels += `<g class="row phase" data-phase="${esc(row.phase)}" role="button" tabindex="0" aria-expanded="${!closed}"><rect class="rowbg" x="0" y="${y}" width="${labelW}" height="${rowH}"/>` +
+        `<text class="chev" x="10" y="${y + rowH - 9}">${closed ? "▸" : "▾"}</text><text class="lbl-phase" x="24" y="${y + rowH - 9}">${esc(row.phase)}</text>` +
+        (closed ? `<text class="tick" x="${labelW - 8}" y="${y + rowH - 9}" text-anchor="end">${done}/${row.members.length}</text>` : "") + `</g>`;
+      if (pr.length) {
+        // phase span: a thin summary bar, thicker when collapsed
+        const ps = new Date(Math.min(...pr.map((r) => +r.start))), pe = new Date(Math.max(...pr.map((r) => +r.end)));
+        const sx = X(ps), sw = Math.max(3, X(addEnd(pe)) - sx), h = closed ? 10 : 4;
+        const tip = esc(`<strong>${esc(row.phase)}</strong><br>${fmtLong(ps)} – ${fmtLong(pe)}<br>${done} of ${row.members.length} tasks done`);
+        bars += `<g class="row phase" data-phase="${esc(row.phase)}" data-tip="${tip}"><rect class="rowbg" x="0" y="${y}" width="${W}" height="${rowH}"/><rect class="phase-bar" x="${sx}" y="${y + rowH / 2 - h / 2 + 2}" width="${sw}" height="${h}" rx="2"/></g>`;
+      }
+      if (closed) for (const t of row.members) rowY.set(t.id, { y, phase: row.phase });
       return;
     }
     const t = row.task, r = sched.get(t.id);
     if (!r) return;
-    rowY.set(t.id, y);
+    rowY.set(t.id, { y });
     const name = narrow && t.name.length > 20 ? t.name.slice(0, 19) + "…" : t.name;
     labels += `<g class="row" data-task="${esc(t.id)}"><rect class="rowbg" x="0" y="${y}" width="${labelW}" height="${rowH}"/><text class="lbl" x="18" y="${y + rowH / 2 + 4}">${esc(name)}</text></g>`;
 
@@ -537,11 +553,13 @@ function renderGantt() {
 
   // dependency connectors
   for (const t of tasks) {
-    const r = sched.get(t.id), y = rowY.get(t.id);
-    if (!r || y == null) continue;
+    const r = sched.get(t.id), ty = rowY.get(t.id);
+    if (!r || !ty) continue;
+    const y = ty.phase ? ty.y - 4 : ty.y;
     for (const dep of t.dependsOn || []) {
-      const dr = sched.get(dep), dy = rowY.get(dep);
-      if (!dr || dy == null) continue;
+      const dr = sched.get(dep), dyr = rowY.get(dep);
+      if (!dr || !dyr || (ty.phase && ty.phase === dyr.phase)) continue;
+      const dy = dyr.phase ? dyr.y - 4 : dyr.y;
       const x1 = X(addEnd(dr.end)), y1 = dy + 13, x2 = X(r.startDelay ? r.earliest : r.start), y2 = y + 13;
       const xm = Math.max(x1 + 4, Math.min(x2 - 4, x1 + 8));
       deps += `<path class="dep" d="M${x1} ${y1} H${xm} V${y2} H${x2 - 1}"/>`;
@@ -571,10 +589,32 @@ function renderGantt() {
 }
 const addEnd = (d) => new Date(d.getTime() + 86400000); // bar runs through the end day
 
+// Collapsed phases are a per-viewer preference, kept in this browser.
+const COLLAPSE_KEY = "addition-tracker:gantt-collapsed";
+const collapsedPhases = new Set((() => { try { return JSON.parse(localStorage.getItem(COLLAPSE_KEY)) || []; } catch { return []; } })());
+function togglePhase(ph) {
+  collapsedPhases.has(ph) ? collapsedPhases.delete(ph) : collapsedPhases.add(ph);
+  try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...collapsedPhases])); } catch {}
+  renderGantt();
+}
 $("#gantt").addEventListener("click", (e) => {
+  const ph = e.target.closest("[data-phase]");
+  if (ph) return togglePhase(ph.dataset.phase);
   const g = e.target.closest("[data-task]");
   if (g) editTask(g.dataset.task);
 });
+$("#gantt").addEventListener("keydown", (e) => {
+  const ph = e.target.closest?.("[data-phase]");
+  if (ph && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); togglePhase(ph.dataset.phase); }
+});
+$("#gantt-all").onclick = () => {
+  const phases = [...new Set(state.tasks.map((t) => t.phase || "Other"))];
+  const collapse = collapsedPhases.size < phases.length;
+  collapsedPhases.clear();
+  if (collapse) phases.forEach((p) => collapsedPhases.add(p));
+  try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...collapsedPhases])); } catch {}
+  renderGantt();
+};
 $("#add-task").onclick = () => editTask(null);
 let ganttZoom = "fit";
 $$("[data-zoom]").forEach((b) => b.addEventListener("click", () => {

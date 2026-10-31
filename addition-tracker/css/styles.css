@@ -209,6 +209,9 @@ main { max-width: 1200px; margin: 0 auto; padding: 16px; }
 .gantt { overflow-x: auto; border: 1px solid var(--grid); border-radius: 8px; }
 .gantt svg { display: block; font: 12px system-ui, -apple-system, "Segoe UI", sans-serif; }
 .gantt .lbl { fill: var(--ink); }
+.gantt .chev { fill: var(--muted); font-size: 11px; }
+.gantt .phase-bar { fill: var(--series-base); }
+.gantt .phase:focus-visible { outline: 2px solid var(--series-actual); outline-offset: -2px; }
 .gantt .lbl-phase { fill: var(--ink-2); font-weight: 600; font-size: 11px; letter-spacing: 0.02em; text-transform: uppercase; }
 .gantt .tick { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
 .gantt .gridline { stroke: var(--grid); }

@@ -128,10 +128,11 @@
           <div class="row gap">
             <div class="legend"><span class="key key-actual"></span>Scheduled <span class="key key-done"></span>Done <span class="key key-base"></span>Original plan <span class="key key-delay"></span>Delay</div>
             <div class="seg" role="group" aria-label="Zoom"><button data-zoom="fit" aria-pressed="true">Whole job</button><button data-zoom="build" aria-pressed="false">Construction</button><button data-zoom="weeks" aria-pressed="false">Weeks</button></div>
+            <button class="btn" id="gantt-all">Collapse all</button>
             <button class="btn" id="add-task">Add task</button>
           </div>
         </div>
-        <p class="muted small">Click a task to update progress or record a delay. Delays push that task and every task that depends on it. Durations are working days (Mon–Fri). Permitting steps are pinned to their actual dates.</p>
+        <p class="muted small">Click a phase heading to collapse or expand it. Click a task to update progress or record a delay. Delays push that task and every task that depends on it. Durations are working days (Mon–Fri). Permitting steps are pinned to their actual dates.</p>
         <div id="gantt" class="gantt"></div>
       </div>
     </section>
