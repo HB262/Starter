@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Addition Tracker</title>
+  <title>Columbine Addition Tracker</title>
   <link rel="stylesheet" href="css/styles.css" />
   <script type="importmap">
     {
@@ -26,6 +26,7 @@
       <button role="tab" data-tab="budget">Budget</button>
       <button role="tab" data-tab="schedule">Schedule</button>
       <button role="tab" data-tab="permit">Permit</button>
+      <button role="tab" data-tab="docs">Documents</button>
       <button role="tab" data-tab="log">Log</button>
       <button role="tab" data-tab="data">Data</button>
     </nav>
@@ -103,6 +104,12 @@
         <div id="budget-chart"></div>
       </div>
       <div class="card">
+        <div class="card-head"><h2>Contract payments · On Point Saliency</h2><button class="btn" id="add-change-order">Add change order</button></div>
+        <p class="muted small">The payment schedule from the Fixed Price Construction Agreement (Section 6). Click a payment to mark it due or paid; paying one adds it to Expenses. Payments not made within 10 days of the due date accrue interest. Change orders: 50% is due when signed. The $20,000 contingency reserve stays with you and is drawn only for unforeseen conditions.</p>
+        <div class="tiles" id="payment-tiles"></div>
+        <div class="table-wrap"><table class="table" id="payment-table"></table></div>
+      </div>
+      <div class="card">
         <div class="card-head"><h2>Line items</h2><button class="btn" id="add-line">Add line item</button></div>
         <div class="table-wrap"><table class="table" id="budget-table"></table></div>
       </div>
@@ -120,11 +127,11 @@
           <h2>Gantt chart</h2>
           <div class="row gap">
             <div class="legend"><span class="key key-actual"></span>Scheduled <span class="key key-done"></span>Done <span class="key key-base"></span>Original plan <span class="key key-delay"></span>Delay</div>
-            <div class="seg" role="group" aria-label="Zoom"><button data-zoom="fit" aria-pressed="true">Whole job</button><button data-zoom="weeks" aria-pressed="false">Weeks</button></div>
+            <div class="seg" role="group" aria-label="Zoom"><button data-zoom="fit" aria-pressed="true">Whole job</button><button data-zoom="build" aria-pressed="false">Construction</button><button data-zoom="weeks" aria-pressed="false">Weeks</button></div>
             <button class="btn" id="add-task">Add task</button>
           </div>
         </div>
-        <p class="muted small">Click a task to update progress or record a delay. Delays push that task and every task that depends on it. Durations are working days (Mon–Fri).</p>
+        <p class="muted small">Click a task to update progress or record a delay. Delays push that task and every task that depends on it. Durations are working days (Mon–Fri). Permitting steps are pinned to their actual dates.</p>
         <div id="gantt" class="gantt"></div>
       </div>
     </section>
@@ -149,6 +156,18 @@
         </div>
         <p class="muted small">The usual Arapahoe County residential inspections. Check them against the permit card and the inspection list in the county portal. Click one to record a date or result; results can be added to the log.</p>
         <div class="table-wrap"><table class="table" id="inspection-table"></table></div>
+      </div>
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section id="tab-docs" class="tab">
+      <div class="card">
+        <div class="card-head">
+          <h2>Project documents</h2>
+          <div class="row gap"><input id="doc-search" type="search" placeholder="Search documents" aria-label="Search documents" /></div>
+        </div>
+        <p class="muted small">The signed construction contract, plus everything submitted to Arapahoe County under BLD-2024-01595, grouped by submittal. The newest submittals are current; older ones are kept for reference. Click a document to open the PDF.</p>
+        <div id="doc-list"></div>
       </div>
     </section>
 

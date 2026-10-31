@@ -24,7 +24,7 @@ export default {
     permit: "BLD-2024-01595 (Arapahoe County)",
     architect: "GMH Ltd. (Brian Ostler)",
     structural: "Denver Structures (Joel Kauffman, PE)",
-    contractor: "TBD",
+    contractor: "On Point Saliency (Rod Cruce), Class-B GEN25-0096, (720) 969-6061",
     startDate: "2026-11-16", // PLACEHOLDER: first working day on site
   },
 
@@ -206,6 +206,15 @@ export default {
     { id: "e3", date: "2026-02-06", budgetId: "b-permits", amount: 4200, vendor: "Arapahoe County (PLACEHOLDER amount)", note: "Building permit BLD-2024-01595" },
   ],
 
+  // ── Contract payments (Fixed Price Construction Agreement, Section 6) ────
+  payments: [
+    { id: "pay-1", kind: "draw", name: "Initial payment", trigger: "Before sitework begins", covers: "Sitework, demolition, excavation, utilities, foundation, and procurement package 1 (steel, framing & trusses, windows & doors, timber, roof).", amount: 250000, status: "Paid", dueDate: "", paidDate: "2026-08-26", note: "", expenseId: "" },
+    { id: "pay-2", kind: "draw", name: "1st progress payment", trigger: "After the foundation is poured", covers: "Framing, roofing, exterior siding finishes, and procurement package 2 (brick, stained Hardie siding & trim, drywall, interior materials).", amount: 250000, status: "Upcoming", dueDate: "", paidDate: "", note: "", expenseId: "" },
+    { id: "pay-3", kind: "draw", name: "2nd progress payment", trigger: "After drywall and interior painting", covers: "MEP rough-ins, insulation, painting, flooring, and procurement package 3 (electrical & plumbing fixtures, cabinetry, hardware).", amount: 150000, status: "Upcoming", dueDate: "", paidDate: "", note: "", expenseId: "" },
+    { id: "pay-4", kind: "draw", name: "3rd progress payment", trigger: "Before hardwood sand-and-finish", covers: "MEP trim-outs, hardware installation, and final finishes.", amount: 150000, status: "Upcoming", dueDate: "", paidDate: "", note: "", expenseId: "" },
+    { id: "pay-5", kind: "draw", name: "Final payment", trigger: "After final inspection and completion", covers: "Due once the final inspection passes; punch-list items may be held back until done.", amount: 42852.12, status: "Upcoming", dueDate: "", paidDate: "", note: "", expenseId: "" },
+  ],
+
   // ── Schedule (PLACEHOLDER durations) ─────────────────────────────────────
   // `duration` is in working days. A task starts the working day after all of
   // its `dependsOn` tasks finish (or on the project start date if none).
@@ -214,7 +223,18 @@ export default {
   //   "start"  = task starts later (e.g. waiting on an inspection)
   //   "extend" = task takes longer (e.g. snow days mid-task)
   tasks: [
-    { id: "demo",        name: "Demolition & site prep",              phase: "Site & foundation", duration: 8,  dependsOn: [],                          progress: 0, delays: [] },
+    // Permitting: pinned to actual dates (`startDate`/`endDate`). `permitField` steps follow the Permit tab's dates.
+    {"id": "p-soils", "name": "Soils & foundation report (Kordziel)", "phase": "Permitting", "startDate": "2023-01-25", "duration": 1, "milestone": true, "dependsOn": [], "progress": 100, "delays": [], "note": "Kordziel Engineering #2599. Needed for the permit submittal."},
+    {"id": "p-apply", "name": "Permit application submitted", "phase": "Permitting", "startDate": "2024-12-02", "permitField": "applied", "duration": 1, "milestone": true, "dependsOn": ["p-soils"], "progress": 100, "delays": [], "note": "PLACEHOLDER date: the permit number shows a 2024 application. Enter the real date on the Permit tab."},
+    {"id": "p-review1", "name": "Plan review 1 → resubmittal with narrative", "phase": "Permitting", "startDate": "2024-12-03", "endDate": "2025-03-10", "duration": 1, "dependsOn": ["p-apply"], "progress": 100, "delays": [], "note": "Ends with GMH's written narrative (3/10/2025): EV charger dropped, lofts and gas fireplace deleted, metal roof."},
+    {"id": "p-asbestos", "name": "CDPHE asbestos release", "phase": "Permitting", "startDate": "2025-03-17", "duration": 1, "milestone": true, "dependsOn": [], "progress": 100, "delays": [], "note": "Released by email after the Ascend Environmental inspection."},
+    {"id": "p-review2", "name": "Plan review 2 → rev 3 drawings", "phase": "Permitting", "startDate": "2025-03-11", "endDate": "2025-06-24", "duration": 1, "dependsOn": ["p-review1"], "progress": 100, "delays": [], "note": "County redlines 4/29/2025; GMH response 6/15 and rev 3 set signed 6/24/2025."},
+    {"id": "p-review3", "name": "Plan review 3 → corrections", "phase": "Permitting", "startDate": "2025-06-25", "endDate": "2025-09-12", "duration": 1, "dependsOn": ["p-review2"], "progress": 100, "delays": [], "note": "County redlines 9/11/2025; A1.2, AD4, S3, A4.0–A4.1 resubmitted 9/12."},
+    {"id": "p-approved", "name": "Final review → Ready for Construction set", "phase": "Permitting", "startDate": "2025-09-15", "endDate": "2026-02-06", "duration": 1, "dependsOn": ["p-review3"], "progress": 100, "delays": [], "note": "Ready for Construction set issued 2/6/2026."},
+    {"id": "p-contractor", "name": "Contractor information form filed", "phase": "Permitting", "startDate": "2026-05-28", "duration": 1, "milestone": true, "dependsOn": ["p-approved"], "progress": 100, "delays": [], "note": "On Point Saliency (GC), Walk on Water Plumbing; electrical and mechanical subs TBD."},
+    {"id": "p-contract", "name": "Construction contract signed", "phase": "Permitting", "startDate": "2026-08-23", "duration": 1, "milestone": true, "dependsOn": ["p-contractor"], "progress": 100, "delays": [], "note": "Fixed Price Construction Agreement with On Point Saliency."},
+    {"id": "p-issued", "name": "Permit issued", "phase": "Permitting", "startDate": "2026-09-23", "permitField": "issued", "duration": 1, "milestone": true, "dependsOn": ["p-approved", "p-contractor"], "progress": 100, "delays": [], "note": "PLACEHOLDER date: enter the issue date on the Permit tab and this moves to match."},
+    { id: "demo",        name: "Demolition & site prep",              phase: "Site & foundation", duration: 8,  dependsOn: ["p-issued", "p-contract"],                          progress: 0, delays: [] },
     { id: "excavation",  name: "Excavation for basement & crawl",     phase: "Site & foundation", duration: 5,  dependsOn: ["demo"],                    progress: 0, delays: [] },
     { id: "foundation",  name: "Footings, basement walls & garage slab", phase: "Site & foundation", duration: 15, dependsOn: ["excavation"],          progress: 0, delays: [] },
     { id: "insp-fdn",    name: "Foundation inspection",               phase: "Site & foundation", duration: 1,  dependsOn: ["foundation"],              progress: 0, delays: [], milestone: true },

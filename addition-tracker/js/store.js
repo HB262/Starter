@@ -14,7 +14,7 @@ import seed from "../data/project-data.js";
 
 const STATE_KEY = "addition-tracker:state:v1";
 const SEED_KEY = "addition-tracker:seed-hash:v1";
-const COLLECTIONS = ["budget", "expenses", "tasks", "events"];
+const COLLECTIONS = ["budget", "expenses", "tasks", "events", "payments"];
 
 const listeners = new Set();
 let state = null;
@@ -53,7 +53,7 @@ export function load() {
       project: { name: seed.project.name, address: "", startDate: seed.project.startDate },
       model: clone(seed.model),
       permit: null,
-      budget: [], expenses: [], tasks: [], events: [],
+      budget: [], expenses: [], tasks: [], events: [], payments: [],
     };
     connectCloud();
     return state;
@@ -64,6 +64,7 @@ export function load() {
   }
   if (!state) state = clone(seed);
   if (!state.permit) state.permit = clone(seed.permit);
+  if (!state.payments) state.payments = clone(seed.payments || []);
   return state;
 }
 

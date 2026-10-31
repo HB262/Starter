@@ -1,4 +1,5 @@
 import * as store from "./store.js";
+import DOCS from "../data/documents.js";
 import {
   computeSchedule, summarize, parseDate, fmtISO, fmtShort, fmtLong, todayUTC,
   addWorkdays, calendarDays,
@@ -148,9 +149,18 @@ function budgetRows() {
   return { rows, cats, totalBudget, totalActual, projected, unassigned };
 }
 
+// Permitting steps tied to a permit field (`permitField: "applied" | "issued"`)
+// take their date from the Permit tab once it's filled in.
+function scheduleTasks() {
+  return state.tasks.map((t) => {
+    const d = t.permitField && state.permit?.[t.permitField];
+    return d ? { ...t, startDate: d, endDate: "" } : t;
+  });
+}
+
 function recompute() {
   try {
-    sched = computeSchedule(state.tasks, state.project.startDate);
+    sched = computeSchedule(scheduleTasks(), state.project.startDate);
   } catch (err) {
     toast(err.message, "bad");
     sched = new Map();
@@ -170,6 +180,7 @@ function renderOverview() {
     tile("Projected cost", money(b.projected), over > 0 ? `<span class="status bad">▲ ${money(over)} over budget</span>` : `<span class="status good">✓ On budget</span>`),
     tile("Construction progress", pct(s.percent), `weighted by task duration`),
     tile("Projected finish", s.finish ? fmtLong(s.finish) : "–", s.slip > 0 ? `<span class="status bad">▲ ${plural(s.slip, "working day")} late</span>` : `<span class="status good">✓ On original schedule</span>`),
+    ...(paymentSummary().draws.length ? [(() => { const p = paymentSummary(); return tile("Next contractor payment", p.next ? money(p.next.amount) : "–", p.next ? `${payStatusPill(p.next)} ${esc(p.next.trigger || p.next.name)}` : `<span class="status good">✓ All paid</span>`); })()] : []),
     ...(state.permit ? [(() => { const c = inspectionCounts(state.permit); return tile("Permit inspections", `${c.passed} of ${c.total}`, `<button class="link" data-goto="permit">${esc(state.permit.number || "Permit")} →</button>`); })()] : []),
   ].join("");
 
@@ -234,12 +245,12 @@ function renderBudget() {
     </tbody>
     <tfoot><tr><td>Total</td><td class="num">${money(b.totalBudget)}</td><td class="num">${money(b.totalActual)}</td><td class="num">${variance(b.totalBudget, b.totalActual)}</td><td>${meter(b.totalBudget, b.totalActual)}</td></tr></tfoot>`;
 
-  const lineName = (id) => state.budget.find((x) => x.id === id)?.item || "Contractor draw (not split by line)";
+  const lineName = (id, e) => state.budget.find((x) => x.id === id)?.item || (e?.paymentId ? "Contract payment" : "Contractor draw (not split by line)");
   const exp = [...state.expenses].sort((a, c) => c.date.localeCompare(a.date));
   $("#expense-table").innerHTML = exp.length
     ? `<thead><tr><th>Date</th><th>Vendor</th><th>Budget line</th><th>Note</th><th class="num">Amount</th></tr></thead>
        <tbody>${exp.map((e) => `<tr class="click" data-expense="${esc(e.id)}">
-         <td>${fmtShort(parseDate(e.date))} ${parseDate(e.date).getUTCFullYear()}</td><td>${esc(e.vendor)}</td><td>${esc(lineName(e.budgetId))}</td>
+         <td>${fmtShort(parseDate(e.date))} ${parseDate(e.date).getUTCFullYear()}</td><td>${esc(e.vendor)}</td><td>${esc(lineName(e.budgetId, e))}</td>
          <td class="muted">${esc(e.note)}</td><td class="num">${money(e.amount)}</td></tr>`).join("")}</tbody>`
     : `<tbody><tr><td class="empty">No expenses yet.</td></tr></tbody>`;
 }
@@ -309,6 +320,110 @@ function editExpense(id) {
   });
 }
 
+// ── Contract payments ──────────────────────────────────────────────────────────
+// `payments`: { id, kind: "draw" | "change", name, trigger, covers, amount,
+//   status: "Upcoming" | "Due" | "Paid", dueDate, paidDate, note, expenseId }
+
+const PAY_STATUSES = ["Upcoming", "Due", "Paid"];
+const PAY_GRACE_DAYS = 10; // contract Section 6: interest starts 10 days after due
+
+function paymentSummary() {
+  const draws = state.payments || [];
+  const sum = (xs) => xs.reduce((s, x) => s + Number(x.amount || 0), 0);
+  const total = sum(draws);
+  const paid = sum(draws.filter((x) => x.status === "Paid"));
+  const next = draws.find((x) => x.status === "Due") || draws.find((x) => x.status !== "Paid");
+  return { draws, total, paid, next, changeTotal: sum(draws.filter((x) => x.kind === "change")) };
+}
+
+function isLate(p) {
+  if (p.status !== "Due" || !p.dueDate) return false;
+  return calendarDays(parseDate(p.dueDate), todayUTC()) > PAY_GRACE_DAYS;
+}
+
+function payStatusPill(p) {
+  if (isLate(p)) return `<span class="pill failed">Late</span>`;
+  const cls = p.status === "Paid" ? "passed" : p.status === "Due" ? "scheduled" : "";
+  return `<span class="pill ${cls}">${p.status === "Paid" ? "✓ " : ""}${esc(p.status || "Upcoming")}</span>`;
+}
+
+function renderPayments() {
+  const s = paymentSummary();
+  if (!s.draws.length) {
+    $("#payment-tiles").innerHTML = "";
+    $("#payment-table").innerHTML = `<tbody><tr><td class="empty">${store.cloud.status === "connecting" ? "Loading payments…" : "No contract payments yet."}</td></tr></tbody>`;
+    return;
+  }
+  $("#payment-tiles").innerHTML = [
+    tile("Contract total", money(s.total), s.changeTotal ? `incl. ${money(s.changeTotal)} in change orders` : "no change orders yet"),
+    tile("Paid", money(s.paid), `${pct(s.total ? (s.paid / s.total) * 100 : 0)} of contract`),
+    tile("Left to pay", money(s.total - s.paid), `${s.draws.filter((x) => x.status !== "Paid").length} payments`),
+    tile("Next payment", s.next ? money(s.next.amount) : "–", s.next ? `${payStatusPill(s.next)} ${esc(s.next.trigger || "")}` : `<span class="status good">✓ All paid</span>`),
+  ].join("");
+  let n = 0;
+  $("#payment-table").innerHTML = `
+    <thead><tr><th>Payment</th><th>Due when</th><th>Status</th><th>Date</th><th class="num">Amount</th></tr></thead>
+    <tbody>${s.draws.map((p) => `<tr class="click" data-payment="${esc(p.id)}">
+      <td><strong>${p.kind === "change" ? "CO · " : `${++n}. `}${esc(p.name)}</strong>${p.covers ? `<br><span class="muted small">${esc(p.covers)}</span>` : ""}</td>
+      <td>${esc(p.trigger || "")}</td>
+      <td>${payStatusPill(p)}</td>
+      <td class="num">${p.status === "Paid" && p.paidDate ? `Paid ${fmtShort(parseDate(p.paidDate))}` : p.dueDate ? `Due ${fmtShort(parseDate(p.dueDate))}` : "—"}</td>
+      <td class="num">${money(p.amount)}</td></tr>`).join("")}</tbody>
+    <tfoot><tr><td>Total</td><td></td><td></td><td class="num">${money(s.paid)} paid</td><td class="num">${money(s.total)}</td></tr></tfoot>`;
+}
+
+$("#payment-table").addEventListener("click", (e) => {
+  const tr = e.target.closest("[data-payment]");
+  if (tr) editPayment(tr.dataset.payment);
+});
+$("#add-change-order").onclick = () => editPayment(null);
+
+function editPayment(id) {
+  const p = (state.payments || []).find((x) => x.id === id) || { kind: "change", name: "Change order", trigger: "50% at signing, rest with later draws", covers: "", amount: "", status: "Due", dueDate: fmtISO(todayUTC()), paidDate: "", note: "" };
+  const wasPaid = p.status === "Paid";
+  openDialog({
+    title: id ? p.name : "Add change order",
+    body: `<div class="form-grid">
+      <label class="f full">Name<input name="name" required value="${esc(p.name)}"></label>
+      <label class="f full">Due when<input name="trigger" value="${esc(p.trigger || "")}"></label>
+      <label class="f full">Covers<textarea name="covers" style="min-height:60px">${esc(p.covers || "")}</textarea></label>
+      <label class="f">Amount ($)<input name="amount" type="number" step="0.01" min="0" required value="${esc(p.amount)}"></label>
+      <label class="f">Status<select name="status">${PAY_STATUSES.map((st) => `<option ${st === (p.status || "Upcoming") ? "selected" : ""}>${st}</option>`).join("")}</select></label>
+      <label class="f">Invoice / due date<input type="date" name="dueDate" value="${esc(p.dueDate || "")}"></label>
+      <label class="f">Paid on<input type="date" name="paidDate" value="${esc(p.paidDate || "")}"></label>
+      <label class="f full">Note (e.g. paid from which account)<input name="note" value="${esc(p.note || "")}"></label>
+      <label class="check full"><input type="checkbox" name="log" ${wasPaid ? "" : "checked"}> When marked paid, add it to the log</label>
+      <p class="full muted small" style="margin:0">Marking a payment paid adds it to Expenses as a contractor draw. Changing it back removes that expense.</p>
+    </div>`,
+    onSave: (fd) => {
+      const v = { name: fd.get("name").trim(), trigger: fd.get("trigger").trim(), covers: fd.get("covers").trim(), amount: Number(fd.get("amount")), status: fd.get("status"), dueDate: fd.get("dueDate"), paidDate: fd.get("paidDate"), note: fd.get("note").trim() };
+      if (v.status === "Paid" && !v.paidDate) v.paidDate = fmtISO(todayUTC());
+      store.update((s) => {
+        s.payments ||= [];
+        let rec = s.payments.find((x) => x.id === id);
+        if (!rec) { rec = { id: store.uid("pay"), kind: "change" }; s.payments.push(rec); }
+        Object.assign(rec, v);
+        if (v.status === "Paid") {
+          const ex = { date: v.paidDate, amount: v.amount, budgetId: "", vendor: "On Point Saliency", note: [v.name, v.note].filter(Boolean).join(". "), paymentId: rec.id };
+          const cur = rec.expenseId && s.expenses.find((x) => x.id === rec.expenseId);
+          if (cur) Object.assign(cur, ex);
+          else { rec.expenseId = store.uid("e"); s.expenses.push({ id: rec.expenseId, ...ex }); }
+          if (!wasPaid && fd.get("log") === "on") {
+            s.events.push({ id: store.uid("ev"), date: v.paidDate, type: "payment", title: `${v.name} to On Point Saliency: ${money(v.amount)}`, note: v.note, photos: [] });
+          }
+        } else if (rec.expenseId) {
+          s.expenses = s.expenses.filter((x) => x.id !== rec.expenseId);
+          rec.expenseId = "";
+        }
+      });
+    },
+    onDelete: id && p.kind === "change" ? () => store.update((s) => {
+      if (p.expenseId) s.expenses = s.expenses.filter((x) => x.id !== p.expenseId);
+      s.payments = s.payments.filter((x) => x.id !== id);
+    }) : null,
+  });
+}
+
 // ── Schedule / Gantt ───────────────────────────────────────────────────────
 
 function renderScheduleTiles() {
@@ -333,7 +448,7 @@ function renderGantt() {
   let min = null, max = null;
   for (const t of tasks) {
     const r = sched.get(t.id);
-    if (!r) continue;
+    if (!r || (ganttZoom === "build" && r.fixed)) continue;
     for (const d of [r.earliest, r.baseStart]) if (!min || d < min) min = d;
     for (const d of [r.end, r.baseEnd]) if (!max || d > max) max = d;
   }
@@ -342,7 +457,7 @@ function renderGantt() {
   const end = new Date(max.getTime() + 14 * 86400000);
   const days = calendarDays(start, end);
   const fitW = (el.clientWidth - labelW - 2) / days;
-  const dayW = ganttZoom === "fit" ? Math.max(3, fitW) : Math.max(narrow ? 9 : 13, fitW);
+  const dayW = ganttZoom === "weeks" ? Math.max(narrow ? 9 : 13, fitW) : Math.max(ganttZoom === "fit" ? 0.3 : 3, fitW);
   const W = Math.floor(days * dayW);
 
   // rows grouped by phase, phases in order of first appearance
@@ -361,13 +476,17 @@ function renderGantt() {
     const d = new Date(start.getTime() + i * 86400000);
     const dow = d.getUTCDay();
     if ((dow === 0 || dow === 6) && dayW >= 6) grid += `<rect class="weekend" x="${i * dayW}" y="${headH}" width="${dayW}" height="${H - headH}"/>`;
-    if (dow === 1 && (dayW >= 5 || Math.floor(i / 7) % 2 === 0)) {
+    if (dow === 1 && dayW >= 2.5 && (dayW >= 5 || Math.floor(i / 7) % 2 === 0)) {
       grid += `<line class="gridline" x1="${i * dayW}" x2="${i * dayW}" y1="${headH - 6}" y2="${H}"/>`;
       head += `<text class="tick" x="${i * dayW + 3}" y="${headH - 10}">${d.getUTCDate()}</text>`;
     }
     if (d.getUTCDate() === 1 || i === 0) {
-      head += `<text class="tick" x="${i * dayW + 3}" y="16" font-weight="600">${d.toLocaleDateString(undefined, { month: "short", year: "numeric", timeZone: "UTC" })}</text>`;
-      if (i) grid += `<line class="sep" x1="${i * dayW}" x2="${i * dayW}" y1="4" y2="${H}"/>`;
+      // Multi-year view: thin month lines, label every quarter, year on the second line.
+      const m = d.getUTCMonth();
+      const label = dayW >= 2.5 || m % 3 === 0 || i === 0;
+      if (label) head += `<text class="tick" x="${i * dayW + 3}" y="16" font-weight="600">${d.toLocaleDateString(undefined, { month: "short", ...(dayW >= 2.5 ? { year: "numeric" } : {}), timeZone: "UTC" })}</text>`;
+      if (dayW < 2.5 && (m === 0 || i === 0)) head += `<text class="tick" x="${i * dayW + 3}" y="${headH - 10}">${d.getUTCFullYear()}</text>`;
+      if (i) grid += `<line class="${dayW < 2.5 && m !== 0 ? "gridline" : "sep"}" x1="${i * dayW}" x2="${i * dayW}" y1="4" y2="${H}"/>`;
     }
   }
   grid += `<line class="sep" x1="0" x2="${W}" y1="${headH}" y2="${headH}"/>`;
@@ -386,7 +505,9 @@ function renderGantt() {
 
     const bx = X(r.start), bw = X(addEnd(r.end)) - bx;
     const by = y + 6, bh = 14;
-    const tip = esc(`<strong>${esc(t.name)}</strong><br>${fmtShort(r.start)} – ${fmtShort(r.end)} · ${plural(Number(t.duration) + r.extend, "working day")}<br>${t.progress || 0}% done` +
+    const tip = esc(`<strong>${esc(t.name)}</strong><br>` + (r.fixed
+      ? `${fmtLong(r.start)}${+r.end !== +r.start ? ` – ${fmtLong(r.end)}` : ""}${t.note ? `<br>${esc(t.note)}` : ""}`
+      : `${fmtShort(r.start)} – ${fmtShort(r.end)} · ${plural(Number(t.duration) + r.extend, "working day")}<br>${t.progress || 0}% done`) +
       (r.startDelay || r.extend ? `<br>Delays: ${r.startDelay ? `${r.startDelay}d start` : ""}${r.startDelay && r.extend ? ", " : ""}${r.extend ? `${r.extend}d longer` : ""}` : "") +
       (r.slip > 0 ? `<br><span style="color:var(--critical)">▲ ${r.slip} working days behind original plan</span>` : ""));
     let g = `<g class="row" data-task="${esc(t.id)}" data-tip="${tip}"><rect class="rowbg" x="0" y="${y}" width="${W}" height="${rowH}"/>`;
@@ -498,6 +619,10 @@ function editTask(id) {
       <label class="f">Phase<input name="phase" list="phases" value="${esc(t.phase || "")}"><datalist id="phases">${phases.map((p) => `<option value="${esc(p)}">`).join("")}</datalist></label>
       <label class="f">Duration (working days)<input name="duration" type="number" min="1" step="1" required value="${t.duration}"></label>
       <label class="check full"><input type="checkbox" name="milestone" ${t.milestone ? "checked" : ""}> Milestone or inspection</label>
+      <label class="f">Fixed start (optional)<input name="startDate" type="date" value="${esc(t.startDate || "")}"></label>
+      <label class="f">Fixed end (optional)<input name="endDate" type="date" value="${esc(t.endDate || "")}"></label>
+      <p class="full muted small" style="margin:0">${t.permitField ? `Uses the ${t.permitField} date from the Permit tab once it's filled in. ` : ""}Fixed dates are for steps that already happened, like permitting. They don't move with dependencies or delays.</p>
+      <label class="f full">Note<input name="note" value="${esc(t.note || "")}"></label>
       <fieldset class="full"><legend>Starts after</legend><div class="deps">${others.map((o) => `<label><input type="checkbox" name="dep" value="${esc(o.id)}" ${(t.dependsOn || []).includes(o.id) ? "checked" : ""}>${esc(o.name)}</label>`).join("") || `<span class="muted">No other tasks</span>`}</div></fieldset>
     </div>`,
     onOpen(form) {
@@ -516,7 +641,8 @@ function editTask(id) {
     },
     onSave(fd) {
       const deps = fd.getAll("dep");
-      const v = { name: fd.get("name").trim(), phase: fd.get("phase").trim(), duration: Number(fd.get("duration")), progress: Number(fd.get("progress")), milestone: fd.get("milestone") === "on", dependsOn: deps };
+      const v = { name: fd.get("name").trim(), phase: fd.get("phase").trim(), duration: Number(fd.get("duration")), progress: Number(fd.get("progress")), milestone: fd.get("milestone") === "on", dependsOn: deps,
+        startDate: fd.get("startDate") || "", endDate: fd.get("startDate") ? fd.get("endDate") || "" : "", note: fd.get("note").trim() };
       const tid = id || store.uid("t");
       // reject cycles
       const test = state.tasks.filter((x) => x.id !== tid).concat([{ ...t, ...v, id: tid, delays: [] }]);
@@ -827,6 +953,26 @@ async function renderStorageInfo() {
   $("#storage-info").textContent = txt;
 }
 
+
+// ── Documents tab ──────────────────────────────────────────────────────────
+
+const SLOT_LABEL = { 1: "Submittal 1 · initial application", 2: "Submittal 2 · first resubmittal", 3: "Submittal 3", 4: "Submittal 4 · rev 3 drawings", 5: "Submittal 5", 6: "Submittal 6 · September 2025 corrections", 7: "Submittal 7 · ready for construction", 8: "Submittal 8 · mechanical", 9: "Submittal 9 · contractor", 10: "Construction contract" };
+function renderDocs() {
+  const q = ($("#doc-search")?.value || "").trim().toLowerCase();
+  const list = DOCS.filter((d) => !q || `${d.title} ${d.kind} ${d.summary}`.toLowerCase().includes(q));
+  const slots = [...new Set(list.map((d) => d.slot))].sort((a, b) => b - a);
+  if (!list.length) { $("#doc-list").innerHTML = `<div class="empty">No documents match.</div>`; return; }
+  $("#doc-list").innerHTML = slots.map((sl) => `
+    <h3 class="doc-group">${esc(SLOT_LABEL[sl] || `Submittal ${sl}`)}${list.some((d) => d.slot === sl && d.current) ? ` <span class="pill passed">Current</span>` : ""}</h3>
+    <ul class="doc-list">${list.filter((d) => d.slot === sl).map((d) => `
+      <li><a class="doc" href="${esc(d.url)}" target="_blank" rel="noopener">
+        <span class="doc-icon" aria-hidden="true">PDF</span>
+        <span class="doc-main"><span class="doc-title">${esc(d.title)}</span><span class="doc-sum">${esc(d.summary)}</span></span>
+        <span class="doc-meta">${esc(d.kind)}${d.date ? `<br>${fmtLong(parseDate(d.date))}` : ""}<br>${plural(d.pages, "page")}</span>
+      </a></li>`).join("")}</ul>`).join("");
+}
+$("#doc-search").addEventListener("input", renderDocs);
+
 // ── Render all ─────────────────────────────────────────────────────────────
 
 function renderAll() {
@@ -837,10 +983,12 @@ function renderAll() {
   renderBanners();
   renderOverview();
   renderBudget();
+  renderPayments();
   renderScheduleTiles();
   renderGantt();
   renderPermit();
   renderLog();
+  renderDocs();
   renderProjectForm();
   renderStorageInfo();
   modelView?.update(state, progressByTask());

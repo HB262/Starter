@@ -54,6 +54,8 @@ const sumDelays = (t, kind) => (t.delays || []).filter((d) => d.kind === kind).r
 
 // Returns Map id → { start, end, baseStart, baseEnd, startDelay, extend, slip }
 // `end` is the last working day of the task (inclusive).
+// A task with `startDate` (and optionally `endDate`) is pinned to those dates,
+// e.g. permitting steps that already happened; dependencies and delays don't move it.
 export function computeSchedule(tasks, startDate) {
   const byId = new Map(tasks.map((t) => [t.id, t]));
   const out = new Map();
@@ -66,6 +68,14 @@ export function computeSchedule(tasks, startDate) {
     if (!t) return null;
     if (visiting.has(id)) throw new Error(`Circular dependency at "${t.name}"`);
     visiting.add(id);
+    if (t.startDate) {
+      const start = parseDate(t.startDate);
+      const end = t.endDate ? parseDate(t.endDate) : addWorkdays(start, Math.max(1, Number(t.duration) || 1) - 1);
+      const r = { earliest: start, start, end, baseStart: start, baseEnd: end, startDelay: 0, extend: 0, slip: 0, fixed: true };
+      visiting.delete(id);
+      out.set(id, r);
+      return r;
+    }
     let earliest = projectStart;
     let baseEarliest = projectStart;
     for (const dep of t.dependsOn || []) {
@@ -96,7 +106,7 @@ export function summarize(tasks, sched) {
   let finish = null, baseFinish = null, totalDur = 0, doneDur = 0, delayDays = 0;
   for (const t of tasks) {
     const r = sched.get(t.id);
-    if (!r) continue;
+    if (!r || r.fixed) continue; // pinned steps (permitting) aren't construction work
     if (!finish || r.end > finish) finish = r.end;
     if (!baseFinish || r.baseEnd > baseFinish) baseFinish = r.baseEnd;
     totalDur += Number(t.duration) || 0;
