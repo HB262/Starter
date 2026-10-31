@@ -101,6 +101,98 @@ function gableRoofGeometry(eave, eaveZ, pitch) {
   return { geo, ridgeZ: eaveZ + rise };
 }
 
+// One hip roof over any simple outline, every slope at the same pitch (the
+// straight-skeleton roof), so ridges run on through bends and tees and valleys
+// form at inside corners. Each edge's plane is limited to the strip between
+// the angle bisectors at its ends; the roof is the lowest such plane at each
+// point. The outline is cut into convex cells by every line where that choice
+// can change, and each cell is drawn on its winning plane.
+function skeletonRoofGeometry(eave, eaveZ, pitch) {
+  let P = eave.map(([x, y]) => [x, y]);
+  let area = 0;
+  for (let i = 0; i < P.length; i++) { const a = P[i], b = P[(i + 1) % P.length]; area += a[0] * b[1] - b[0] * a[1]; }
+  if (area < 0) P.reverse();
+  const n = P.length, k = pitch / 12, EPS = 1e-7;
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1]];
+  const norm = (a) => { const l = Math.hypot(a[0], a[1]) || 1; return [a[0] / l, a[1] / l]; };
+  // inward normal of edge i (P[i] → P[i+1]); interior is on the left of a CCW outline
+  const N = P.map((a, i) => { const b = P[(i + 1) % n]; return norm([-(b[1] - a[1]), b[0] - a[0]]); });
+  const bis = P.map((_, i) => norm([N[(i + n - 1) % n][0] + N[i][0], N[(i + n - 1) % n][1] + N[i][1]]));
+  // a half-plane is [a, b, c]: a·x + b·y + c >= 0
+  const hp = (nrm, pt) => [nrm[0], nrm[1], -dot(nrm, pt)];
+  const sideOf = (dir, at, keep) => { const l = [-dir[1], dir[0]]; return dot(l, sub(keep, at)) >= 0 ? hp(l, at) : hp([-l[0], -l[1]], at); };
+  const slabs = P.map((a, i) => {
+    const b = P[(i + 1) % n];
+    return [hp(N[i], a), sideOf(bis[i], a, b), sideOf(bis[(i + 1) % n], b, a)];
+  });
+  const inHp = (h, p) => h[0] * p[0] + h[1] * p[1] + h[2] >= -1e-6;
+  const height = (i, p) => eaveZ + k * dot(sub(p, P[i]), N[i]);
+  // every line where the winning plane can change
+  const lines = [];
+  for (const s of slabs) lines.push(...s);
+  for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+    const d = sub(N[i], N[j]);
+    if (Math.hypot(d[0], d[1]) < 1e-6) continue;
+    lines.push([d[0], d[1], -dot(N[i], P[i]) + dot(N[j], P[j])]);
+  }
+  const xs = P.map((p) => p[0]), ys = P.map((p) => p[1]);
+  const x0 = Math.min(...xs) - 1, x1 = Math.max(...xs) + 1, y0 = Math.min(...ys) - 1, y1 = Math.max(...ys) + 1;
+  let cells = [[[x0, y0], [x1, y0], [x1, y1], [x0, y1]]];
+  const clip = (poly, h) => {
+    const out = [];
+    for (let i = 0; i < poly.length; i++) {
+      const a = poly[i], b = poly[(i + 1) % poly.length];
+      const fa = h[0] * a[0] + h[1] * a[1] + h[2], fb = h[0] * b[0] + h[1] * b[1] + h[2];
+      if (fa >= -EPS) out.push(a);
+      if ((fa >= -EPS) !== (fb >= -EPS)) { const t = fa / (fa - fb); out.push([a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])]); }
+    }
+    return out;
+  };
+  const areaOf = (poly) => { let s = 0; for (let i = 0; i < poly.length; i++) { const a = poly[i], b = poly[(i + 1) % poly.length]; s += a[0] * b[1] - b[0] * a[1]; } return s / 2; };
+  for (const l of lines) {
+    const next = [];
+    for (const c of cells) {
+      const A = clip(c, l), B = clip(c, [-l[0], -l[1], -l[2]]);
+      if (A.length >= 3 && areaOf(A) > 1e-4) next.push(A);
+      if (B.length >= 3 && areaOf(B) > 1e-4) next.push(B);
+    }
+    cells = next;
+  }
+  const inside = (p) => {
+    let c = false;
+    for (let i = 0, j = n - 1; i < n; j = i++) {
+      const a = P[i], b = P[j];
+      if ((a[1] > p[1]) !== (b[1] > p[1]) && p[0] < ((b[0] - a[0]) * (p[1] - a[1])) / (b[1] - a[1]) + a[0]) c = !c;
+    }
+    return c;
+  };
+  const V3 = (p, z) => new THREE.Vector3(p[0], z, -p[1]);
+  const arr = [];
+  let top = eaveZ;
+  for (const c of cells) {
+    const m = [c.reduce((s, p) => s + p[0], 0) / c.length, c.reduce((s, p) => s + p[1], 0) / c.length];
+    if (!inside(m)) continue;
+    let best = -1, bz = Infinity;
+    for (let i = 0; i < n; i++) {
+      if (!slabs[i].every((h) => inHp(h, m))) continue;
+      const z = height(i, m);
+      if (z < bz) { bz = z; best = i; }
+    }
+    if (best < 0) continue;
+    const pts = c.map((p) => V3(p, height(best, p)));
+    for (const p of pts) top = Math.max(top, p.y);
+    for (let i = 1; i < pts.length - 1; i++) arr.push(pts[0].x, pts[0].y, pts[0].z, pts[i].x, pts[i].y, pts[i].z, pts[i + 1].x, pts[i + 1].y, pts[i + 1].z);
+  }
+  // soffit
+  const tri = THREE.ShapeUtils.triangulateShape(P.map((p) => new THREE.Vector2(p[0], p[1])), []);
+  for (const t of tri) for (const i of [t[0], t[2], t[1]]) { const v = V3(P[i], eaveZ - 0.05); arr.push(v.x, v.y, v.z); }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(arr, 3));
+  geo.computeVertexNormals();
+  return { geo, ridgeZ: top };
+}
+
 // A room name label: wide canvas, sized to the text.
 function labelSprite(text) {
   const cv = document.createElement("canvas");
@@ -397,7 +489,7 @@ export function createModelView(container, tooltipEl) {
 
     let top = 0;
     for (const r of model.roofs || []) {
-      const { geo, ridgeZ } = (r.type === "gable" ? gableRoofGeometry : hipRoofGeometry)(r.eave, r.eaveZ, r.pitch);
+      const { geo, ridgeZ } = (r.type === "gable" ? gableRoofGeometry : r.type === "outline" ? skeletonRoofGeometry : hipRoofGeometry)(r.eave, r.eaveZ, r.pitch);
       top = Math.max(top, ridgeZ);
       const isNew = r.kind === "new";
       const m = isNew

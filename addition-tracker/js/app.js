@@ -1,9 +1,9 @@
-import * as store from "./store.js?v=20261031c";
-import DOCS from "../data/documents.js?v=20261031c";
+import * as store from "./store.js?v=20261031d";
+import DOCS from "../data/documents.js?v=20261031d";
 import {
   computeSchedule, summarize, parseDate, fmtISO, fmtShort, fmtLong, todayUTC,
   addWorkdays, calendarDays,
-} from "./schedule.js?v=20261031c";
+} from "./schedule.js?v=20261031d";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -958,7 +958,7 @@ function progressByTask() {
 async function ensureModel() {
   if (modelView) return;
   try {
-    const { createModelView } = await import("./model3d.js?v=20261031c");
+    const { createModelView } = await import("./model3d.js?v=20261031d");
     modelView = createModelView($("#model-canvas"), $("#model-tip"));
     modelView.update(state, progressByTask());
   } catch (err) {

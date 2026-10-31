@@ -79,11 +79,13 @@ export default {
   //   openings: on footprint edge `edge` (edge i runs from point i to i+1),
   //     `offset` ft from the start of that edge, `sill` above the floor.
   //   sharedEdges: edges that abut another volume (not drawn).
-  // roofs: hip roofs over a rectangular eave outline (4 corners, in order).
+  // roofs: hip roofs over a rectangular eave outline (4 corners, in order);
+  //   type "gable" puts the ridge along eave[0]→eave[1]; type "outline" is a
+  //   hip roof over any outline, all slopes at the same pitch.
   //   `eaveZ` is the height of the eave edge; `pitch` is rise per 12" of run.
   model: {
     // Shown under the 3D legend, so a viewer can tell which model version loaded.
-    revision: "Oct 31, existing roof matched to aerial",
+    revision: "Oct 31, existing roof with one continuous ridge",
     materials: {
       siding: "#d9d4c7",      // Hardie vertical board & batten, color TBD
       brick: "#8a5a44",       // full brick veneer wainscot
@@ -173,9 +175,10 @@ export default {
       { id: "wing-main",  kind: "new", eave: [[0, 0], [-32.56, -24.13], [-7.28, -58.24], [25.28, -34.1]],      eaveZ: 12.2, pitch: 7 },
       { id: "wing-low",   kind: "new", eave: [[10.72, -14.46], [-29.8, -44.5], [-15.24, -64.14], [25.28, -34.1]], eaveZ: 12.2, pitch: 7 },
       { id: "garage",     kind: "new", eave: [[0.6, -0.8], [32.6, -0.8], [32.6, -28.65], [0.6, -28.65]],      eaveZ: 7.5,  pitch: 5 },
-      { id: "existing-mid",   kind: "existing", eave: [[12.41, -34.37], [-14.91, -54.62], [11.0, -89.57], [38.31, -69.32]], eaveZ: 10.4, pitch: 5 },
-      { id: "existing-west",  kind: "existing", eave: [[-19.8, -70], [13.2, -70], [13.2, -98.6], [-19.8, -98.6]],          eaveZ: 10.4, pitch: 5 },
-      { id: "existing-south", kind: "existing", eave: [[0, -69], [36.2, -69], [36.2, -120.2], [0, -120.2]],              eaveZ: 10.4, pitch: 5 },
+      // The existing house is one roof: a 5/12 hip over the whole outline (the
+      // NW wing, the south block and the west block), with one ridge that runs
+      // on through the bend. Outline traced from the drone photo and the aerial.
+      { id: "existing", kind: "existing", type: "outline", eave: [[12.57, -34.25], [35.7, -65.46], [35.7, -120.2], [0.5, -120.2], [0.5, -98.6], [-19.8, -98.6], [-19.8, -70.0], [-4.75, -70.0], [-15.71, -55.22]], eaveZ: 10.4, pitch: 5 },
       // New covered entry over the existing stoop (A3.2 east elevation): 4/12 gable
       // facing east, about 21 ft wide, on posts; the back end dies into the
       // existing roof. Ridge runs along eave[0]→eave[1].
