@@ -523,7 +523,7 @@ function renderGantt() {
     const by = y + 6, bh = 14;
     const tip = esc(`<strong>${esc(t.name)}</strong><br>` + (r.fixed
       ? `${fmtLong(r.start)}${+r.end !== +r.start ? ` – ${fmtLong(r.end)}` : ""}${t.note ? `<br>${esc(t.note)}` : ""}`
-      : `${fmtShort(r.start)} – ${fmtShort(r.end)} · ${plural(Number(t.duration) + r.extend, "working day")}<br>${t.progress || 0}% done`) +
+      : `${fmtShort(r.start)} – ${fmtShort(r.end)} · ${plural(Number(t.duration) + r.extend, "working day")}<br>${t.progress || 0}% done${t.note ? `<br>${esc(t.note)}` : ""}`) +
       (r.startDelay || r.extend ? `<br>Delays: ${r.startDelay ? `${r.startDelay}d start` : ""}${r.startDelay && r.extend ? ", " : ""}${r.extend ? `${r.extend}d longer` : ""}` : "") +
       (r.slip > 0 ? `<br><span style="color:var(--critical)">▲ ${r.slip} working days behind original plan</span>` : ""));
     let g = `<g class="row" data-task="${esc(t.id)}" data-tip="${tip}"><rect class="rowbg" x="0" y="${y}" width="${W}" height="${rowH}"/>`;
