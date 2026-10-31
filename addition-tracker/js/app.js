@@ -143,7 +143,8 @@ function budgetRows() {
   const unassigned = state.expenses.filter((e) => !state.budget.some((b) => b.id === e.budgetId)).reduce((s, e) => s + Number(e.amount || 0), 0);
   const totalBudget = rows.reduce((s, r) => s + Number(r.budget || 0), 0);
   const totalActual = rows.reduce((s, r) => s + r.actual, 0) + unassigned;
-  const projected = rows.reduce((s, r) => s + Math.max(Number(r.budget || 0), r.actual), 0) + unassigned;
+  // Payments not split by line (e.g. contractor draws) count against unspent budget, not on top of it.
+  const projected = Math.max(rows.reduce((s, r) => s + Math.max(Number(r.budget || 0), r.actual), 0), totalActual);
   return { rows, cats, totalBudget, totalActual, projected, unassigned };
 }
 
@@ -229,11 +230,11 @@ function renderBudget() {
         <td>${esc(r.item)}</td><td class="num">${money(r.budget)}</td><td class="num">${money(r.actual)}</td>
         <td class="num">${variance(r.budget, r.actual)}</td>
         <td>${meter(r.budget, r.actual)}</td></tr>`).join("")}`).join("")}
-      ${b.unassigned ? `<tr><td class="muted">Expenses not linked to a line</td><td></td><td class="num">${money(b.unassigned)}</td><td></td><td></td></tr>` : ""}
+      ${b.unassigned ? `<tr><td class="muted">Payments not split by line (contractor draws)</td><td></td><td class="num">${money(b.unassigned)}</td><td></td><td></td></tr>` : ""}
     </tbody>
     <tfoot><tr><td>Total</td><td class="num">${money(b.totalBudget)}</td><td class="num">${money(b.totalActual)}</td><td class="num">${variance(b.totalBudget, b.totalActual)}</td><td>${meter(b.totalBudget, b.totalActual)}</td></tr></tfoot>`;
 
-  const lineName = (id) => state.budget.find((x) => x.id === id)?.item || "—";
+  const lineName = (id) => state.budget.find((x) => x.id === id)?.item || "Contractor draw (not split by line)";
   const exp = [...state.expenses].sort((a, c) => c.date.localeCompare(a.date));
   $("#expense-table").innerHTML = exp.length
     ? `<thead><tr><th>Date</th><th>Vendor</th><th>Budget line</th><th>Note</th><th class="num">Amount</th></tr></thead>
@@ -288,7 +289,7 @@ function editExpense(id) {
   const opts = (() => {
     const groups = {};
     for (const b of state.budget) (groups[b.category] ||= []).push(b);
-    return Object.entries(groups).map(([c, items]) => `<optgroup label="${esc(c)}">${items.map((b) => `<option value="${esc(b.id)}" ${b.id === ex.budgetId ? "selected" : ""}>${esc(b.item)}</option>`).join("")}</optgroup>`).join("");
+    return `<option value="" ${!ex.budgetId ? "selected" : ""}>Contractor draw (not split by line)</option>` + Object.entries(groups).map(([c, items]) => `<optgroup label="${esc(c)}">${items.map((b) => `<option value="${esc(b.id)}" ${b.id === ex.budgetId ? "selected" : ""}>${esc(b.item)}</option>`).join("")}</optgroup>`).join("");
   })();
   openDialog({
     title: id ? "Edit expense" : "Add expense",
