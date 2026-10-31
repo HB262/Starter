@@ -862,9 +862,16 @@ const logFilter = $("#log-filter");
 logFilter.innerHTML = `<option value="">All types</option>` + EVENT_TYPES.map((t) => `<option value="${t}">${t[0].toUpperCase() + t.slice(1)}</option>`).join("");
 logFilter.onchange = () => renderLog();
 
+const logOrder = $("#log-order");
+try { logOrder.value = localStorage.getItem("addition-tracker:log-order") || "oldest"; } catch {}
+logOrder.onchange = () => { try { localStorage.setItem("addition-tracker:log-order", logOrder.value); } catch {} renderLog(); };
+
 function renderLog() {
   const f = logFilter.value;
-  const items = [...state.events].filter((e) => !f || e.type === f).sort((a, b) => b.date.localeCompare(a.date) || (b.id > a.id ? 1 : -1));
+  // Chronological by date; same-day entries keep the order they were logged in.
+  const dir = logOrder.value === "newest" ? -1 : 1;
+  const items = state.events.map((e, i) => [e, i]).filter(([e]) => !f || e.type === f)
+    .sort(([a, i], [b, j]) => dir * (a.date.localeCompare(b.date) || i - j)).map(([e]) => e);
   $("#log-list").innerHTML = items.length
     ? items.map((e) => `<article class="entry">
         <div class="entry-head"><span class="chip ${e.type}">${e.type}</span><h3>${esc(e.title)}</h3><span class="date">${fmtLong(parseDate(e.date))}</span><span class="spacer"></span><button class="link" data-edit-event="${esc(e.id)}">Edit</button></div>
@@ -898,7 +905,7 @@ function editEvent(id) {
   openDialog({
     title: id ? "Edit log entry" : "New log entry",
     body: `<div class="form-grid">
-      <label class="f">Date<input type="date" name="date" required value="${esc(ev.date)}"></label>
+      <label class="f">Date<input type="date" name="date" required value="${esc(ev.date)}"><span class="muted small" id="ev-date-hint"></span></label>
       <label class="f">Type<select name="type">${EVENT_TYPES.map((t) => `<option ${t === ev.type ? "selected" : ""}>${t}</option>`).join("")}</select></label>
       <label class="f full">Title<input name="title" required value="${esc(ev.title)}" placeholder="e.g. Footings poured"></label>
       <label class="f full">Notes<textarea name="note" placeholder="What happened, who was there, what's next">${esc(ev.note)}</textarea></label>
@@ -907,6 +914,17 @@ function editEvent(id) {
     </div>`,
     onOpen(form) {
       hydratePhotos(form);
+      // Date the entry from the photos' metadata unless it was typed in.
+      const dateIn = form.elements.date, hint = $("#ev-date-hint", form);
+      let typed = false;
+      dateIn.addEventListener("input", () => { typed = true; hint.textContent = ""; });
+      form.elements.files?.addEventListener("change", async (e) => {
+        const dates = (await Promise.all([...e.target.files].map(store.photoTakenDate))).filter(Boolean).sort();
+        if (!dates.length) { hint.textContent = typed ? "" : "No date in the photos"; return; }
+        if (typed) return;
+        dateIn.value = dates[0];
+        hint.textContent = dates[0] === dates.at(-1) ? "From the photos" : `From the photos (taken ${fmtShort(parseDate(dates[0]))} – ${fmtShort(parseDate(dates.at(-1)))})`;
+      });
       $("#ev-photos", form).onclick = (e) => {
         const rm = e.target.dataset.rmPhoto;
         if (rm) { keep = keep.filter((p) => p !== rm); e.target.parentElement.remove(); }

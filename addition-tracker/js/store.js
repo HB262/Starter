@@ -267,6 +267,53 @@ export async function photoUrl(id) {
   return url;
 }
 
+// The date a photo was taken (YYYY-MM-DD), from its EXIF DateTimeOriginal
+// (or DateTime). JPEG only; resolves null when there's none. Read this from
+// the original file: downscaling drops the metadata.
+export async function photoTakenDate(file) {
+  try {
+    const buf = new DataView(await file.slice(0, 256 * 1024).arrayBuffer());
+    if (buf.getUint16(0) !== 0xffd8) return null;
+    let off = 2;
+    while (off + 4 < buf.byteLength) {
+      const marker = buf.getUint16(off), size = buf.getUint16(off + 2);
+      if (marker === 0xffe1 && buf.getUint32(off + 4) === 0x45786966) return exifDate(buf, off + 10);
+      if ((marker & 0xff00) !== 0xff00) return null;
+      off += 2 + size;
+    }
+  } catch { /* unreadable file */ }
+  return null;
+}
+
+function exifDate(v, tiff) {
+  const le = v.getUint16(tiff) === 0x4949;
+  const u16 = (o) => v.getUint16(o, le), u32 = (o) => v.getUint32(o, le);
+  const readIfd = (ifd) => {
+    const tags = {};
+    const n = u16(ifd);
+    for (let i = 0; i < n; i++) {
+      const e = ifd + 2 + i * 12;
+      tags[u16(e)] = e;
+    }
+    return tags;
+  };
+  const ascii = (e) => {
+    const len = u32(e + 4), at = tiff + u32(e + 8);
+    let s = "";
+    for (let i = 0; i < len - 1 && at + i < v.byteLength; i++) s += String.fromCharCode(v.getUint8(at + i));
+    return s;
+  };
+  const ifd0 = readIfd(tiff + u32(tiff + 4));
+  let raw = null;
+  if (ifd0[0x8769]) {
+    const exif = readIfd(tiff + u32(ifd0[0x8769] + 8));
+    if (exif[0x9003]) raw = ascii(exif[0x9003]);
+  }
+  if (!raw && ifd0[0x0132]) raw = ascii(ifd0[0x0132]);
+  const m = raw && raw.match(/^(\d{4}):(\d{2}):(\d{2})/);
+  return m && m[1] !== "0000" ? `${m[1]}-${m[2]}-${m[3]}` : null;
+}
+
 // Downscale a picked image so storage stays small.
 export async function downscale(file, maxSide = 1800, quality = 0.85) {
   const bitmap = await createImageBitmap(file).catch(() => null);
