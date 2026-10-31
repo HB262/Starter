@@ -80,6 +80,27 @@ function hipRoofGeometry(eave, eaveZ, pitch) {
   return { geo, ridgeZ: eaveZ + rise };
 }
 
+// Gable roof over a rectangle: the ridge runs along eave[0]→eave[1] at mid-width,
+// with vertical gable ends on edges 1→2 and 3→0.
+function gableRoofGeometry(eave, eaveZ, pitch) {
+  const c = eave.map((p) => new THREE.Vector2(p[0], p[1]));
+  const W = c[1].distanceTo(c[2]);
+  const rise = (W / 2) * (pitch / 12);
+  const r0 = c[3].clone().add(c[0]).multiplyScalar(0.5), r1 = c[1].clone().add(c[2]).multiplyScalar(0.5);
+  const P = (v, z) => new THREE.Vector3(v.x, z, -v.y);
+  const [A, B, C, D] = c.map((v) => P(v, eaveZ));
+  const R0 = P(r0, eaveZ + rise), R1 = P(r1, eaveZ + rise);
+  const tris = [[A, B, R1], [A, R1, R0], [C, D, R0], [C, R0, R1], [B, C, R1], [D, A, R0]];
+  const S = c.map((v) => P(v, eaveZ - 0.05));
+  tris.push([S[0], S[2], S[1]], [S[0], S[3], S[2]]);
+  const arr = [];
+  for (const t of tris) for (const v of t) arr.push(v.x, v.y, v.z);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(arr, 3));
+  geo.computeVertexNormals();
+  return { geo, ridgeZ: eaveZ + rise };
+}
+
 // A room name label: wide canvas, sized to the text.
 function labelSprite(text) {
   const cv = document.createElement("canvas");
@@ -376,17 +397,24 @@ export function createModelView(container, tooltipEl) {
 
     let top = 0;
     for (const r of model.roofs || []) {
-      const { geo, ridgeZ } = hipRoofGeometry(r.eave, r.eaveZ, r.pitch);
+      const { geo, ridgeZ } = (r.type === "gable" ? gableRoofGeometry : hipRoofGeometry)(r.eave, r.eaveZ, r.pitch);
       top = Math.max(top, ridgeZ);
       const isNew = r.kind === "new";
       const m = isNew
         ? mat(M.roof || "#444", { metalness: 0.45, roughness: 0.45 })
         : mat(M.existingRoof || "#777");
-      add(new THREE.Mesh(geo, m), { kind: r.kind, roof: true, phase: isNew ? "roof" : "existing", label: isNew ? `New roof (${r.pitch}/12 standing seam)` : "Existing roof" });
+      add(new THREE.Mesh(geo, m), { kind: r.kind, roof: true, phase: isNew ? "roof" : "existing", label: r.label || (isNew ? `New roof (${r.pitch}/12 standing seam)` : "Existing roof") });
+    }
+
+    for (const p of model.posts || []) {
+      const h = p.to - p.from, sz = p.size || 0.5;
+      const post = new THREE.Mesh(new THREE.BoxGeometry(sz, h, sz), mat(M.trim || "#333"));
+      post.position.set(p.at[0], p.from + h / 2, -p.at[1]);
+      add(post, { kind: "new", phase: "framing", label: p.label || "Post" });
     }
 
     const box = new THREE.Box3();
-    for (const p of parts) if (p.userData.kind === "new") box.expandByObject(p);
+    for (const p of parts) if (p.userData.kind === "new" || (opts.showExisting && !opts.interior)) box.expandByObject(p);
     if (box.isEmpty()) box.setFromObject(group);
     box.getCenter(center);
     radius = box.getSize(new THREE.Vector3()).length() / 2 || 60;

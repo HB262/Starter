@@ -141,7 +141,7 @@ export default {
         id: "existing-mid",
         label: "Existing house (re-roofed)",
         kind: "existing",
-        footprint: [[21.57, -34.98], [3.1, -48.68], [26.65, -80.45], [45.12, -66.76]],
+        footprint: [[15.55, -39.45], [-10.16, -58.51], [11.31, -87.47], [37.02, -68.41]],
         floor: 3.0,
         plate: 11.0,
       },
@@ -149,7 +149,7 @@ export default {
         id: "existing-west",
         label: "Existing house",
         kind: "existing",
-        footprint: [[-12.3, -70.9], [23.5, -70.9], [23.5, -94.2], [-12.3, -94.2]],
+        footprint: [[-16.5, -71.5], [11.7, -71.5], [11.7, -97.1], [-16.5, -97.1]],
         floor: 3.0,
         plate: 11.0,
       },
@@ -157,18 +157,27 @@ export default {
         id: "existing-south",
         label: "Existing house",
         kind: "existing",
-        footprint: [[6.3, -63.0], [37.7, -63.0], [37.7, -115.1], [6.3, -115.1]],
+        footprint: [[4.0, -70.5], [36.1, -70.5], [36.1, -118.7], [4.0, -118.7]],
         floor: 3.0,
         plate: 11.0,
       },
+    ],
+    // Posts carrying the new entry roof (bottom/top heights in feet above grade).
+    posts: [
+      { at: [40.3, -49.3], from: 3.0, to: 10.4, size: 0.75, label: "Entry post" },
+      { at: [40.3, -68.2], from: 3.0, to: 10.4, size: 0.75, label: "Entry post" },
     ],
     roofs: [
       { id: "wing-main",  kind: "new", eave: [[0, 0], [-32.56, -24.13], [-7.28, -58.24], [25.28, -34.1]],      eaveZ: 12.2, pitch: 7 },
       { id: "wing-low",   kind: "new", eave: [[10.72, -14.46], [-29.8, -44.5], [-15.24, -64.14], [25.28, -34.1]], eaveZ: 12.2, pitch: 7 },
       { id: "garage",     kind: "new", eave: [[0.6, -0.8], [32.6, -0.8], [32.6, -28.65], [0.6, -28.65]],      eaveZ: 7.5,  pitch: 5 },
-      { id: "existing-mid",   kind: "existing", eave: [[22.21, -33.33], [1.33, -48.81], [26.34, -82.55], [47.22, -67.07]], eaveZ: 10.4, pitch: 5 },
-      { id: "existing-west",  kind: "existing", eave: [[-13.8, -69.4], [25, -69.4], [25, -95.7], [-13.8, -95.7]],          eaveZ: 10.4, pitch: 5 },
-      { id: "existing-south", kind: "existing", eave: [[4.8, -61.5], [39.2, -61.5], [39.2, -116.6], [4.8, -116.6]],        eaveZ: 10.4, pitch: 5 },
+      { id: "existing-mid",   kind: "existing", eave: [[16.76, -38.56], [-11.36, -59.4], [11.0, -89.57], [39.12, -68.73]], eaveZ: 10.4, pitch: 5 },
+      { id: "existing-west",  kind: "existing", eave: [[-18, -70], [13.2, -70], [13.2, -98.6], [-18, -98.6]],              eaveZ: 10.4, pitch: 5 },
+      { id: "existing-south", kind: "existing", eave: [[2.5, -69], [37.6, -69], [37.6, -120.2], [2.5, -120.2]],          eaveZ: 10.4, pitch: 5 },
+      // New covered entry over the existing stoop (A3.2 east elevation): 4/12 gable
+      // facing east, about 21 ft wide, on posts; the back end dies into the
+      // existing roof. Ridge runs along eave[0]→eave[1].
+      { id: "entry", kind: "new", type: "gable", label: "New covered entry (4/12 gable)", eave: [[20, -48], [41.5, -48], [41.5, -69.5], [20, -69.5]], eaveZ: 10.4, pitch: 4 },
     ],
     // Which schedule task completes each part of the new construction. In
     // Progress view a part is a ghost until its task starts, translucent while
