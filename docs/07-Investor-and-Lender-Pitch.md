@@ -9,9 +9,9 @@
    - Derek, Chief Pilot partner: type-rated PIC flying today for an operation on EJM's certificate; runs day-to-day operations.
    - Advisers: aviation attorney, securities counsel, CPA; EJM as operator.
 4. **Why Denver.** Ski and resort demand, central repositioning, and high-altitude, short-runway airports that suit the Sovereign+. A new Jet Aviation FBO/hangar campus is coming to KBJC in 2028.
-5. **Unit economics, honestly.** Conservative maintenance and contingency budgets. Show the NetJets rate needed to cover debt (base: about $10,800/hr at 600 hrs) next to EJM's actual rate. The purchase depends on EJM's written rate card and hours letter.
+5. **Unit economics, honestly.** Conservative maintenance and contingency budgets. Costs from Guardian Jet's Sovereign+ sheet. Show the rate needed to cover debt (base: about $12,400/hr at 600 hrs) next to the $6,000/hr planning rate. The purchase depends on EJM's written rate card and hours letter.
 6. **Where the value comes from.** Rebuild this slide once EJM's numbers are in. At the placeholder rate the jet is sold in 2029 and the return depends on a management platform that may cost NetJets access.
-7. **The tax feature.** 100% bonus depreciation gives about $2.70 of first-year deductions per $1 invested at 80% LTV. It is best for investors with passive income. It is recaptured at sale, so it is a timing benefit. Investors should consult their own CPA.
+7. **The tax feature.** 100% bonus depreciation gives about $2.50 of first-year deductions per $1 invested at 80% LTV. It is best for investors with passive income. It is recaptured at sale, so it is a timing benefit. Investors should consult their own CPA.
 8. **Risk controls.**
    - EJM's written NetJets rate card and hours letter before purchase.
    - Very conservative maintenance budget: 15% contingency on maintenance, $150K/yr operating contingency, $350K squawk reserve.
@@ -24,8 +24,8 @@
    - Return of capital, then an 8% compounding pref, then an 80/20 split.
    - 1% acquisition fee; no ongoing asset-management fee.
    - Minimum ticket $250K (proposed).
-10. **The raise.** About $4.2M at launch (80% LTV), with committed capital of up to about $8.0M (base). Use of funds: down payment, onboarding, refurb, squawk reserve, operating reserve, early operating losses.
-11. **Returns.** Rebuild once EJM's numbers are in. Placeholder (management-led): downside 1.9x, base 3.7x, upside 6.3x; base IRR 16%.
+10. **The raise.** About $4.6M at launch (80% LTV), with committed capital of up to about $10.1M (base). Use of funds: down payment, onboarding, refurb, squawk reserve, operating reserve, early operating losses.
+11. **Returns.** Rebuild once EJM's numbers are in. At $6,000/hr (management-led): downside 1.6x, base 3.0x, upside 4.6x; base IRR 14%, all from managed jets after Jet #1 is sold.
 12. **Timeline.** Investors soft-circled Feb 2027; close May 2027; revenue July 2027; own-certificate decision 2029; exit 2034-2036.
 
 ## Lender ask (separate conversation)

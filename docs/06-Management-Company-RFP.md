@@ -49,7 +49,7 @@
 - Would EJM accept more aircraft from us later, owned or brought in from other owners, and on what terms?
 
 ## Gate 1 pass test
-Put EJM's answers into the model (Assumptions: `rate_ovf`, `hours`, `mix`, `mgmt_fee`, `comm`, `fuel`). Proceed only if **cash flow after debt service on the Unit Economics sheet is better than the ($750K) stop-loss threshold**, and ideally positive. In the base case that needs a NetJets rate of about $10,800 an hour at 600 hours.
+Put EJM's answers into the model (Assumptions: `rate_ovf`, `hours`, `mix`, `mgmt_fee`, `comm`, `fuel`). Proceed only if **cash flow after debt service on the Unit Economics sheet is better than the ($750K) stop-loss threshold**, and ideally positive. In the base case (Guardian Jet costs plus Derek's contingencies) that needs about $12,400 an hour at 600 hours; Henry's $6,000 planning rate fails. If NetJets pays fuel, set `fuel_paid` to 100%.
 
 ## Backup operator scorecard (price check only)
 

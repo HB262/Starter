@@ -1,6 +1,6 @@
 # Business plan: Citation Sovereign+ NetJets overflow company
 
-*Draft 4, October 30, 2026. Prepared for Henry, updated with comments from Derek, the intended Chief Pilot. Figures come from `financials/Jet_Business_Financial_Model.xlsx`. "Base" means the base scenario unless stated otherwise. Every estimate must be replaced with a quote before money is committed.*
+*Draft 5, October 31, 2026. Prepared for Henry. Revenue at Henry's planning rate of $6,000/hr; costs from Guardian Jet's Sovereign+ operating cost sheet; Derek's conservative contingencies kept. Figures come from `financials/Jet_Business_Financial_Model.xlsx`. "Base" means the base scenario unless stated otherwise. Every estimate must be replaced with a quote before money is committed.*
 
 ---
 
@@ -18,10 +18,11 @@ The plan has four phases:
 4. **Exit (2034-2036):** sell to a strategic buyer.
 
 **Key findings.**
-- Derek asked for very conservative maintenance and contingency budgets, and the model now carries them (section 6). With those budgets and a placeholder NetJets rate of $6,750 an hour, **one jet loses about $1.05M a year before debt and $2.08M after**.
-- **The number that decides the deal is EJM's NetJets rate for a Sovereign+.** At 600 hours, the jet needs about **$8,800 per hour to break even before the loan and about $10,800 to cover the loan**. If NetJets pays fuel separately, the rate needed falls by roughly $2,000 an hour.
-- So the plan's main gate is now: **do not buy until EJM shows, in writing, a rate and hours projection that clear debt service.**
-- At the placeholder rate the stop-loss sells Jet #1 in mid-2029 in every scenario. The management-led path still returns 3.7x (16% IRR) on $8.0M, but all of that comes from the management platform, which depends on the own-certificate decision in section 9.
+- Henry set revenue at **$6,000 per billable hour**, and costs follow **Guardian Jet's Sovereign+ sheet** (section 6). Derek's conservative contingencies stay on top.
+- On Guardian's own numbers a Sovereign+ costs about **$7,200 an hour to operate at 600 hours**, before contingency, EJM's commission, positioning or the loan. **At $6,000 an hour each extra hour loses about $200**, so flying more makes the loss bigger.
+- One jet loses about **$2.25M a year before debt and $3.27M after** (base). It needs about **$10,400/hr to break even before the loan and $12,400/hr to cover it**. If NetJets pays the fuel, the loss after debt is still about $1.9M.
+- **At $6,000/hr, owning a Sovereign+ for NetJets work does not pay.** The stop-loss sells Jet #1 in mid-2029 in every scenario, after about $5M of operating losses. The management-led path still shows 3.0x (14% IRR) on $10.1M, but all of that comes from managing other owners' jets afterward, which depends on the own-certificate decision in section 9.
+- The purchase gate stands: **don't buy until EJM shows, in writing, a rate and hours that clear debt service.** At $6,000/hr, Gate 1 fails.
 
 ## 2. Company and ownership
 
@@ -78,8 +79,8 @@ The plan has four phases:
 
 | Source | Base assumption | Comment |
 |---|---|---|
-| NetJets trips via EJM | 95% of hours at $6,750/hr (placeholder) | **Most important number in the plan.** Get EJM's actual rate card, and whether fuel and positioning are paid. |
-| Retail charter | 5% of hours at $8,000/hr | Excludes 7.5% federal excise tax |
+| NetJets trips via EJM | 95% of hours at $6,000/hr (Henry's planning rate, treated as wet) | **Most important number in the plan.** Confirm with EJM, including whether fuel and positioning are paid separately. |
+| Retail charter | 5% of hours at $6,000/hr | Excludes 7.5% federal excise tax |
 | Billable hours, mature year | 600 per jet | Ramp: 60% of mature hours in the first year of service, 90% in the second. Ask EJM for actual hours on its NetJets-flying midsize jets. |
 | Unpaid positioning | 10% of billable hours | |
 | Management platform (2030+) | $200K net margin per third-party jet managed | Only if the own-certificate decision goes ahead |
@@ -88,38 +89,40 @@ Rates grow 3% a year and costs 3% a year in the base case.
 
 ## 6. Cost structure (one jet, base, today's dollars)
 
-Derek asked for very conservative maintenance and contingency budgets. Every maintenance line is set at or above published benchmarks, and contingencies sit on top.
+Costs follow the **Guardian Jet Sovereign+ operating cost sheet** Henry supplied (built for 300 hours a year): $4,303/hr variable and $1.76M a year fixed, $3.05M in total at 300 hours. Derek's conservative contingencies sit on top.
 
 | Line | Per year | Note |
 |---|---|---|
-| Revenue (600 hrs x $6,813 blended) | $4.09M | |
-| EJM commission (10%) | ($0.41M) | Confirm whether EJM takes a cut of NetJets trips |
-| Fuel, 285 gal/hr at $6.75 | ($1.27M) | Guardian Jet: 274 gal/hr. EJM's negotiated price not yet credited. |
-| Airframe maintenance, $1,250/hr | ($0.83M) | Guardian Jet benchmark $1,220/hr |
-| Engine program, $950/hr | ($0.63M) | Listing shows $906/hr on PowerAdvantage+ |
-| APU program, $95/hr | ($0.06M) | |
-| **Maintenance contingency, 15% on top** | **($0.23M)** | Downside 20% |
-| Crew travel, landing, handling, $450/hr | ($0.30M) | |
-| Crew (2 captains, 1 PIC-rated second pilot, contract pilots) | ($0.69M) | 25% benefits load |
-| Training (FlightSafety every 6 months, 3 pilots) | ($0.14M) | At EJM rates |
-| Hangar, insurance, other fixed | ($0.23M) | |
-| **Operating contingency** | **($0.15M)** | AOG downtime, inspection overruns. Downside $200K. |
+| Revenue (600 hrs x $6,000) | $3.60M | Henry's planning rate |
+| EJM commission (10%) | ($0.36M) | Confirm whether EJM takes a cut of NetJets trips |
+| Fuel, 274 gal/hr at $7.54 ($2,066/hr) | ($1.36M) | Guardian. Assumes we pay for fuel out of the $6,000. |
+| Maintenance, $1,220/hr | ($0.81M) | Guardian 5-year average |
+| Engine program, $1,017/hr | ($0.67M) | Guardian |
+| **Maintenance contingency, 15% on top** | **($0.34M)** | Derek; downside 20% |
+| Crew travel, landing, handling, $450/hr | ($0.30M) | Not on Guardian's sheet; confirm what NetJets pays |
+| Crew pay, benefits, contract pilots | ($1.13M) | Matches Guardian's crew line |
+| Recurrent training (FlightSafety every 6 months) | ($0.14M) | Carved out of Guardian's miscellaneous |
+| Hangar | ($0.08M) | Guardian $78,230 |
+| Insurance (hull + liability) | ($0.05M) | Guardian $54K; charter use may cost more |
+| Other fixed (rest of Guardian's miscellaneous) | ($0.36M) | Guardian $499K less training |
+| **Operating contingency** | **($0.15M)** | Derek; downside $200K |
 | EJM management fee | ($0.12M) | $10K/month placeholder |
 | Company G&A incl. investor reporting | ($0.10M) | |
-| **EBITDA** | **($1.05M)** | |
+| **EBITDA** | **($2.25M)** | |
 | Debt service (80% LTV, 7.25%, 15-yr amortization) | ($1.03M) | |
-| **Cash flow after debt** | **($2.08M)** | |
+| **Cash flow after debt** | **($3.27M)** | |
 
-Plus a **$350K one-time squawk reserve** at closing ($500K downside) for pre-buy findings and first-year surprises. Unspent cash stays in the company.
+Plus a **$350K one-time squawk reserve** at closing ($500K downside). The flight-hour lines above use 660 flight hours: 600 billable plus 10% unpaid positioning.
 
 **Rate needed to make one jet work (base, 600 hrs):**
 
-| Target | NetJets rate per billable hour |
+| Target | Revenue per billable hour |
 |---|---|
-| EBITDA breakeven | about $8,800 |
-| Covers debt service at 80% LTV | about $10,800 |
+| EBITDA breakeven | about $10,400 |
+| Covers debt service at 80% LTV | about $12,400 |
+| Covers debt service if NetJets pays fuel | about $9,700 |
 
-Hours alone can't close this gap: at $6,750 each extra hour adds only about $620 of margin. If NetJets reimburses fuel, the rate needed falls by about $2,000 an hour.
+**Hours can't fix this.** After commission, positioning and contingency, each hour at $6,000 costs about $200 more than it earns. The "Unit Economics" sheet shows the loss growing from 300 to 900 hours. The Assumptions sheet has a switch (`fuel_paid`) for whether NetJets pays the fuel.
 
 ## 7. Financing and investors
 
@@ -127,12 +130,12 @@ Hours alone can't close this gap: at $6,750 each extra hour adds only about $620
 
 | LTV | Equity to raise | Annual debt service | Cash after debt (600 hrs) | Year-1 depreciation per $1 equity |
 |---|---|---|---|---|
-| 60% | $6.50M | $0.77M | ($1.82M) | 1.8x |
-| 70% | $5.35M | $0.90M | ($1.95M) | 2.1x |
-| 75% | $4.78M | $0.96M | ($2.01M) | 2.4x |
-| **80%** | **$4.20M** | **$1.03M** | **($2.08M)** | **2.7x** |
-| 85% | $3.63M | $1.09M | ($2.14M) | 3.2x |
-| 90% | $3.05M | $1.15M | ($2.21M) | 3.8x |
+| 60% | $6.85M | $0.77M | ($3.02M) | 1.7x |
+| 70% | $5.70M | $0.90M | ($3.14M) | 2.0x |
+| 75% | $5.13M | $0.96M | ($3.21M) | 2.2x |
+| **80%** | **$4.55M** | **$1.03M** | **($3.27M)** | **2.5x** |
+| 85% | $3.98M | $1.09M | ($3.34M) | 2.9x |
+| 90% | $3.40M | $1.15M | ($3.40M) | 3.4x |
 
 **What this tells you.** Leverage changes how much equity investors put in and how much depreciation they get per dollar. It doesn't make the jet carry itself. The real levers are **the NetJets rate, hours and purchase price**.
 
@@ -143,42 +146,42 @@ Hours alone can't close this gap: at $6,750 each extra hour adds only about $620
 
 **Tax: the investor angle.**
 - The 2025 tax law permanently restored 100% bonus depreciation, and used aircraft qualify. Charter counts as business use.
-- Jet #1 creates about an $11.5M deduction in its first year in service, about **2.7x the investor equity at 80% LTV**.
+- Jet #1 creates about an $11.5M deduction in its first year in service, about **2.5x the investor equity at 80% LTV**.
 - Most investors are passive, so losses offset only passive income. The deduction is recaptured when the jet is sold. Each investor's own CPA must confirm.
 
 ## 8. Financial projections: three growth paths
 
-All three paths share Jet #1. At the placeholder NetJets rate, the stop-loss fails and Jet #1 is sold in mid-2029 in every path, so no path buys more jets. The paths then differ only in how many other owners' jets they manage.
+All three paths share Jet #1. At $6,000/hr the stop-loss fails and Jet #1 is sold in mid-2029 in every path, so no path buys more jets. The paths then differ only in how many other owners' jets they manage.
 
 | Base scenario, 2027-2036 | Ownership | Management-led | Hybrid |
 |---|---|---|---|
 | Owned / third-party managed jets at exit | 0 / 0 | 0 / 18 | 0 / 12 |
 | EBITDA in 2036 | $0 | $2.1M | $1.1M |
-| **Peak equity to raise** | **$8.0M** | **$8.0M** | **$8.0M** |
-| Net exit proceeds | $4.1M | $33.1M | $22.5M |
-| **Investor multiple (pre-tax)** | **0.5x** | **3.7x** | **2.6x** |
-| Investor IRR, pre-tax | (7%) | 16% | 12% |
-| Sponsor promote (Henry + Derek) | $0 | $3.5M | $1.3M |
+| **Peak equity to raise** | **$10.1M** | **$10.1M** | **$10.1M** |
+| Net exit proceeds | $3.9M | $32.8M | $22.2M |
+| **Investor multiple (pre-tax)** | **0.4x** | **3.0x** | **2.2x** |
+| Investor IRR, pre-tax | (11%) | 14% | 9% |
+| Sponsor promote (Henry + Derek) | $0 | $2.6M | $0.5M |
 
 | Investor multiple by scenario | Ownership | Management-led | Hybrid |
 |---|---|---|---|
-| Downside | 0.3x | 1.9x | 1.2x |
-| Base | 0.5x | 3.7x | 2.6x |
-| Upside | 0.8x | 6.3x | 4.5x |
+| Downside | 0.3x | 1.6x | 1.0x |
+| Base | 0.4x | 3.0x | 2.2x |
+| Upside | 0.5x | 4.6x | 3.3x |
 
 **Management-led path, base ($M):**
 
 | | 2027 | 2028 | 2029 | 2030 | 2031 | 2033 | 2036 |
 |---|---|---|---|---|---|---|---|
 | Owned / managed jets (year end) | 1 / 0 | 1 / 0 | 0 / 0 | 0 / 2 | 0 / 4 | 0 / 9 | 0 / 18 |
-| Revenue | 1.2 | 3.8 | 2.2 | 0.2 | 0.7 | 1.8 | 4.3 |
-| EBITDA | (0.6) | (1.1) | (0.6) | (0.8) | (0.5) | 0.3 | 2.1 |
-| Investor equity in (cumulative) | 5.9 | 8.0 | 8.0 | 8.0 | 8.0 | 8.0 | 8.0 |
+| Revenue | 1.1 | 3.3 | 1.9 | 0.2 | 0.7 | 1.8 | 4.3 |
+| EBITDA | (1.2) | (2.3) | (1.2) | (0.8) | (0.5) | 0.3 | 2.1 |
+| Investor equity in (cumulative) | 6.7 | 10.1 | 10.1 | 10.1 | 10.1 | 10.1 | 10.1 |
 
 **How to read this.**
-1. **At the placeholder rate, the jet itself loses money**, and investors fund about $2M a year until the 2029 sale.
+1. **At $6,000/hr the jet itself loses money**, and investors fund about $3.3M a year until the 2029 sale.
 2. **All the return comes from managing other owners' jets**, which in the model needs our own certificate. Derek's warning that NetJets work flows through EJM puts that step in question (section 9).
-3. **Rerun the model as soon as EJM's rate card arrives.** If the rate clears debt service, the stop-loss passes, Jet #1 is kept, and the economics change completely.
+3. **The owned jet subtracts value.** A management platform built without buying Jet #1 would need far less capital, if it can win owners and NetJets access without a jet of its own.
 
 ## 9. Growth and exit strategy
 
@@ -202,7 +205,7 @@ Derek's point changes how growth works. NetJets work reaches us because the jet 
 ## 10. Top risks (full register in `05-Risk-Register.md`)
 
 1. **NetJets turns off the tap.** NetJets can stop sending trips at any time. Retail charter alone won't cover costs, and chasing charter makes the jet unavailable when NetJets returns. Mitigation: confirm NetJets' recent volume through EJM; fund a 6-month reserve; stop-loss; keep the jet on EJM so it stays first in line.
-2. **NetJets rate too low to cover costs.** Mitigation: Gate 1 needs EJM's written rate card to clear debt service.
+2. **NetJets rate too low to cover costs.** At $6,000/hr it is: each hour loses money. Mitigation: Gate 1 needs EJM's written rate card to clear debt service.
 3. **Maintenance on an out-of-production airframe.** Mitigation: engines on program, thorough pre-buy, 15% maintenance contingency, $150K operating contingency, $350K squawk reserve, 6-month reserve.
 4. **Phenom wet-runway demand fades** if NetJets changes its policy or fleet. Mitigation: don't count on it in the hours letter.
 5. **Aircraft value falls faster** because production has ended. Mitigation: buy below market; keep maintenance current.
@@ -212,8 +215,8 @@ Derek's point changes how growth works. NetJets work reaches us because the jet 
 
 ## 11. Immediate next steps (next 60 days)
 
-1. **Derek gets from EJM:** the NetJets hourly rate for a Sovereign+ (and whether fuel and positioning are included), actual annual hours on comparable EJM jets, EJM's management fee and commission, and EJM's hangar location for a Broomfield-based jet.
-2. Re-run the model with those numbers. If the rate clears debt service, proceed; if not, stop or rethink the aircraft.
+1. **Derek confirms with EJM** whether $6,000/hr is the right NetJets rate for a Sovereign+ (and whether fuel and positioning are included), actual annual hours on comparable EJM jets, EJM's management fee and commission, and EJM's hangar location for a Broomfield-based jet.
+2. Re-run the model with those numbers. At $6,000/hr the owned jet fails; decide whether to stop, change the aircraft or financing, or build the management business without owning a jet.
 3. Hire securities counsel, an aviation attorney and a CPA.
 4. Talk to 2-3 aviation lenders about a Sovereign+ loan, with and without an anchor-investor guarantee.
 5. Hire an aircraft broker to scan lightly used 2014-2016 Sovereign+ aircraft, starting with the Controller.com example.

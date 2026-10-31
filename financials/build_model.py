@@ -159,53 +159,52 @@ ASSUMPTIONS = [
     ("mix", "Share of hours flown for NetJets (via EJM)", "%", 0.95, 0.95, 0.95, PCT,
      "Derek: EJM's managed fleet flies ~95% NetJets customers, so little charter selling is needed. The rest is retail charter. "
      "Model the NetJets cut-off risk with the hours sensitivity on Unit Economics.", True),
-    ("rate_ovf", "Rate paid for NetJets trips (via EJM)", "$/hr", 6_250, 6_750, 7_000, USD,
-     "Wholesale is below retail. NetJets' own midsize lift program retails $8,000-10,900/hr (SherpaReport). Estimate; "
-     "get EJM's actual NetJets rate card for a Sovereign+.", True),
-    ("rate_ret", "Retail / broker charter rate", "$/hr", 7_500, 8_000, 8_500, USD,
-     "Excludes 7.5% federal excise tax (collected from the customer and remitted). Estimate.", True),
+    ("rate_ovf", "Revenue per billable hour, NetJets trips (via EJM)", "$/hr", 5_750, 6_000, 6_250, USD,
+     "Henry (Oct 31, 2026): plan on $6,000/hr. Treated as all-in (wet): fuel is paid out of it unless the fuel line below says otherwise. Confirm with EJM.", True),
+    ("rate_ret", "Revenue per billable hour, retail charter", "$/hr", 5_750, 6_000, 6_250, USD,
+     "Henry: plan on $6,000/hr for all revenue. Excludes 7.5% federal excise tax.", True),
     ("rate_g", "Annual charter rate growth", "%", 0.020, 0.030, 0.035, PCT, "", False),
     ("ferry", "Unpaid positioning hours (% of billable)", "%", 0.15, 0.10, 0.08, PCT,
      "Denver base means some empty legs to the coasts. Estimate.", False),
     ("SEC", "Variable operating costs (per flight hour)"),
-    ("gph", "Fuel burn", "gal/hr", 295, 285, 275, NUM,
-     "Guardian Jet: Sovereign+ 274 gal/hr. Base set above that on purpose.", False),
-    ("fuel", "Jet-A price (EJM negotiated pricing)", "$/gal", 7.25, 6.75, 6.25, '$#,##0.00',
-     "Guardian Jet used $7.54/gal retail. EJM's negotiated fuel should come in lower; not credited until we see the price sheet.", False),
-    ("maint", "Airframe maintenance and parts (scheduled + unscheduled)", "$/hr", 1_450, 1_250, 1_100, USD,
-     "Guardian Jet: Sovereign+ maintenance $1,220/hr. Base set at or above the benchmark (Derek: keep it conservative). "
-     "EJM's in-house A&Ps and labor rates should come in lower.", False),
-    ("engine", "Engine program (2 x PW306D, PowerAdvantage+/ESP)", "$/hr", 1_000, 950, 906, USD,
-     "A 2015 Sovereign+ listing shows PowerAdvantage+ at $453/engine/hr ($906/hr). Guardian Jet engine reserve $1,017/hr. "
-     "Engines must be on program for resale value.", False),
-    ("apu", "APU program", "$/hr", 110, 95, 85, USD, "Estimate.", False),
+    ("gph", "Fuel burn", "gal/hr", 290, 274, 265, NUM, "Guardian Jet Sovereign+ operating cost sheet (300 hrs/yr), supplied by Henry Oct 31, 2026: 274 gal/hr.", False),
+    ("fuel", "Jet-A price", "$/gal", 7.75, 7.54, 7.00, '$#,##0.00',
+     "Guardian Jet Sovereign+ operating cost sheet (300 hrs/yr), supplied by Henry Oct 31, 2026: $7.54/gal. EJM's negotiated price may be lower; not credited in base.", False),
+    ("fuel_paid", "Share of fuel cost paid separately by NetJets / the customer", "%", 0.0, 0.0, 0.0, PCT,
+     "0% = the $6,000/hr rate is wet and we buy the fuel. Set to 100% if EJM confirms NetJets reimburses fuel.", True),
+    ("maint", "Airframe maintenance (5-year average)", "$/hr", 1_340, 1_220, 1_160, USD,
+     "Guardian Jet Sovereign+ operating cost sheet (300 hrs/yr), supplied by Henry Oct 31, 2026: $1,220/hr. Downside +10%. Maintenance contingency below sits on top (Derek: keep it conservative).", False),
+    ("engine", "Engine program (2 x PW306D)", "$/hr", 1_100, 1_017, 906, USD,
+     "Guardian Jet Sovereign+ operating cost sheet (300 hrs/yr), supplied by Henry Oct 31, 2026: $1,017/hr. A 2015 listing shows PowerAdvantage+ at $453/engine/hr ($906/hr).", False),
+    ("apu", "APU program (not on the Guardian sheet)", "$/hr", 95, 0, 0, USD, "Assumed inside Guardian's maintenance figure and the maintenance contingency; downside adds a separate program.", False),
     ("maint_cont", "Maintenance contingency added to airframe, engine and APU costs", "%", 0.20, 0.15, 0.10, PCT,
      "Extra cushion on top of the benchmarks for an out-of-production airframe: AOG parts, corrosion, gear and "
      "landing-gear overhauls, inspection overruns. Derek asked for very conservative maintenance budgets.", False),
-    ("trip", "Crew travel, landing, handling fees (not rebilled)", "$/hr", 500, 450, 400, USD,
-     "Flycraft range $400-650/hr.", False),
+    ("trip", "Crew travel, landing, handling fees (not on the Guardian sheet)", "$/hr", 500, 450, 400, USD,
+     "Part 135 trip costs not rebilled. Flycraft range $400-650/hr. Confirm with EJM what NetJets pays for.", False),
     ("SEC", "Fixed operating costs (per owned aircraft, per year)"),
     ("captains", "Captains per aircraft", "#", 2, 2, 2, NUM, "Chief pilot (Henry's partner) is one of the captains.", False),
     ("fos", "Second PIC-rated pilots per aircraft", "#", 1, 1, 1, NUM,
      "Derek: both seats hold full PIC type ratings (NetJets standard). Plus contract pilots for peaks.", False),
-    ("cap_sal", "Captain salary", "$", 190_000, 175_000, 165_000, USD, "Midsize Part 135 market. Estimate.", False),
-    ("fo_sal", "Second pilot salary (PIC type-rated)", "$", 160_000, 150_000, 140_000, USD,
-     "Higher than a typical first officer because both pilots are PIC-qualified. Estimate.", False),
-    ("benefits", "Benefits and payroll tax load", "%", 0.28, 0.25, 0.22, PCT, "Flycraft used 43% (corporate); charter typically lower.", False),
-    ("contract", "Contract pilot budget", "$", 90_000, 60_000, 40_000, USD, "Estimate.", False),
+    ("cap_sal", "Captain salary", "$", 285_000, 265_000, 250_000, USD,
+     "Set so crew pay, benefits and contract pilots total about $1.13M, matching the Guardian Jet Sovereign+ operating cost sheet (300 hrs/yr), supplied by Henry Oct 31, 2026.", False),
+    ("fo_sal", "Second pilot salary (PIC type-rated)", "$", 255_000, 240_000, 225_000, USD,
+     "Derek: both seats hold full PIC type ratings. Calibrated to the Guardian crew total.", False),
+    ("benefits", "Benefits and payroll tax load", "%", 0.32, 0.30, 0.28, PCT, "Calibrated to the Guardian crew total.", False),
+    ("contract", "Contract pilot budget", "$", 140_000, 125_000, 110_000, USD, "Calibrated to the Guardian crew total.", False),
     ("train", "Recurrent training per pilot per year (FlightSafety every 6 months)", "$", 55_000, 45_000, 40_000, USD,
      "Derek: pilots return to FlightSafety every 6 months at EJM's training rates. Two sessions plus travel per pilot.", False),
-    ("hangar", "Hangar at home base (KBJC)", "$", 84_000, 66_000, 54_000, USD,
-     "Flycraft range $2,305-5,470/month heated. EJM has hangars; confirm KBJC space. Sheltair now; Jet Aviation FBO 2028.", False),
-    ("ins", "Insurance (hull + $100M+ liability, charter use)", "$", 110_000, 85_000, 70_000, USD,
-     "Flycraft: hull 0.15-0.25% of value + liability; charter use adds premium. Get a broker quote.", False),
+    ("hangar", "Hangar", "$", 90_000, 78_230, 66_000, USD,
+     "Guardian Jet Sovereign+ operating cost sheet (300 hrs/yr), supplied by Henry Oct 31, 2026: $78,230. EJM has hangars; confirm KBJC space.", False),
+    ("ins", "Insurance (hull + liability)", "$", 85_000, 53_968, 50_000, USD,
+     "Guardian Jet Sovereign+ operating cost sheet (300 hrs/yr), supplied by Henry Oct 31, 2026: hull $18,968 + liability $35,000. Charter use and NetJets limits may cost more: get a quote.", False),
     ("mgmt_fee", "EJM management fee (while on EJM's certificate)", "$/month", 11_000, 10_000, 8_500, USD,
      "Covers EJM's Part 135 certificate, OpSpecs, admin and NetJets compliance. Light jet ~$3K/month to heavy $10K+ "
      "(Jet Linx). Get EJM's actual fee.", True),
     ("comm", "EJM commission on charter revenue", "%", 0.12, 0.10, 0.08, PCT,
      "Commonly 10-15% of charter revenue. Confirm whether EJM takes a cut of NetJets trips.", True),
-    ("other", "Other fixed: CAMP tracking, nav data, Wi-Fi plan, software", "$", 100_000, 80_000, 65_000, USD,
-     "Flycraft range $40-60K corporate; charter adds Wi-Fi and scheduling.", False),
+    ("other", "Other fixed (Guardian 'miscellaneous' less training)", "$", 400_000, 363_997, 340_000, USD,
+     "Guardian Jet Sovereign+ operating cost sheet (300 hrs/yr), supplied by Henry Oct 31, 2026: miscellaneous $498,997, less the $135K of recurrent training shown on its own line.", False),
     ("conting", "Operating contingency (AOG downtime, inspection overruns, surprises)", "$", 200_000, 150_000, 100_000, USD,
      "Deliberately conservative (Derek). Sits on top of the maintenance contingency.", False),
     ("ga", "Company G&A before own certificate (incl. investor reporting)", "$", 120_000, 100_000, 85_000, USD,
@@ -305,7 +304,7 @@ urow(r, "comm", "Less manager's commission", lambda c: f"=-{c}{UR['rev']}*{a('co
 urow(r, "net", "Net charter revenue to owner", lambda c: f"={c}{UR['rev']}+{c}{UR['comm']}", bold=True, border=True); r += 2
 urow(r, "fh", "Flight hours incl. unpaid positioning", lambda c: f"={c}{UR['hours']}*(1+{a('ferry', c)})", NUM); r += 1
 urow(r, "varhr", "Variable cost per flight hour",
-     lambda c: f"={a('gph', c)}*{a('fuel', c)}+({a('maint', c)}+{a('engine', c)}+{a('apu', c)})*(1+{a('maint_cont', c)})+{a('trip', c)}"); r += 1
+     lambda c: f"={a('gph', c)}*{a('fuel', c)}*(1-{a('fuel_paid', c)})+({a('maint', c)}+{a('engine', c)}+{a('apu', c)})*(1+{a('maint_cont', c)})+{a('trip', c)}"); r += 1
 urow(r, "var", "Variable costs", lambda c: f"=-{c}{UR['fh']}*{c}{UR['varhr']}"); r += 2
 urow(r, "crew", "Crew salaries and benefits",
      lambda c: f"=-(({a('captains', c)}*{a('cap_sal', c)}+{a('fos', c)}*{a('fo_sal', c)})*(1+{a('benefits', c)})+{a('contract', c)})"); r += 1
@@ -323,6 +322,8 @@ urow(r, "margin", "EBITDA margin", lambda c: f"=IF({c}{UR['rev']}=0,0,{c}{UR['eb
 urow(r, "loan", "Loan amount", lambda c: f"={a('price', c)}*{a('ltv', c)}"); r += 1
 urow(r, "ds", "Annual debt service", lambda c: f"=-PMT({a('rate', c)},{a('amort', c)},-{c}{UR['loan']})"); r += 1
 urow(r, "cfads", "Cash flow after debt service", lambda c: f"={c}{UR['ebitda']}+{c}{UR['ds']}", bold=True, border=True); r += 1
+urow(r, "cfads_dry", "What-if: cash after debt if NetJets pays all fuel",
+     lambda c: f"={c}{UR['cfads']}+{c}{UR['fh']}*{a('gph', c)}*{a('fuel', c)}*(1-{a('fuel_paid', c)})"); r += 1
 urow(r, "int", "Of which: first-year interest", lambda c: f"=-{c}{UR['loan']}*{a('rate', c)}"); r += 1
 urow(r, "decl", "First-year decline in aircraft value", lambda c: f"=-{a('price', c)}*{a('dep', c)}"); r += 1
 urow(r, "econ", "Economic profit (EBITDA - interest - value decline)",
@@ -502,7 +503,7 @@ def build_strategy(code, name, suffix):
 
     section(FC, r, "Operating costs", 12); r += 1
     frow(r, "c_var", "Variable flight costs (fuel, maintenance + contingency, engines, APU, trip)",
-         lambda c, p, i: f"={c}{R['fh']}*({L('gph')}*{L('fuel')}+({L('maint')}+{L('engine')}+{L('apu')})*(1+{L('maint_cont')})+{L('trip')})*{c}{R['cidx']}"); r += 1
+         lambda c, p, i: f"={c}{R['fh']}*({L('gph')}*{L('fuel')}*(1-{L('fuel_paid')})+({L('maint')}+{L('engine')}+{L('apu')})*(1+{L('maint_cont')})+{L('trip')})*{c}{R['cidx']}"); r += 1
     frow(r, "c_crew", "Crew salaries, benefits, contract pilots",
          lambda c, p, i: f"={c}{R['acy']}*(({L('captains')}*{L('cap_sal')}+{L('fos')}*{L('fo_sal')})*(1+{L('benefits')})+{L('contract')})*{c}{R['cidx']}"); r += 1
     frow(r, "c_train", "Recurrent training",
@@ -791,7 +792,8 @@ DASH = [
     ("EBITDA, one jet", f"={UE}!F{UR['ebitda']}", USD, "Before debt"),
     ("Annual debt service, one jet", f"=-{UE}!F{UR['ds']}", USD, ""),
     ("Cash flow after debt, one jet", f"={UE}!F{UR['cfads']}", USD, "Negative = investors fund the gap"),
-    ("Breakeven billable hours (EBITDA)", f"={UE}!F{UR['be']}", NUM, ""),
+    ("What-if: cash after debt if NetJets pays fuel", f"={UE}!F{UR['cfads_dry']}", USD, "Ask EJM whether the rate is wet or dry"),
+    ("Breakeven billable hours (EBITDA)", f"={UE}!F{UR['be']}", NUM, "0 = each extra hour loses money"),
     ("Breakeven billable hours incl. debt", f"={UE}!F{UR['be_ds']}", NUM, "Over ~1,000 hrs means hours alone can't fix it"),
     ("NetJets rate needed, EBITDA breakeven", f"={UE}!F{UR['req_rate']}", USD, "Per billable hour, at the assumed hours"),
     ("NetJets rate needed, incl. debt service", f"={UE}!F{UR['req_rate_ds']}", USD, "Key number to get from EJM"),

@@ -24,7 +24,7 @@
 
 | Term | Proposal | Why |
 |---|---|---|
-| Investor capital | All equity. Base: about $4.2M at launch. Peak raise depends on strategy (see below). | Henry contributes no cash |
+| Investor capital | All equity. Base: about $4.6M at launch. Peak raise depends on strategy (see below). | Henry contributes no cash |
 | Sponsor co-invest | 0% (input on Assumptions) | Sweat equity instead. Investors usually like to see at least some sponsor money, so even 1-2% helps if possible later. |
 | Preferred return | 8%, compounding, cumulative | Market-standard for real-asset deals |
 | Distribution order | 1) return of capital, 2) 8% pref, 3) split remaining profit **80% investors / 20% sponsor** | Simple; sponsor earns only if investors do well |
@@ -40,23 +40,23 @@
 
 | | Ownership | Management-led | Hybrid |
 |---|---|---|---|
-| Peak equity to raise | $8.0M | **$8.0M** | $8.0M |
-| Investors receive at exit | $4.1M | **$29.6M** | $21.1M |
-| Investor multiple, pre-tax | 0.5x | **3.7x** | 2.6x |
-| Investor IRR, pre-tax | (7%) | **16%** | 12% |
-| Investor IRR after tax, if losses usable | (11%) | **12%** | 8% |
-| Sponsor promote (Henry + Derek) | $0 | **$3.5M** | $1.3M |
-| of which Henry (60%) / Derek (40%) | $0 / $0 | **$2.1M / $1.4M** | $0.8M / $0.5M |
+| Peak equity to raise | $10.1M | **$10.1M** | $10.1M |
+| Investors receive at exit | $3.9M | **$30.2M** | $21.7M |
+| Investor multiple, pre-tax | 0.4x | **3.0x** | 2.2x |
+| Investor IRR, pre-tax | (11%) | **14%** | 9% |
+| Investor IRR after tax, if losses usable | (13%) | **10%** | 6% |
+| Sponsor promote (Henry + Derek) | $0 | **$2.6M** | $0.5M |
+| of which Henry (60%) / Derek (40%) | $0 / $0 | **$1.6M / $1.1M** | $0.3M / $0.2M |
 
-Upside scenario: 0.8x / 6.3x / 4.5x investor multiples.
-Downside scenario: 0.3x / 1.9x / 1.2x.
+Upside scenario: 0.5x / 4.6x / 3.3x investor multiples.
+Downside scenario: 0.3x / 1.6x / 1.0x.
 
-**Reading it (Draft 4, Sovereign+ with conservative maintenance).** At the placeholder NetJets rate of $6,750 an hour, Jet #1 runs at about ($2.1M) a year after debt, so the stop-loss sells it in mid-2029 in every scenario. All the return then comes from managing other owners' jets, which needs our own certificate, and that step may cost NetJets access. **Don't pitch these returns until EJM's actual NetJets rate is in the model.**
+**Reading it (Draft 5: $6,000/hr, Guardian Jet costs, conservative contingencies).** Jet #1 runs at about ($3.3M) a year after debt, so the stop-loss sells it in mid-2029 in every scenario. All the return then comes from managing other owners' jets, which needs our own certificate, and that step may cost NetJets access. **Don't pitch these returns: at $6,000/hr the owned jet subtracts value.**
 
 ## The depreciation story for investors
 
 - The 2025 tax law made **100% first-year bonus depreciation permanent**, and used aircraft qualify. Jet #1's full price (about $11.5M) can be deducted in the year it enters service, if business use is over 50%. That is the case here, because the jet is 100% charter.
-- With 80% debt, that is **about $2.70 of first-year deductions for every $1 of investor equity**. At a 37% tax rate, that could mean about $4.3M of tax savings in 2027 against about $4.2M invested, **if** investors can use the losses.
+- With 80% debt, that is **about $2.50 of first-year deductions for every $1 of investor equity**. At a 37% tax rate, that could mean about $4.3M of tax savings in 2027 against about $4.6M invested, **if** investors can use the losses.
 - **Important limits to tell investors:**
   1. Most investors are **passive**. Passive losses offset only passive income, such as other partnership or rental income. Unused losses carry forward and are released when the investment is sold.
   2. **At-risk rules** may limit losses funded by debt that the investor isn't personally liable for.
@@ -83,7 +83,7 @@ Lenders will ask who stands behind the loan. With no wealthy guarantor, an inves
 
 ## Next steps
 
-1. ~~Pick a strategy.~~ Done: management-led (Oct 30, 2026). Size the raise at about $4.2M at launch with commitments up to about $8.0M (base).
+1. ~~Pick a strategy.~~ Done: management-led (Oct 30, 2026). Size the raise at about $4.6M at launch with commitments up to about $10.1M (base).
 2. Engage securities counsel to draft the PPM and operating agreement.
 3. Build a target list of 15-25 accredited investors, with $250K minimum tickets.
 4. Talk to lenders about guarantor requirements early. This decides the LTV.

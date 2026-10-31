@@ -19,14 +19,14 @@
 | 0.7 | Hire an aircraft broker (buy-side); market scan of lightly used 2014-2016 Sovereign+ aircraft with engine program status (start with the Controller.com 2015 example) | H, B | Dec 15 |
 | 0.8 | Insurance broker indication: charter-use hull + $100M+ liability | H | Jan 15 |
 | 0.9 | Reference calls with current EJM owners flying NetJets trips | H, CP | Jan 31 |
-| **G1** | **Gate 1 go/no-go:** EJM's written NetJets rate card and projected-hours letter clear debt service in the model (base: about $10,800/hr at 600 hrs with conservative costs) | H | **Feb 15** |
+| **G1** | **Gate 1 go/no-go:** EJM's written NetJets rate card and projected-hours letter clear debt service in the model (base: about $12,400/hr at 600 hrs with Guardian Jet costs and conservative contingencies; $6,000/hr fails) | H | **Feb 15** |
 
 ## Phase 1: Acquire and launch (Feb - Jul 2027)
 
 | # | Action | Owner | By |
 |---|---|---|---|
 | 1.1 | Lender term sheet and credit approval | L | Mar 1 |
-| 1.2 | **Gate 2:** lender term sheet plus investor commitments of at least the launch equity (about $4.2M base) | H | Mar 1 |
+| 1.2 | **Gate 2:** lender term sheet plus investor commitments of at least the launch equity (about $4.6M base) | H | Mar 1 |
 | 1.2b | Investor closing: subscriptions signed, funds into escrow, Form D filed within 15 days | SC | Apr 30 |
 | 1.3 | LOI on the selected aircraft, with a refundable deposit into escrow | B, A | Mar 15 |
 | 1.4 | Pre-buy inspection at a Textron service center; records review; engine borescope | CP, B | Apr 15 |

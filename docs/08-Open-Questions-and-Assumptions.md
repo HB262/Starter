@@ -1,6 +1,6 @@
 # Open questions and key assumptions
 
-*Draft 4, October 30, 2026, updated with Derek's comments. These are the next interview questions for Henry, and the assumptions to replace with real data.*
+*Draft 5, October 31, 2026: $6,000/hr revenue and Guardian Jet costs (Henry); Derek's comments included. These are the next interview questions for Henry, and the assumptions to replace with real data.*
 
 ## What Henry has told us
 - Financing: mainly debt, assume at least 80% LTV; scenarios wanted
@@ -22,6 +22,7 @@
 - Working name "Front Range Jet Partners" is fine
 - Promote split: **60% Henry / 40% Chief Pilot**, Chief Pilot's share vesting over 4 years
 - Growth path chosen: **management-led** (one owned jet, grow by managing other owners' jets)
+- Plan on revenue of **$6,000/hr**, with costs guided by Guardian Jet's Sovereign+ operating cost sheet (Oct 31, 2026)
 
 ## What Derek added (Oct 30, 2026)
 - EJM-managed jets fly about **95% NetJets customers**; little charter selling needed.
@@ -31,7 +32,7 @@
 - **Keep maintenance and contingency budgets very conservative.**
 
 ## Still open
-1. **EJM's NetJets rate for a Sovereign+** (and whether fuel and positioning are included). This decides the deal: base needs about $10,800/hr at 600 hrs to cover debt.
+1. **EJM's NetJets rate for a Sovereign+** (and whether fuel and positioning are included). Henry's planning rate is $6,000/hr; base needs about $12,400/hr at 600 hrs to cover debt.
 2. **Actual annual hours** on EJM's NetJets-flying midsize jets.
 3. **EJM's management fee and commission**, and whether the commission applies to NetJets trips.
 4. **Can a jet keep NetJets work if it moves to our own certificate?** If not, the own-certificate step is off, and growth happens on EJM's certificate.
@@ -41,16 +42,17 @@
 | Assumption | Base value | How to verify |
 |---|---|---|
 | Billable hours a manager can deliver | 600/yr | RFP responses: committed hours |
-| NetJets rate paid via EJM for a Sovereign+ | $6,750/hr (placeholder) | EJM rate card via Derek |
+| Revenue per billable hour | $6,000/hr, wet (Henry, Oct 31) | EJM rate card via Derek |
+| Operating costs | Guardian Jet Sovereign+ sheet: $4,303/hr variable, $1.76M/yr fixed | EJM owner statements |
 | Share of hours flown for NetJets | 95% | Derek; EJM history |
 | Purchase price, lightly used 2014-2016 Sovereign+ | $11.5M | Broker and JETNET market scan; Controller.com example |
-| Airframe maintenance / engine program | $1,250/hr / $950/hr, plus 15% contingency | EJM owner statements; PowerAdvantage+ quote |
+| Airframe maintenance / engine program | $1,220/hr / $1,017/hr (Guardian), plus 15% contingency | EJM owner statements; PowerAdvantage+ quote |
 | Squawk reserve / operating contingency | $350K once / $150K a year | Pre-buy findings; EJM history |
 | Interest rate / LTV | 7.25% / 80% | Lender term sheets |
-| Insurance | $85K/yr | Insurance broker quote |
+| Insurance | $54K/yr (Guardian) | Insurance broker quote |
 | Management fee / commission | $10K/month / 10% | EJM term sheet |
-| Crew pay | $175K captain / $150K PIC-rated second pilot | Chief Pilot's market knowledge |
-| Hangar at KBJC | $66K/yr | Sheltair quote; Jet Aviation pre-lease |
+| Crew pay (total incl. benefits, contract) | $1.13M (Guardian crew line) | Chief Pilot's market knowledge |
+| Hangar | $78K/yr (Guardian) | Sheltair quote; Jet Aviation pre-lease |
 | Tax benefit usable by investors | memo only | Each investor's CPA; fund CPA memo |
 | Lender LTV without a personal guarantor | 80% | Lender conversations; may be 60-70% |
 | Third-party jets the platform can sign | 18 by 2036 (management-led) | Market survey of Front Range owners; Chief Pilot's network |
