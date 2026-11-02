@@ -1,3 +1,5 @@
+> **Also in this repo:** [Home addition tracker](addition-tracker/) for 3315 S. Columbine Cir.: 3D model, budget vs. actual, Gantt schedule with delays, and a photo log.
+
 # Jet overflow charter business: plan and model
 
 A business plan for buying a lightly used Cessna Citation Sovereign+, basing it at Rocky Mountain Metropolitan Airport (KBJC), and flying it on Executive Jet Management's (EJM) Part 135 certificate as overflow lift for NetJets. It also covers growth, an own-certificate decision, and exit. Draft 4 includes comments from Derek, the intended Chief Pilot.
